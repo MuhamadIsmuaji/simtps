@@ -1,0 +1,236 @@
+// participant_lists.php
+
+<div class="page-title">
+    <span class="title">Halaman Data Peserta Praktikum</span>
+    <div class="description">Halaman ini digunakan untuk mengolah data peserta praktikum</div>
+    <input type="hidden" id="maxThnAjaran" value="<?= $maxThnAjaran ?>" />
+	<input type="hidden" id="minThnAjaran" value="<?= $minThnAjaran ?>" />
+	<input type="hidden" id="thn_ajaran_cek" value="<?= $thn_ajaran ?>" />
+	<input type="hidden" id="smt_cek" value="<?= $smt ?>" />
+</div>
+<div class="row">
+	<!-- Form -->
+	<div class="col-md-4">
+	    <div class="card">
+	        <div class="card-header">
+	            <div class="card-title">
+	                <div class="title">Form Data Peserta Praktikum</div>
+	            </div>
+	        </div>
+	        <div class="card-body">
+	        	<div id="alert_box"></div>
+	            <form class="form-horizontal" id="frmProcessLecturer" action="#">
+	                <div class="form-group">
+	                    <label for="NPP" class="col-sm-2 control-label">NBI</label>
+	                    <div class="col-sm-10">
+	                        <input type="text" class="form-control" id="nbi" name="nbi" placeholder="NBI" onkeypress="return numbersonly(this,event)" required>  
+	                        <input type="hidden" class="form-control" id="old_npp" name="old_npp" placeholder="NPP" onkeypress="return numbersonly(this,event)" required>  
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label for="Nama" class="col-sm-2 control-label">Nama</label>
+	                    <div class="col-sm-10">
+	                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" required>
+	                    	<p class="help-block"></p>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+	                    <div class="col-sm-10">
+	                        <input type="text" class="form-control" id="pwd" name="pwd" placeholder="Password Max 9 Karakter" maxlength="9" required>
+	                    	 <p class="help-block" id="alert_pwd"></p>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label for="inputPassword3" class="col-sm-2 control-label">Akses</label>
+	                    <div class="col-sm-10">
+	                    	<div class="radio3">
+	                            <input type="radio" id="radio1" name="akses" value="0" checked>
+	                            <label for="radio1">Dosen</label>
+                            </div>
+                            <div class="radio3">
+	                            <input type="radio" id="radio2" name="akses" value="1"  >
+	                            <label for="radio2">Dosen Pembimbing</label>
+                            </div>
+                            <div class="radio3">
+	                            <input type="radio" id="radio3" name="akses" value="2"  >
+	                            <label for="radio3">Admin / Kalab RPL</label>
+                            </div>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <div class="col-sm-offset-2 col-sm-10">
+	                        <button type="submit" id="btnProsesDosen" class="btn btn-block btn-primary" disabled>Tambah</button>
+	                    </div>
+	                </div>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+	<!-- Form -->
+	
+	<!-- Lists -->
+	<div class="col-md-8">
+	    <div class="card">
+	        <div class="card-header">
+	            <div class="card-title">
+	                <div class="title">Data Peserta Praktikum</div>
+	            </div>
+	            <div class="pull-right card-action">
+	        		<button type="button" id="deleteLecturerSelected" onclick="deleteLecturerSelected()" visible="false" class="btn btn-warning">Hapus Terpilih</button>
+	            </div>
+	        </div>
+	        <div class="card-body">
+	        	<div class="card-action">
+				</div>
+	        	<div class="table-responsive">
+	        		<table id="tbParticipantListsAdmin" class="table table-striped" cellspacing="0" width="100%">
+	                    <thead>
+	                        <tr>
+	                            <!-- <th>#</th> -->
+	                            <th>NBI</th>
+	                            <th>NAMA</th>
+	                            <th>NILAI AKHIR</th>
+	                            <!-- <th>#</th> -->
+	                        </tr>
+	                    </thead>
+	                    <tbody></tbody>
+					</table>
+	        	</div>
+	        </div>
+	    </div>
+	</div>
+	<!-- Lists -->
+</div>
+
+<script type="text/javascript">
+	var save_method;
+    var table,total_data;
+    var maxThnAjaran,minThnAjaran;
+    var inputThnAjaran, inputSemester = '';
+
+	$(function(){
+		/*Datatable*/
+		table = $('#tbParticipantListsAdmin').DataTable({
+    			
+			"dom": '<"row"<"col-sm-3"l><"col-sm-3"<"#tahun_ajaran">><"col-sm-3"<"#semester">><"col-sm-3"f>>rtp',
+
+			ordering : 0,
+
+            "language": {
+                "search": "Pencarian:",
+                "searchPlaceholder": "NBI, Nama Peserta...",
+                "lengthMenu": "Tampilkan _MENU_ Data",
+                "zeroRecords": "Maaf Data Peserta Tidak Ditemukan",
+                "info": "",
+                "infoEmpty": "",
+                "infoFiltered": "",
+                "sProcessing": '<i class="fa fa-circle-o-notch fa-spin"></i> Memproses...',
+                "oPaginate":{
+                	"sPrevious": "<",
+                	"sNext": ">",
+                }
+            },
+
+            "aLengthMenu": [[10, 15, 20, -1], [10, 15, 20, "Semua"]],
+            
+            "processing": true,
+            "serverSide": true,
+
+            "ajax" : {
+                "url": "<?php echo base_url('admin/data/participant/participantListsAdmin');?>/",
+                "type": "POST",
+                "dataType" : "json",
+            },
+
+        }); 
+
+		table.on( 'xhr', function () {
+		    var json = table.ajax.json();
+		});	
+		/*Datatable*/
+		
+		// Create filter periode
+		maxThnAjaran = $('#maxThnAjaran').val();
+		minThnAjaran = $('#minThnAjaran').val();
+		
+		for(i=minThnAjaran;i<=maxThnAjaran;i++){
+			var selected = $('#thn_ajaran_cek').val() == i ? 'Selected' : '';
+			inputThnAjaran += '<option value="'+ i +'"'+ selected +'>'+ i +'</option>';
+		}
+
+		for(i=1;i<=2;i++){
+			var selected2 = $('#smt_cek').val() == i ? 'Selected' : '';
+			var GorJ = i == 1 ? 'Ganjil' : 'Genap'
+			inputSemester += '<option value="'+ i +'"'+ selected2 +'>'+ GorJ +'</option>';
+		}
+
+	    $("div#tahun_ajaran").html('Tahun Ajaran <select id="thn_ajaran_filter" name="thn_ajaran_filter" class="form-control input-sm">'+ inputThnAjaran + '</select>');
+	    $("div#semester").html('Semester <select id="smt_filter" name="smt_filter" class="form-control input-sm">'+ inputSemester +'</select>');
+		// Create filter periode
+		
+		//Filter periode operation
+		$('#thn_ajaran_filter').on('change',function(){
+			table.ajax.url("<?= base_url('admin/data/participant/participantListsAdmin')?>/"+ $(this).val() +'/'+ $('#smt_filter').val());
+			//console.log($(this).val() + ' ' + $('#smt_filter').val());		
+			reload_table();
+		});
+
+		$('#smt_filter').on('change',function(){
+			table.ajax.url("<?= base_url('admin/data/participant/participantListsAdmin')?>/"+ $('#thn_ajaran_filter').val() +'/'+ $(this).val());
+			//console.log($(this).val() + ' ' + $('#thn_ajaran_filter').val());		
+			reload_table();
+		});
+		//Filter periode operation
+
+		
+
+	})// $ function
+
+	//reload datatable
+	function reload_table(){		
+		table.ajax.reload(null,false)
+	}
+	//
+</script>
+
+// participant_lists.php
+
+//index participant.php
+
+
+
+//index participant.php
+
+// Create filter periode
+		maxThnAjaran = $('#maxThnAjaran').val();
+		minThnAjaran = $('#minThnAjaran').val();
+		
+		for(i=minThnAjaran;i<=maxThnAjaran;i++){
+			var selected = $('#thn_ajaran_cek').val() == i ? 'Selected' : '';
+			inputThnAjaran += '<option value="'+ i +'"'+ selected +'>'+ i +'</option>';
+		}
+
+		for(i=1;i<=2;i++){
+			var selected2 = $('#smt_cek').val() == i ? 'Selected' : '';
+			var GorJ = i == 1 ? 'Ganjil' : 'Genap'
+			inputSemester += '<option value="'+ i +'"'+ selected2 +'>'+ GorJ +'</option>';
+		}
+
+	    $("div#tahun_ajaran").html('Tahun Ajaran <select id="thn_ajaran_filter" name="thn_ajaran_filter" class="form-control input-sm">'+ inputThnAjaran + '</select>');
+	    $("div#semester").html('Semester <select id="smt_filter" name="smt_filter" class="form-control input-sm">'+ inputSemester +'</select>');
+		// Create filter periode
+		
+		//Filter periode operation
+		$('#thn_ajaran_filter').on('change',function(){
+			table.ajax.url("<?= base_url('admin/data/participant/participantListsAdmin')?>/"+ $(this).val() +'/'+ $('#smt_filter').val());
+			//console.log($(this).val() + ' ' + $('#smt_filter').val());		
+			reload_table();
+		});
+
+		$('#smt_filter').on('change',function(){
+			table.ajax.url("<?= base_url('admin/data/participant/participantListsAdmin')?>/"+ $('#thn_ajaran_filter').val() +'/'+ $(this).val());
+			//console.log($(this).val() + ' ' + $('#thn_ajaran_filter').val());		
+			reload_table();
+		});
+		//Filter periode operation

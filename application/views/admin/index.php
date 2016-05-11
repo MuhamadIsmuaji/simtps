@@ -1,0 +1,3 @@
+
+<?= $this->session->userdata('isAdminTps') ?>
+
