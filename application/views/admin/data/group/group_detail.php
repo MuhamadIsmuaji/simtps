@@ -19,7 +19,7 @@
                     <ul class="nav nav-tabs nav-justified" role="tablist">
                         <li role="step" class="active">
                             <a href="#step1" id="step1-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
-                                <div class="icon fa fa-truck"></div>
+                                <div class="icon fa fa-users"></div>
                                 <div class="step-title">
                                     <div class="title">Data Anggota</div>
                                     <div class="description">Detail data anggota kelompok</div>
@@ -28,7 +28,7 @@
                         </li>
                         <li role="step">
                             <a href="#step2" role="tab" id="step2-tab" data-toggle="tab" aria-controls="profile">
-                                <div class="icon fa fa-credit-card"></div>
+                                <div class="icon fa fa-star"></div>
                                 <div class="step-title">
                                     <div class="title">Data Nilai</div>
                                     <div class="description">Detail data nilai anggota kelompok</div>
@@ -37,7 +37,7 @@
                         </li>
                         <li role="step">
                             <a href="#step3" role="tab" id="step3-tab" data-toggle="tab" aria-controls="profile">
-                                <div class="icon fa fa-check-circle-o"></div>
+                                <div class="icon fa fa-book"></div>
                                 <div class="step-title">
                                     <div class="title">Data Dokumen</div>
                                     <div class="description">Detail data dokumen kelompok</div>
@@ -113,7 +113,7 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <div class="card-title">
-                                                <div class="title">Anggota Kelompok</div>
+                                                <div class="title">Data Nilai</div>
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -217,9 +217,16 @@
                                                         ?>
                                                     </tbody>
                                                 </table>
-                                                </form>
                                                 <input type="hidden" id="n_point" name="n_point" value="<?= $banyak ?>" />
                                             </div>
+                                            <div class="sub-title"></div>
+                                            <div class="text-indent">
+                                                <button type="submit" name="btnSimpanUbahNilai" class="btn btn-primary btn-block">   
+                                                    <i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i>&nbsp;
+                                                    <strong>Simpan Nilai Huruf</strong>
+                                                </button>
+                                            </div>
+                                            </form>
                                             <div class="sub-title">Keterangan</div>
                                             <div class="text-indent">
                                                 <ul class="list-group">
@@ -235,7 +242,65 @@
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="step3" aria-labelledby="document-tab">
-                            data dokumen
+                            <div class="row">
+                                <!-- Lists -->
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title">
+                                                <div class="title">Data Dokumen</div>
+                                            </div>
+                                            <div class="pull-right card-action">
+                                                <button type="button" id="btnAddAnggota" visible="false" 
+                                                    class="btn btn-primary" onclick="showAddAnggotaModal()" >
+                                                    <i class="fa fa-plus fa-lg" aria-hidden="true"></i>&nbsp;
+                                                    <strong>Tambahkan Anggota</strong>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-action">
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="tbListAnggota" class="table table-striped" cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>NBI</th>
+                                                            <th>NAMA</th>
+                                                            <th>#</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php 
+                                                            foreach ($dataMember as $member) {       
+                                                        ?>
+                                                            <tr>
+                                                                <td><?= $member->nbi ?></td>
+                                                                <td><?= $member->nama ?></td>
+                                                                <td>
+                                                                    <a href="javascript:void(0)" class="btn btn-danger"
+                                                                        data-thn_ajaran="<?= $member->thn_ajaran ?>"
+                                                                        data-smt="<?= $member->smt ?>"
+                                                                        data-kode_kel="<?= $member->kode_kel ?>"  
+                                                                        data-nbi="<?= $member->nbi ?>"
+                                                                        data-nama="<?= $member->nama ?>"
+                                                                        onclick="deleteAnggota(this);" >
+                                                                        <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                                                        &nbsp;<strong>Hapus</strong>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        <?php 
+                                                            }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Lists -->
+                            </div>
                         </div>
                     </div>
                 </div>

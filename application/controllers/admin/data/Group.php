@@ -143,6 +143,45 @@ class Group extends CI_Controller {
         echo json_encode($data); 
     }
 
+    // Untuk mengubah nilai huruf oleh admin
+    public function changePoint() {
+        if ( !$this->session->userdata('isAdminTps') ) {
+            redirect('public/home','refresh');
+        }
+
+        if ( empty($_POST) ) {
+            redirect('admin/data/group','refresh');
+        } else {
+            $fields = ['thn_ajaran','smt','kode_kel','nbi','nilai_huruf'];
+
+            foreach ($fields as $field) {
+                
+                foreach ($_POST[$field] as $key => $value) {
+                    $datanya[$key][$field] = $value;    
+                }
+
+            }
+            
+            // Proses update nilai huruf oleh admin
+            foreach ($datanya as $participant) {
+                $thn_ajaran = $participant['thn_ajaran'];
+                $smt = $participant['smt'];
+                $kode_kel = $participant['kode_kel'];
+                $nbi = $participant['nbi'];
+                $nilai_huruf = $participant['nilai_huruf'];
+
+                $updateData = ['nilai_huruf' => $nilai_huruf];
+
+                $updatePoint = $this->M_anggota->update($thn_ajaran,$smt,$kode_kel,$nbi,$updateData);
+
+            }            
+
+            redirect('admin/data/group/detailGroup/'.$kode_kel,'refresh');
+        }
+
+    }
+
+    // Untuk menambah anggota kelompok oleh admin
     public function addMember() {
         if ( !$this->session->userdata('isAdminTps') ) {
             redirect('public/home','refresh');
@@ -182,6 +221,7 @@ class Group extends CI_Controller {
 
     }
 
+    // Untuk menghapus anggota kelompok oleh admin
     public function deleteMemberFromGroup() {
         if ( !$this->session->userdata('isAdminTps') ) {
             redirect('public/home','refresh');
@@ -267,6 +307,7 @@ class Group extends CI_Controller {
         }
     }
 
+    // Untuk autocomplete dosen dihalaman kelompok di admin
     public function getLecturerAutoComplete() {
 
         if ( !$this->session->userdata('isAdminTps') ) {
@@ -293,7 +334,7 @@ class Group extends CI_Controller {
         echo json_encode($data);
     }
 
-
+    // Untuk mencari kode kelompok maksimal
     public function getMaxCode() {
         if ( !$this->session->userdata('isAdminTps') ) {
             redirect('public/home','refresh');
