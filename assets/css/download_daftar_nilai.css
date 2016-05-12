@@ -1,0 +1,180 @@
+/*Body*/
+body {
+	color : black;
+	font-family: "Times New Roman";
+	margin: 0px;
+    padding: 0px;
+}
+/*Body*/
+
+/*header*/
+header div.identity {
+	line-height:0.1;!important
+	font-size: 17px;
+}
+
+header p.labname {
+	text-align: center;
+	font-weight: bold;
+}
+
+header p.consname {
+	margin-top: 5px;
+	text-align: center;
+	font-weight: bold;
+}
+
+header div.identity2 {
+	margin-top: 7px;
+	line-height:0.1;!important
+	font-size: 17px;
+}
+
+header p.pointlist {
+	text-align: center;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+header p.taskname {
+	margin-top: 7px;
+	text-align: center;
+	font-weight: bold;
+}
+
+header p.date {
+	margin-top: 5px;
+	text-align: center;
+	font-weight: bold;
+}
+/*header*/
+
+/*content*/
+
+/*Table Head*/
+.Table {
+    display: table;
+    width: 100%;
+}
+
+.Heading {
+    display: table-row;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+
+.Cell {
+    display: table-cell;
+    border: solid;
+    border-width: thin;
+    height: 1px;
+}
+
+div.Cell p {
+    margin: 5px 0px 5px 0px;
+}
+
+div.no {
+	width: 55px;
+	border-right: 0px;
+}
+
+div.nbi {
+	width: 145px;
+	border-right: 0px;
+}
+
+div.nama {
+	width: 400px;
+	border-right: 0px;
+}
+/*Table Head*/
+
+/*Table Row*/
+.tableRow {
+	width: 100%;
+	height: 20px;
+	display: table;
+}
+
+.container {
+    display: table-row;
+    font-size: 12px;
+}
+
+.cellRow {
+    display: table-cell;
+    border: solid;
+    border-width: thin;
+    height: 1px;
+}
+
+div.cellRow p {
+    margin: 5px 0px 5px 0px;
+}
+
+div.no-row {
+	width: 55px;
+	border-right: 0px;
+    text-align: center;
+}
+
+div.nbi-row {
+	width: 135px;
+	border-right: 0px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+div.nama-row {
+	width: 390px;
+	border-right: 0px;
+    text-align: left;
+    padding-left: 10px;
+
+}
+
+div.nilai-row {
+    text-align: center;
+}
+
+/*Table Row*/
+
+/*Kalab Sign*/
+div.kalabSign {
+	width: 250px;
+	height: 200px;
+	margin: 20px 0px 0px 450px;
+}
+
+p.when {
+	text-align: center;
+	font-size: 16px;
+}
+
+p.who {
+	text-align: center;
+	font-size: 16px;
+	margin-top: 100px;
+	margin-bottom: 0px;
+}
+
+hr {
+	width: 90%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+p.whonpp {
+	text-align: center;
+	font-size: 16px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+/*Kalab Sign*/
+
+/*content*/
+
+/*17 + 7 + 50 */
