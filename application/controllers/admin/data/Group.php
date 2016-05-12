@@ -76,6 +76,7 @@ class Group extends CI_Controller {
     }
     /*Datatable data kelompok di admin*/
 
+    // Untuk detail kelompok di halaman admin
     public function detailGroup($kode_kelompok = NULL) {
         if ( !$this->session->userdata('isAdminTps') ) {
             redirect('public/home','refresh');
@@ -109,6 +110,60 @@ class Group extends CI_Controller {
         }           
     }
 
+    // Untuk validasi dan unvalidasi judul kelompok di admin
+    public function validateTitle() {
+        if ( !$this->session->userdata('isAdminTps') ) {
+            redirect('public/home','refresh');
+        }
+
+        if ( empty($_POST) ) {
+            redirect('admin/data/group','refresh');
+        } else {
+            $thn_ajaran_validate = $this->input->post('thn_ajaran');
+            $smt_validate = $this->input->post('smt');
+            $kode_kel_validate = $this->input->post('kode_kel');
+            $status = $this->input->post('status');
+
+            $validateData = ['validasi' => $status];
+
+            $validate = $this->M_kelompok->update($thn_ajaran_validate,$smt_validate,$kode_kel_validate,$validateData);
+            
+            if ( $validate )
+                echo json_encode(1);
+            else 
+                echo json_encode(0);
+        }
+    }
+
+    // Untuk download dokumen kelompok
+    // Param fileName untuk nama file
+    // Param code untuk jenis file proposal / revisi proposal
+    public function downloadGroupDocument($code = NULL, $fileName = NULL) {
+        if ( !$this->session->userdata('isAdminTps') ) {
+            redirect('public/home','refresh');
+        }
+
+        if ( $code == NULL || $fileName == NULL ) {
+            redirect('admin/data/group','refresh');        
+        }
+
+        if ( $code == 1 || $code == 2 ) {
+            $file_path = $code == 1 ? 'assets/files/proposal/'.$fileName : 'assets/files/revisi_proposal/'.$fileName;
+
+            if ( file_exists($file_path) ) {
+                $this->load->helper('download');
+                $file = file_get_contents($file_path);
+                force_download($fileName, $file);
+            } else {
+                //not found page
+                redirect('admin/data/group','refresh');
+            }
+        } else {
+            redirect('admin/data/group','refresh');        
+        }
+    }
+
+    // Untuk autocomplete peserta di admin
     public function getParticipantAutoComplete() {
         if ( !$this->session->userdata('isAdminTps') ) {
             redirect('public/home','refresh');

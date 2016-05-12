@@ -1,7 +1,49 @@
 <?php 
     $next = $settingData->thn_ajaran+1;
     $semester = $settingData->smt == 1 ? 'Ganjil' : 'Genap' ;
-    //var_dump($dataMember);
+    
+    $judul = $dataGroup->judul == NULL ? '-' : $dataGroup->judul;
+    $proposal = $dataGroup->proposal == NULL ? '-' : $dataGroup->proposal;
+    $revisi = $dataGroup->revisi == NULL ? '-' : $dataGroup->revisi;
+
+    if ( $dataGroup->judul == NULL ) {
+        $btnJudul = '-';
+    } else {
+        if ( $dataGroup->validasi == 1 ) {
+            $btnJudul = '<button class="btn btn-danger btn-block" onclick="validateTitle(this,0)" data-thn_ajaran="'.$dataGroup->thn_ajaran.'"
+                         data-smt="'.$dataGroup->smt.'" data-kode_kel="'.$dataGroup->kode_kel.'" >
+                            <i class="fa fa-times fa-lg" aria-hidden="true"></i>&nbsp;
+                            Batalkan Validasi Judul
+                        </button>';
+        } else {
+            $btnJudul = '<button class="btn btn-primary btn-block" onclick="validateTitle(this,1)" data-thn_ajaran="'.$dataGroup->thn_ajaran.'"
+                         data-smt="'.$dataGroup->smt.'" data-kode_kel="'.$dataGroup->kode_kel.'" >
+                            <i class="fa fa-check fa-lg" aria-hidden="true"></i>&nbsp;
+                            Validasi Judul
+                        </button>';
+        }
+    }
+
+
+    if ( $dataGroup->proposal == NULL ) {
+        $btnProposal = '-';
+    } else {
+        $btnProposal = '<a href="'. base_url('admin/data/group/downloadGroupDocument/1/'.$dataGroup->proposal) .'" 
+                            target="_blank" class="btn btn-primary btn-block" >
+                            <i class="fa fa-cloud-download fa-lg"></i>&nbsp;
+                            Unduh Proposal
+                        </a>';
+    }
+
+    if ( $dataGroup->revisi == NULL ) {
+        $btnRevisi = '-';
+    } else {
+        $btnRevisi = '<a href="'. base_url('admin/data/group/downloadGroupDocument/2/'.$dataGroup->revisi) .'" 
+                            target="_blank" class="btn btn-primary btn-block" >
+                            <i class="fa fa-cloud-download fa-lg"></i>&nbsp;
+                            Unduh Revisi Proposal
+                    </a>';
+    }
 ?>  
 <input type="hidden" id="kode_kel" value="<?= $dataGroup->kode_kel ?>" />
 <div class="row">
@@ -250,50 +292,27 @@
                                             <div class="card-title">
                                                 <div class="title">Data Dokumen</div>
                                             </div>
-                                            <div class="pull-right card-action">
-                                                <button type="button" id="btnAddAnggota" visible="false" 
-                                                    class="btn btn-primary" onclick="showAddAnggotaModal()" >
-                                                    <i class="fa fa-plus fa-lg" aria-hidden="true"></i>&nbsp;
-                                                    <strong>Tambahkan Anggota</strong>
-                                                </button>
-                                            </div>
                                         </div>
                                         <div class="card-body">
                                             <div class="card-action">
                                             </div>
                                             <div class="table-responsive">
-                                                <table id="tbListAnggota" class="table table-striped" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>NBI</th>
-                                                            <th>NAMA</th>
-                                                            <th>#</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php 
-                                                            foreach ($dataMember as $member) {       
-                                                        ?>
-                                                            <tr>
-                                                                <td><?= $member->nbi ?></td>
-                                                                <td><?= $member->nama ?></td>
-                                                                <td>
-                                                                    <a href="javascript:void(0)" class="btn btn-danger"
-                                                                        data-thn_ajaran="<?= $member->thn_ajaran ?>"
-                                                                        data-smt="<?= $member->smt ?>"
-                                                                        data-kode_kel="<?= $member->kode_kel ?>"  
-                                                                        data-nbi="<?= $member->nbi ?>"
-                                                                        data-nama="<?= $member->nama ?>"
-                                                                        onclick="deleteAnggota(this);" >
-                                                                        <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                                                                        &nbsp;<strong>Hapus</strong>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        <?php 
-                                                            }
-                                                        ?>
-                                                    </tbody>
+                                                <table id="tbListDokumen" class="table table-striped" cellspacing="0" width="100%">
+                                                    <tr>
+                                                        <td>Judul Tugas</td>
+                                                        <td><?= $judul ?></td>
+                                                        <td><?= $btnJudul ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Proposal</td>
+                                                        <td><?= $proposal ?></td>
+                                                        <td><?= $btnProposal ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Revisi Proposal</td>
+                                                        <td><?= $revisi ?></td>
+                                                        <td><?= $btnRevisi ?></td>
+                                                    </tr>
                                                 </table>
                                             </div>
                                         </div>
@@ -334,9 +353,6 @@
                 success : function(msg) {
                     $('#nbinama').val('');
                     $('#nbinya').val('');
-                    //console.log(msg)
-                    //window.location.href = "<?= base_url('admin/data/group/detailGroup') ?>/"+kode_kel_add;   
-
 
                     if ( msg == 0 ) {
                         $('#addStatus').html('<strong><i>Processing...</i></strong>');
@@ -374,7 +390,37 @@
                 }
             });
         });
-    });
+    }); // $function
+
+    // for validate title group 
+    // param group and status
+    // group to get group data, status ( 1 = validate , 0 = cancel validate)
+    function validateTitle(group,status) {
+        thn_ajaran_validate = group.getAttribute('data-thn_ajaran');
+        smt_validate = group.getAttribute('data-smt');
+        kode_kel_validate = group.getAttribute('data-kode_kel');
+
+        message_validate = status == 1 ? 'Yakin Ingin Validasi Judul ?' : 'Yakin Ingin Batalkan Validasi Judul ?';
+
+        if ( confirm(message_validate) ) {
+            $.ajax({
+                url : "<?= base_url('admin/data/group/validateTitle') ?>",
+                data : 'thn_ajaran='+thn_ajaran_validate+'&smt='+smt_validate+'&kode_kel='+kode_kel_validate+'&status='+status,
+                method : 'POST',
+                dataType : 'JSON',
+                success : function(msg) {
+                    if ( msg == 0 ) {
+                        alert('Proses Gagal');
+                    }
+
+                    window.location.href = "<?= base_url('admin/data/group/detailGroup/') ?>/"+kode_kel_validate;
+                },
+                error : function(jqXHR, textStatus, errorThrown) {
+                    alert('Error ! Reload Browser Anda');
+                }
+            });
+        }
+    }
 
     //for delete anggota
     //param objek to get data attr 
@@ -384,7 +430,6 @@
         kode_kel = objek.getAttribute('data-kode_kel');
         nbi = objek.getAttribute('data-nbi');
         nama = objek.getAttribute('data-nama');
-        //console.log("<?= base_url('admin/data/group/detailGroup/') ?>/"+kode_kel);
 
         if ( confirm('Yakin ingin menghapus '+nama+' dari kelompok '+kode_kel+' ?') ) {
             $.ajax({
@@ -400,22 +445,18 @@
                     }
 
                     window.location.href = "<?= base_url('admin/data/group/detailGroup/') ?>/"+kode_kel;
-                    //console.log(msg);
                 },
                 error : function(jqXHR, textStatus, errorThrown) {
                     alert('Reload Browser Anda');
                 }
             });
         }
-
-        //console.log(thn_ajaran+' | '+smt+' | '+kode_kel+' | '+nbi);
     }
 
     //for showing add anggota modal
     function showAddAnggotaModal() {
         $('#add_member_modal').modal('show');
         $('#kode_kel_modal_add').val($('#kode_kel').val());
-        //console.log('modal_show');
     }
 
     // for add member autocomplete
@@ -443,39 +484,3 @@
     }
 
 </script>
-
-<!-- <div class="col-md-4">
-    <div class="card">
-        <div class="card-header">
-            <div class="card-title">
-                <div class="title">Tambah Anggota Kelompok</div>
-            </div>
-        </div>
-        <div class="card-body">
-            <div id="alert_box"></div>
-            <form class="form-horizontal" id="frmProcessParticipant" action="#">
-                <div class="form-group">
-                    <label for="NBI" class="col-sm-2 control-label">NBI</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nbi" name="nbi" placeholder="NBI" onkeypress="return numbersonly(this,event)" required>  
-                        <input type="hidden" class="form-control" id="old_nbi" name="old_nbi" >  
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="Nama" class="col-sm-2 control-label">Nama</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-block btn-primary">
-                            Tambahkan Peserta
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
- -->
