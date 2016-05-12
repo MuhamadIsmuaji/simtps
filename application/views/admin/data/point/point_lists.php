@@ -19,7 +19,10 @@
 	                <div class="title">Daftar Nilai Peserta Praktikum</div>
 	            </div>
 	            <div class="pull-right card-action">
-	        		<button type="button" id="deleteNewsSelected" onclick="printPointList()" visible="false" class="btn btn-primary">Cetak Daftar Nilai</button> 	
+	        		<button type="button" id="deleteNewsSelected" onclick="printPointList()" visible="false" 
+	        			class="btn btn-primary"	><i class="fa fa-cloud-download fa-lg" aria-hidden="true"></i>
+	        			&nbsp;<strong>Unduh Daftar Nilai</strong>
+	        		</button> 	
 	            </div>
 	        </div>
 	        <div class="card-body">

@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+ini_set('max_execution_time', 0); // limit waktu eksekusi
+
 class Point extends CI_Controller {
 
 	function construct() {
@@ -74,19 +76,49 @@ class Point extends CI_Controller {
         }
 
         $pointList = $this->M_anggota->getAnggotaPeriode($thn_ajaran, $smt)->result();
+        $setting = $this->M_setting->getSetting()->row();
+        $when = $this->generateIndoTime(date('Y-m-d'));
+        $next = $thn_ajaran+1;
+        $smt = $smt == 1 ? 'Ganjil' : 'Genap';
 
         // load dompdf
         $this->load->helper('dompdf');
         //load content html
-        $data['pointList'] = $pointList;
+        $data = [
+            'pointList'     => $pointList,
+            'thn_ajaran'    => $thn_ajaran,
+            'smt'           => $smt,
+            'next'          => $next,
+            'when'          => $when,
+            'settingData'   => $setting
+        ];
+
         $html = $this->load->view('admin/data/point/point_print',$data,true);
         // create pdf using dompdf
-        $filename = 'Message';
+        
+        $filename = 'Daftar Nilai Tugas Perancangan Sistem TA '.$thn_ajaran.'-'.$next.' Semester '.$smt;
         $paper = 'A4';
         $orientation = 'potrait';
         pdf_create($html, $filename, $paper, $orientation);
 
 	}
+
+
+    // Untuk generate waktu indonesia waktu cetak daftar nilai
+    private function generateIndoTime($date) {
+        if ( !$this->session->userdata('isAdminTps') ) {
+            redirect('public/home','refresh');
+        }
+
+        $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+     
+        $tahun = substr($date, 0, 4);
+        $bulan = substr($date, 5, 2);
+        $tgl   = substr($date, 8, 2);
+     
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;     
+        return($result);
+    }
 
 }
 
