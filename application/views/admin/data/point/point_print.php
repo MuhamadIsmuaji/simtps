@@ -89,9 +89,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<p class="when">
 			Surabaya, <?= $when ?>
 		</p>
-		<p class="who"><?= $settingData->nama_dekan ?></p>
+		<p class="kalab">Kalab RPL,</p>
+		<p class="who"><?= $settingData->nama_kalab ?></p>
 		<hr>
-		<p class="whonpp">NPP : <?= $settingData->npp_kalab ?></p>
+		<p class="whonpp">
+			<?php
+				$first = substr($settingData->npp_kalab,0,5);
+				$second = substr($settingData->npp_kalab,6,2);
+				$third = substr($settingData->npp_kalab,8);		
+				echo "NPP. ".$first.'.'.$second.'.'.$third;
+			?>
+		</p>
 	</div>
 	<!-- content -->
 	

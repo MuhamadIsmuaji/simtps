@@ -70,12 +70,16 @@ class Loa extends CI_Controller {
         $this->load->helper('dompdf');
         //load content html
         $setting = $this->M_setting->getSetting()->row();
+        $when = $this->generateIndoTime($setting->tgl_surattgs);
+        $pengikut = $this->input->get('jml');
 
         $data = [
             'dosen'         => $doping,
-            'settingData'   => $setting
+            'settingData'   => $setting,
+            'when'          => $when,
+            'pengikut'      => $pengikut
         ];
-        
+
         $html = $this->load->view('admin/data/loa/loa_print',$data , true);
         // create pdf using dompdf
         $filename = 'Message';
@@ -85,6 +89,22 @@ class Loa extends CI_Controller {
 
         //echo json_encode($this->input->get('jml'));
 	}
+
+    // Untuk generate waktu indonesia waktu cetak surat tugas
+    private function generateIndoTime($date) {
+        if ( !$this->session->userdata('isAdminTps') ) {
+            redirect('public/home','refresh');
+        }
+
+        $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+     
+        $tahun = substr($date, 0, 4);
+        $bulan = substr($date, 5, 2);
+        $tgl   = substr($date, 8, 2);
+     
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;     
+        return($result);
+    }
 
 }
 
