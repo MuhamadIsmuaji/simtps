@@ -60,4 +60,10 @@ $route['public'] = 'public/home';
 $route['admin'] = 'admin/home/index';
 $route['admin/data'] = 'admin/home/index';
 
+//Participant
+$route['participant'] = 'participant/dashboard';
+
+//Lecturer
+$route['lecturer'] = 'lecturer/home/index';
+$route['lecturer/data'] = 'lecturer/home/index';
 

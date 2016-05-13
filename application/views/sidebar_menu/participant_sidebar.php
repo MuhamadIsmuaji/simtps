@@ -10,6 +10,8 @@
                 </li>
                 <li><a href="<?= base_url('participant/guidance') ?>">Bimbingan</a>
                 </li>
+                <li><a href="<?= base_url('participant/schedule') ?>">Jadwal Sidang</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -10,6 +10,8 @@
                 </li>
                 <li><a href="<?= base_url('lecturer/data/group') ?>">Daftar Kelompok</a>
                 </li>
+                <li><a href="<?= base_url('lecturer/data/schedule') ?>">Jadwal Sidang</a>
+                </li>
                 <li><a href="<?= base_url('lecturer/data/review') ?>">Review Sidang</a>
                 </li>
             </ul>

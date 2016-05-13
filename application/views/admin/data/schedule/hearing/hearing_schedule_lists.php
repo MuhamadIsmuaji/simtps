@@ -6,7 +6,7 @@
 <div class="page-title">
    <div class="row">
    		 <div class="col-md-8">
-   		 	<span class="title">Jadwal Sidang</span>
+   		 	<span class="title">Jadwal Sidang Tugas Perancangan Sistem</span>
     		<div class="description">Tahun Ajaran <?= $settingData->thn_ajaran.' / '.$next.' Semester '. $semester ?></div>
    		 </div>
    </div>
