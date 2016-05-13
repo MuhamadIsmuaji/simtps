@@ -61,15 +61,21 @@ class Loa extends CI_Controller {
         $doping = array();
 
         for( $i=1; $i<=$this->input->get('jml'); $i++) { //ulangi sebanyak jml yg akan dihapus
+            $dosen = array();
             
             $npp = $this->input->get('npp'.$i);
             $dataDoping = $this->M_dosen->getDosenByNpp($npp)->row();
-            $doping[] = $dataDoping->nama; 
+            $dosen[] = $dataDoping->nama;
+            $dosen[] = $dataDoping->npp;
+
+            $doping[] = $dosen;   
         }
 		// load dompdf
         $this->load->helper('dompdf');
         //load content html
         $setting = $this->M_setting->getSetting()->row();
+        $next = $setting->thn_ajaran+1;
+        $smt = $setting->smt == 1 ? 'Gasal' : 'Genap'; 
         $when = $this->generateIndoTime($setting->tgl_surattgs);
         $pengikut = $this->input->get('jml');
 
@@ -82,7 +88,7 @@ class Loa extends CI_Controller {
 
         $html = $this->load->view('admin/data/loa/loa_print',$data , true);
         // create pdf using dompdf
-        $filename = 'Message';
+        $filename = 'Surat Tugas - Pemimbing Praktikum Tugas Perancangan Sistem TA '.$setting->thn_ajaran.' - '.$next.' Semester '.$smt;
         $paper = 'A4';
         $orientation = 'potrait';
         pdf_create($html, $filename, $paper, $orientation);

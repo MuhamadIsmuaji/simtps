@@ -1,4 +1,4 @@
-/*Body*/
+Body*/
 body {
 	color : black;
 	font-family: "Times New Roman";
@@ -11,14 +11,14 @@ body {
 /*Header*/
 header p.univname {
 	text-align: center;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
-	margin-bottom: 10px;
+	margin-bottom: 2px;
 }
 
 header p.facultyname {
 	text-align: center;
-	font-size: 22px;
+	font-size: 20px;
 	font-weight: bold;
 	letter-spacing: 4px;
 	margin-bottom: 5px;
@@ -36,7 +36,7 @@ div.prodi {
 	height: auto;
 	margin-left: 64px;
 	margin-bottom: -10px;
-	font-size: 15px;
+	font-size: 14px;
 }
 
 div.prodiLeft {
@@ -52,7 +52,7 @@ div.prodiRight {
 	width: 287.5px;
 	margin-left: 287.5px;
 	position: absolute;
-	padding-top: -102px;
+	padding-top: -109px;
 
 }
 
@@ -65,13 +65,13 @@ div.prodiRight p {
 hr.top {
 	margin-top: -8px;
 	margin-bottom: 0px;
-	height: 3px;
+	height: 2.5px;
 	background-color: black;
 }
 
 hr.bottom {
-	margin-top: 2px;
-	height: 1px;
+	margin-top: 3px;
+	height: 0.5px;
 	background-color: black;
 }
 /*Header*/
@@ -84,7 +84,7 @@ hr.bottom {
 div.title {
 	width: 100%;
 	height: auto;
-	margin-top: 2px;
+	margin-top: -5px;
 }
 
 div.title p {
@@ -93,7 +93,7 @@ div.title p {
 	letter-spacing: 1px;
 	text-align: center;
 	font-weight: bold;
-	font-size: 26px;
+	font-size: 24px;
 	margin-bottom: 0px;
 }
 
@@ -101,7 +101,7 @@ div.letternumber p {
 	text-align: center;
 	font-weight: bold;
 	font-size: 14px;
-	margin-top: 10px;
+	margin-top: 0px;
 	letter-spacing: 1px;
 }
 /*Letter number*/
@@ -110,7 +110,7 @@ div.letternumber p {
 div.tablemain {
 	width: 100%;
 	height: auto;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 /*Table main*/
 
@@ -121,8 +121,8 @@ div.givetaskcontainer {
 	width: 100%;
 	height: auto;
 	padding-left: 10px;
-	padding-bottom: 10px;
-	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-top: 0px;
 }
 
 div.givetaskcontainer p.title {
@@ -170,7 +170,7 @@ p.kalab {
 p.who {
 	text-align: center;
 	font-size: 14px;
-	margin-top: 85px;
+	margin-top: 80px;
 	margin-bottom: 0px;
 }
 
@@ -192,7 +192,7 @@ p.whonpp {
 /*Tembusan*/
 div.tembusan {
 	font-size: 14px;
-	margin-top: -10px;
+	margin-top: -15px;
 }
 
 div.tembusan p.title {
@@ -203,4 +203,60 @@ div.tembusan p.title {
 
 /*main*/
 
-/*content*/
+/*next page (lampiran)*/
+
+/*headlampiran*/
+div.headlampiran {
+	font-size: 14px;
+	width: 353px;
+	height: auto;
+	margin-left: 345px;
+}
+
+div.headlampiran p {
+	margin-bottom: 4px;
+}
+
+div.headlampiran table {
+	margin-top: 0px;
+	border-collapse: collapse;
+	margin-bottom: 15px;
+}
+
+div.headlampiran table td {
+	padding-top: 4px;
+}
+
+div.headlampiran hr.headlampiran {
+	width: 100%;
+	background-color: black;
+	align-items: left;
+}
+
+div.lampiran {
+	font-size: 14px;
+}
+/*headlampiran*/
+
+div.lampiran p {
+	margin-top: 30px;
+	margin-bottom: 5px;
+}
+
+/*listlampiran*/
+div.listlampiran {
+	width: 85%;
+	height: 50px;
+	font-size: 14px;
+	padding-bottom: -30px;
+}
+
+div.listlampiran table {
+	margin-left: 20px;
+}
+
+/*listlampiran*/
+
+/*next page (lampiran)*/
+
+/*content

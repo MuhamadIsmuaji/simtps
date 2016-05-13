@@ -191,5 +191,75 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 	<!-- content -->
+
+	<!-- next page (lampiran) -->
+	<div class="lampiran" style="page-break-before: always">
+
+		<div class="headlampiran">
+			<p>Lampiran Surat Tugas Dekan Fakultas Teknik Untag Surabaya</p>
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="120px">Nomor</td>
+					<td>:</td>
+					<td>&nbsp;<strong><?= $settingData->no_surattgs ?></strong></td>
+				</tr>
+				<tr>
+					<td>Tanggal</td>
+					<td>:</td>
+					<td>&nbsp;<strong><?= $when ?></strong></td>
+				</tr>
+			</table>
+			<hr class="headlampiran">
+		</div>
+
+		<p><strong>Nama nama Dosen Pembimbing :</strong></p>
+	</div>
+	
+	<?php 
+		$no=1;
+		foreach ($dosen as $dataDosen) {	
+	?>
+		<div class="listlampiran" style="page-break-inside: avoid;">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="25px"><?= $no ?>.</td>
+					<td width="400px"><?= $dataDosen[0] ?></td>
+					<td>NPP&nbsp;&nbsp;</td>
+					<td>:&nbsp;&nbsp;</td>
+					<td width="100px;">
+						<?php
+							$first_dosen = substr($dataDosen[1],0,5);
+							$second_dosen = substr($dataDosen[1],6,2);
+							$third_dosen = substr($dataDosen[1],8);		
+							echo $first_dosen.'.'.$second_dosen.'.'.$third_dosen;
+						?>
+					</td>
+				</tr>
+			</table>	
+		</div>
+
+	<?php 
+			$no++;
+		}
+	?>
+
+	<div class="kalabSign" style="margin-top: 65px;">
+		<p class="when">
+			Surabaya, <?= $when ?>
+		</p>
+		<p class="kalab">Dekan,</p>
+		<p class="who"><?= $settingData->nama_dekan ?></p>
+		<hr class="kalabSign">
+		<p class="whonpp">
+			<?php
+				$first = substr($settingData->npp_dekan,0,5);
+				$second = substr($settingData->npp_dekan,6,2);
+				$third = substr($settingData->npp_dekan,8);		
+				echo "NPP. ".$first.'.'.$second.'.'.$third;
+			?>
+		</p>
+	</div>
+	<!-- next page (lampiran) -->
+
 </body>
 </html>
