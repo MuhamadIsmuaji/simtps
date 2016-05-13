@@ -10,42 +10,45 @@ body {
 /*header*/
 header div.identity {
 	line-height:0.1;!important
-	font-size: 17px;
 }
 
 header p.labname {
 	text-align: center;
 	font-weight: bold;
+	font-size: 20px;
 }
 
 header p.consname {
 	margin-top: 5px;
 	text-align: center;
 	font-weight: bold;
+	font-size: 20px;
 }
 
 header div.identity2 {
 	margin-top: 7px;
 	line-height:0.1;!important
-	font-size: 17px;
 }
 
 header p.pointlist {
 	text-align: center;
 	font-weight: bold;
 	text-transform: uppercase;
+	font-size: 20px;
 }
 
 header p.taskname {
 	margin-top: 7px;
 	text-align: center;
 	font-weight: bold;
+	font-size: 20px;
 }
 
 header p.date {
 	margin-top: 5px;
 	text-align: center;
 	font-weight: bold;
+	font-size: 20px;
 }
 /*header*/
 
@@ -60,7 +63,7 @@ header p.date {
 .Heading {
     display: table-row;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
 }
 
@@ -100,7 +103,7 @@ div.nama {
 
 .container {
     display: table-row;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .cellRow {
@@ -143,9 +146,9 @@ div.nilai-row {
 
 /*Kalab Sign*/
 div.kalabSign {
-	width: 250px;
+	width: 325px;
 	height: 200px;
-	margin: 20px 0px 0px 450px;
+	margin: 25px 0px 0px 375px;
 }
 
 p.when {

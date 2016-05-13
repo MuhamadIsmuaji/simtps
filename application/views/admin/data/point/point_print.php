@@ -89,7 +89,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<p class="when">
 			Surabaya, <?= $when ?>
 		</p>
-		<p class="who"><?= $settingData->nama_kalab ?></p>
+		<p class="who"><?= $settingData->nama_dekan ?></p>
 		<hr>
 		<p class="whonpp">NPP : <?= $settingData->npp_kalab ?></p>
 	</div>

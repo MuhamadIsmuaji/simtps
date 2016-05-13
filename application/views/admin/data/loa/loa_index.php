@@ -45,7 +45,10 @@
                   <div class="title">Data Dosen Pembimbing</div>
               </div>
               <div class="pull-right card-action">
-                  <button type="button" id="printLoa" onclick="printLoa();" class="btn btn-primary">Cetak Surat Tugas</button>
+                  <button type="button" id="printLoa" onclick="printLoa();" visible="false" 
+                    class="btn btn-primary" ><i class="fa fa-cloud-download fa-lg" aria-hidden="true"></i>
+                    &nbsp;<strong>Unduh Surat Tugas</strong>
+                  </button>
               </div>
           </div>
           <div class="card-body">

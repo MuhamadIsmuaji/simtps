@@ -69,7 +69,13 @@ class Loa extends CI_Controller {
 		// load dompdf
         $this->load->helper('dompdf');
         //load content html
-        $data['dosen'] = $doping;
+        $setting = $this->M_setting->getSetting()->row();
+
+        $data = [
+            'dosen'         => $doping,
+            'settingData'   => $setting
+        ];
+        
         $html = $this->load->view('admin/data/loa/loa_print',$data , true);
         // create pdf using dompdf
         $filename = 'Message';
