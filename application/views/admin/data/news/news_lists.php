@@ -15,8 +15,14 @@
 	                <div class="title">Data Pengumuman</div>
 	            </div>
 	            <div class="pull-right card-action">
-	        		<button type="button" id="deleteNewsSelected" onclick="deleteNewsSelected()" visible="false" class="btn btn-warning">Hapus Terpilih</button>
-	        		<a href="<?= base_url('admin/data/news/create') ?>" class="btn btn-primary">Buat Pengumuman</a>	        		
+	        		<button type="button" id="deleteNewsSelected" onclick="deleteNewsSelected()" visible="false" class="btn btn-warning">
+	        			<i class="fa fa-trash fa-lg" aria-hidden="true"></i>&nbsp;
+	        			<strong>Hapus Terpilih</strong>
+	        		</button>
+	        		<a href="<?= base_url('admin/data/news/create') ?>" class="btn btn-primary">
+	        			<i class="fa fa-plus fa-lg" aria-hidden="true"></i>&nbsp;
+	        			<strong>Buat Pengumuman</strong>
+	        		</a>	        		
 	            </div>
 	        </div>
 	        <div class="card-body">

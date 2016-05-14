@@ -25,9 +25,11 @@
 	                <div class="title">Data Bimbingan</div>
 	            </div>
 	            <div class="pull-right card-action">
-	        		<a href="<?= base_url('admin/data/news/create') ?>" class="btn btn-primary">
-	        			<i class="fa fa-file-pdf-o fa-lg" aria-hidden="true"></i>&nbsp;
-	        			Cetak Data Bimbingan
+	        		<a href="javascript:void(0)" onclick="printGuidance(this)" 
+	        			data-thn_ajaran="<?= $thn_ajaran ?>" data-smt="<?= $participant->smt ?>" 
+	        				data-Kode_kel="<?= $participant->kode_kel ?>" class="btn btn-primary">
+	        			<i class="fa fa-cloud-download fa-lg" aria-hidden="true"></i>
+	        			&nbsp;Unduh Data Bimbingan
 	        		</a>
 	        		<a href="<?= base_url('participant/guidance/create') ?>" class="btn btn-primary">
 	        			<i class="fa fa-plus fa-lg" aria-hidden="true"></i>
@@ -113,14 +115,22 @@
 					}
 
 					window.location.href = "<?= base_url('participant/guidance') ?>";
-					//console.log(msg);
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					alert('Reload Browser Anda');
 				}
 			});
 		}
+	}
 
-		//console.log(nou);
+	// for print guidance data
+	// param objek to get attr
+	function printGuidance(objek) {
+		thn_ajaran_print = objek.getAttribute('data-thn_ajaran');
+		smt_print = objek.getAttribute('data-smt');
+		kode_kel_print = objek.getAttribute('data-kode_kel');
+		// window.location.href = "<?= base_url('participant/guidance/guidancePrint') ?>"
+
+    	window.location.href = "<?= base_url('participant/guidance/guidancePrint') ?>/" + thn_ajaran_print +'/'+ smt_print + '/' + kode_kel_print;
 	}
 </script>

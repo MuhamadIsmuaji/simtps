@@ -23,7 +23,9 @@
 						echo '
                         <div class="sub-title">Lampiran File</div>
                         <div class="text-indent">
-                            Unduh Lampiran File Pengumuman : <a href="'.base_url('public/news/downloadAttachmentFile/'.$news->lampiran).'" class="btn btn-success" style="padding-left:0px;">Unduh<i class="fa fa-download"></i></a>
+                            Unduh Lampiran File Pengumuman : <a href="'.base_url('public/news/downloadAttachmentFile/'.$news->lampiran).'" class="btn btn-success" style="padding-left:0px;">
+                                <strong>Unduh</strong>
+                                <i class="fa fa-download" aria-hidden="true"></i></a>
                         </div>';
 					} else {
 						echo '';

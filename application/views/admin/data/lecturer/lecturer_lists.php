@@ -54,7 +54,9 @@
 	                </div>
 	                <div class="form-group">
 	                    <div class="col-sm-offset-2 col-sm-10">
-	                        <button type="submit" id="btnProsesDosen" class="btn btn-block btn-primary" disabled>Tambah</button>
+	                        <button type="submit" id="btnProsesDosen" class="btn btn-block btn-primary" disabled>
+	                        	Tambah
+	                        </button>
 	                    </div>
 	                </div>
 	            </form>

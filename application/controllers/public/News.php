@@ -17,7 +17,7 @@ class News extends CI_Controller {
 		$config = [
 			'base_url'			=> base_url('public/news/newsList'),
 			'total_rows'		=> $this->M_pengumuman->newsRecord($dateNow),
-			'per_page'			=> 3,
+			'per_page'			=> 5,
 			'uri_segment'		=> 4,
 			'use_page_numbers'	=> TRUE,
 			'num_links'			=> 2,

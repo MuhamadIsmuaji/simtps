@@ -8,19 +8,7 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function index() {
-
-		if ( !$this->session->userdata('isAdminTps') ) {
-			redirect('public/home','refresh');
-		}
-
-		$data = [
-			'content' 		=> 'admin/index',
-			'pesan'			=> 'Halaman Home Admin',
-			'pagetitle' 	=> 'Dashboard Admin',
-			'navbartitle' 	=> 'Dashboard'
-		];
-
-		$this->load->view('template',$data);
+		redirect('admin/setting','refresh');
 	}
 
 }

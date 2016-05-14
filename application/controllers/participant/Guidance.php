@@ -150,6 +150,55 @@ class Guidance extends CI_Controller {
 		}
 	}
 
+	public function guidancePrint($thn_ajaran = NULL, $smt = NULL, $kode_kel = NULL) {
+		if ( ! $this->session->userdata('isParticipantTps') ) {
+			redirect('public/home','refresh');
+		}
+
+		if ( $thn_ajaran == NULL || $smt == NULL || $kode_kel == NULL ) {
+			redirect('participant/guidance','refresh');
+		}
+
+		// load dompdf
+        $this->load->helper('dompdf');
+
+        $guidance = $this->M_bimbingan->getGuidanceByKodeKel($thn_ajaran,$smt,$kode_kel)->result();
+        $guidanceCek = $this->M_bimbingan->getGuidanceByKodeKel($thn_ajaran,$smt,$kode_kel)->row();
+
+        if ( $guidance ) {
+
+			$nbi = $this->session->userdata('nbi');
+        	$participant = $this->M_anggota->getAnggotaByPeriode($thn_ajaran, $smt, $nbi)->row();
+
+        	if ( $participant->kode_kel != $guidanceCek->kode_kel ) {
+        		redirect('participant/guidance','refresh');
+        	} else {
+
+        		$group = $this->M_kelompok->getGroupByCodeJoinLecturer($thn_ajaran,$smt,$participant->kode_kel)->row();
+        		$member = $this->M_anggota->getAnggotaByKodeKelJoinMhs($thn_ajaran,$smt,$participant->kode_kel)->result();
+        		$data = [
+		        	'pesan'		=> 'hello world',
+		        	'guidance'	=> $guidance,
+		        	'group'		=> $group,
+		        	'member'	=> $member
+		        ];
+
+		        //load content html
+		        $html = $this->load->view('participant/guidance/guidance_print',$data,true);	
+		        //$html = $this->load->view('admin/data/point/point_print',$data,true);
+		        
+		        // create pdf using dompdf
+		        $filename = 'Data Bimbingan '.$guidanceCek->kode_kel;
+		        $paper = 'A4';
+		        $orientation = 'potrait';
+		        pdf_create($html, $filename, $paper, $orientation);
+        	}
+        
+        } else {
+        	redirect('participant/guidance','refresh');
+        }
+	}
+
 }
 
 /* End of file Guidance.php */

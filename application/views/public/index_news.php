@@ -13,7 +13,10 @@
                 </div>
                 <div class="pull-right card-action">
                     <div class="btn-group" role="group" aria-label="...">
-	        			<a href="<?= base_url('public/news') ?>" class="btn btn-primary">Lihat Pengumuman Lain</a>	        		
+	        			<a href="<?= base_url('public/news') ?>" class="btn btn-primary">
+                            <i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i>&nbsp;
+                            <strong>Lihat Pengumuman Lain</strong>
+                        </a>	        		
                     </div>
                 </div>
             </div>

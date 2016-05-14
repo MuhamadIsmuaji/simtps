@@ -57,36 +57,118 @@
                     endif;
                 ?>
 				<ul class="list-group">
-					<li class="list-group-item active">Dekan Fakultas Teknik</li>
-					<li class="list-group-item"><?= $settingData->nama_dekan ?> | NPP : <?= $settingData->npp_dekan ?></li>
-					
-					<li class="list-group-item active">Kepala Laboratorium</li>
-					<li class="list-group-item"><?= $settingData->nama_kalab ?> | NPP : <?= $settingData->npp_kalab ?> </li>
-					
-					<li class="list-group-item active">Periode</li>
+					<li class="list-group-item active">
+						<h5><strong>Dekan Fakultas Teknik</strong></h5>
+					</li>
 					<li class="list-group-item">
-						Tahun Ajaran
-						<?php
-							$smt = $settingData->smt == 1 ? 'Ganjil' : 'Genap';
-							$next = $settingData->thn_ajaran+1;
-							$bts_judul = new DateTime($settingData->bts_judul);
-							$bts_kelompok = new DateTime($settingData->bts_kelompok);
-							$bts_proposal = new DateTime($settingData->bts_proposal);
-							$bts_revisi = new DateTime($settingData->bts_revisi);
-							$tgl_surattgs = new DateTime($settingData->tgl_surattgs);							
-							echo $settingData->thn_ajaran .' / '. $next .' Semester '. $smt;
-						?>
+						<h5>
+							<strong>
+								<?php 
+									$first_dekan = substr($settingData->npp_dekan,0,5);
+									$second_dekan = substr($settingData->npp_dekan,6,2);
+									$third_dekan = substr($settingData->npp_dekan,8);
+								?>
+								<?= $settingData->nama_dekan ?> | NPP : <?= $first_dekan.'.'.$second_dekan.'.'.$third_dekan ?>
+							</strong>
+						</h5>
 					</li>
 					
-					<li class="list-group-item active">Batas Waktu</li>
-					<li class="list-group-item">Pengumpulan Judul | <?= $bts_judul->format('d-m-Y') ?></li>
-					<li class="list-group-item">Pemilihan Kelompok | <?= $bts_kelompok->format('d-m-Y') ?></li>
-					<li class="list-group-item">Pengumpulan Proposal | <?= $bts_proposal->format('d-m-Y') ?></li>
-					<li class="list-group-item">Pengumpulan Revisi Proposal | <?= $bts_revisi->format('d-m-Y') ?></li>
+					<li class="list-group-item active">
+						<h5><strong>Kepala Laboratorium</strong></h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								<?php 
+									$first_kalab = substr($settingData->npp_kalab,0,5);
+									$second_kalab = substr($settingData->npp_kalab,6,2);
+									$third_kalab = substr($settingData->npp_kalab,8);
+								?>
+								<?= $settingData->nama_kalab ?> | NPP : <?= $first_kalab.'.'.$second_kalab.'.'.$third_kalab ?>
+							</strong>
+						</h5>
+					</li>
 					
-					<li class="list-group-item active">Surat Tugas</li>
-					<li class="list-group-item">Nomor Surat | <?= $settingData->no_surattgs ?></li>
-					<li class="list-group-item">Tanggal Pembuatan | <?= $tgl_surattgs->format('d-m-Y') ?></li>
+					<li class="list-group-item active">
+						<h5>
+							<strong>
+								Periode
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Tahun Ajaran
+								<?php
+									$smt = $settingData->smt == 1 ? 'Ganjil' : 'Genap';
+									$next = $settingData->thn_ajaran+1;
+									$bts_judul = new DateTime($settingData->bts_judul);
+									$bts_kelompok = new DateTime($settingData->bts_kelompok);
+									$bts_proposal = new DateTime($settingData->bts_proposal);
+									$bts_revisi = new DateTime($settingData->bts_revisi);
+									$tgl_surattgs = new DateTime($settingData->tgl_surattgs);							
+									echo $settingData->thn_ajaran .' / '. $next .' Semester '. $smt;
+								?>
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item active">
+						<h5>
+							<strong>
+								Batas Waktu
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Pengumpulan Judul | <?= $bts_judul->format('d-m-Y') ?>
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Pemilihan Kelompok | <?= $bts_kelompok->format('d-m-Y') ?>
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Pengumpulan Proposal | <?= $bts_proposal->format('d-m-Y') ?>
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Pengumpulan Revisi Proposal | <?= $bts_revisi->format('d-m-Y') ?>
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item active">
+						<h5>
+							<strong>
+								Surat Tugas
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Nomor Surat | <?= $settingData->no_surattgs ?>
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Tanggal Pembuatan | <?= $tgl_surattgs->format('d-m-Y') ?>
+							</strong>
+						</h5>
+					</li>
 				</ul>
 	        </div>
 	    </div>
@@ -97,7 +179,7 @@
 	<div class="col-md-8">
 	    <div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">Ubah Pengaturan Sistem</h3>
+				<h3 class="panel-title"><strong>Ubah Pengaturan Sistem</strong></h3>
 				<span class="pull-right clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
 			</div>
 			<div class="panel-body" style="display:none;">
@@ -105,7 +187,7 @@
 		        	<div class="row">
 		        		<div class="col-sm-6">
 	                        <div class="panel fresh-color panel-primary">
-	                            <div class="panel-heading">Dekan Fakultas Teknik</div>
+	                            <div class="panel-heading"><strong>Dekan Fakultas Teknik</strong></div>
 	                            <div class="panel-body">
 	                        		<div class="form-group">
 	                                    <label for="exampleInputEmail1">NPP</label>
@@ -120,7 +202,7 @@
 	                    </div>
 	                    <div class="col-sm-6">
 	                        <div class="panel fresh-color panel-primary">
-	                            <div class="panel-heading">Kepala Laboratorium</div>
+	                            <div class="panel-heading"><strong>Kepala Laboratorium</strong></div>
 	                            <div class="panel-body">
 	                                <div class="form-group">
 	                                    <label for="exampleInputEmail1">NPP</label>
@@ -137,7 +219,7 @@
 		        	<div class="row">
 		        		<div class="col-sm-6">
 	                        <div class="panel fresh-color panel-primary">
-	                            <div class="panel-heading">Periode</div>
+	                            <div class="panel-heading"><strong>Periode</strong></div>
 	                            <div class="panel-body">
 	                        		<div class="form-group">
 	                                    <label for="exampleInputEmail1">Tahun Ajaran</label>
@@ -167,7 +249,7 @@
 	                    </div>
 	                    <div class="col-sm-6">
 	                        <div class="panel fresh-color panel-primary">
-	                            <div class="panel-heading">Surat Tugas</div>
+	                            <div class="panel-heading"><strong>Surat Tugas</strong></div>
 	                            <div class="panel-body">
 	                                <div class="form-group">
 	                                    <label for="exampleInputEmail1">Nomor Surat</label>
@@ -184,7 +266,7 @@
 		        	<div class="row">
 		        		<div class="col-sm-12">
 	                        <div class="panel fresh-color panel-primary">
-	                            <div class="panel-heading">Batas Waktu</div>
+	                            <div class="panel-heading"><strong>Batas Waktu</strong></div>
 	                            <div class="panel-body">
 	                        		<div class="row">
 	                        			<div class="col-sm-6">
@@ -219,8 +301,12 @@
 	                    </div>
 		        	</div>
 		        	<div class="row">
-		        		<div class="col-sm-6"><input type="submit" name="btnCreatePeriode" class="btn btn-block btn-primary" value="Buat Periode"></div>
-		        		<div class="col-sm-6"><input type="submit" name="btnSavePeriode" class="btn btn-block btn-primary" value="Simpan Periode"></div>
+		        		<div class="col-sm-6">
+		        			<input type="submit" name="btnCreatePeriode" class="btn btn-block btn-primary" value="Buat Periode">
+		        		</div>
+		        		<div class="col-sm-6">
+		        			<input type="submit" name="btnSavePeriode" class="btn btn-block btn-primary" value="Simpan Periode">
+		        		</div>
 		        	</div>
 	        	</form>
 			</div>

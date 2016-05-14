@@ -8,13 +8,14 @@
                         $tgl = new DateTime($news->tgl);
                     ?>
 						<a href="<?= base_url('public/news/show/'.$news->id.'/'.$news->slug) ?>" class="list-group-item">
-                        	<span class="badge"><?= $tgl->format('d-m-Y') ?></span> <strong><?= $news->judul ?></strong>
+                        	<span class="badge"><h6><?= $tgl->format('d-m-Y') ?></h6></span>
+                            <h5><strong><?= $news->judul ?></strong></h5>
                     	</a>
 
                    <?php } ?>
                 </div>
                 <div class="sub-title"></div>
-                <?= $links ?>
+                <h5><?= $links ?></h5>
             </div>
         </div>
     </div>

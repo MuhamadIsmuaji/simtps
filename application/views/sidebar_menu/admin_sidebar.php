@@ -6,8 +6,6 @@
     <div id="dropdown-admin" class="panel-collapse collapse">
         <div class="panel-body">
             <ul class="nav navbar-nav">
-                <li><a href="<?= base_url('admin/home') ?>">Dashboard</a>
-                </li>
                 <li><a href="<?= base_url('admin/setting/system') ?>">Pengaturan Sistem</a>
                 </li>
                 <li><a href="<?= base_url('admin/data/lecturer') ?>">Dosen</a>

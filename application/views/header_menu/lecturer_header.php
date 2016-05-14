@@ -1,5 +1,12 @@
 <li class="dropdown profile">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?= $this->session->userdata('nama') ?><span class="caret"></span></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+        <?php 
+            $var = $this->session->userdata('nama');
+            $say = substr($var,0,15);
+        ?>
+        <?= $say.'...' ?>
+        <span class="caret"></span>
+    </a>
     <ul class="dropdown-menu animated fadeInDown">
         <li>
             <div class="profile-info">
