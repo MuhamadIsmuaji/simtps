@@ -81,8 +81,8 @@
                             <a href="#step3" role="tab" id="step3-tab" data-toggle="tab" aria-controls="profile">
                                 <div class="icon fa fa-book"></div>
                                 <div class="step-title">
-                                    <div class="title">Data Dokumen</div>
-                                    <div class="description">Detail data dokumen kelompok</div>
+                                    <div class="title">Data Dokumen dan Bimbingan</div>
+                                    <div class="description">Detail data dokumen dan bimbingan kelompok</div>
                                 </div>
                             </a>
                         </li>
@@ -313,6 +313,47 @@
                                                         <td><?= $revisi ?></td>
                                                         <td><?= $btnRevisi ?></td>
                                                     </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title">
+                                                <div class="title">Data Bimbingan</div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="card-action">
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="tbListBimbingan" class="table table-striped" cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Tanggal Bimbingan</th>
+                                                            <th>Uraian</th>
+                                                            <th>Validasi Dosen Pembimbing</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php 
+                                                            foreach ($bimbingan as $databimb) {
+                                                                $tgl = new DateTime($databimb->tgl);
+                                                                $validasi = $databimb->validasi == 1 ? 'Valid' : 'Belum Valid';
+                                                        ?>
+                                                                <tr>
+                                                                    <td><?= $databimb->nou ?></td>
+                                                                    <td><?= $tgl->format('d-m-Y') ?></td>
+                                                                    <td><?= $databimb->uraian ?></td>
+                                                                    <td><?= $validasi ?></td>
+                                                                </tr>
+                                                        <?php 
+                                                            }
+                                                        ?>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>

@@ -4,8 +4,8 @@
 	    <div class="side-menu-container">
 	        <div class="navbar-header">
 	            <a class="navbar-brand" href="<?= base_url('public/home') ?>">
-	                <div class="icon fa fa-university"></div>
-	                <div class="title">SIM TPS</div>
+	                <div class="icon fa fa-university fa-lg"></div>
+	                <div class="title"><strong>SIM TPS</strong></div>
 	            </a>
 	            <button type="button" class="navbar-expand-toggle pull-right visible-xs">
 	                <i class="fa fa-times icon"></i>

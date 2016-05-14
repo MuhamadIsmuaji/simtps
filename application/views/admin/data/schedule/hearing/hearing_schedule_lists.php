@@ -20,7 +20,10 @@
 	                <div class="title">Data Jadwal Sidang</div>
 	            </div>
 	            <div class="pull-right card-action">
-	        		<a href="<?= base_url('admin/data/schedule/hearingScheduleCreate') ?>" class="btn btn-primary">Buat Jadwal</a>
+	        		<a href="<?= base_url('admin/data/schedule/hearingScheduleCreate') ?>" class="btn btn-primary">
+	        			<i class="fa fa-plus fa-lg" aria-hidden="true"></i>&nbsp;
+	        			<strong>Buat Jadwal</strong>
+	        		</a>
 	            </div>
 	        </div>
 	        <div class="card-body">
@@ -55,9 +58,14 @@
 									<td><?= $value->ruang ?></td>
 									<td>
 										<a href="<?= base_url('admin/data/schedule/hearingScheduleDetail/'.$value->thn_ajaran.'/'.$value->smt.'/'.$value->ruang.'/'.$value->tgl.'/'.$value->mulai.'/'.$value->akhir)?>" class="btn btn-primary">
-											Detail
+											<i class="fa fa-eye fa-lg" aria-hidden="true"></i>&nbsp;
+											<strong>Detail</strong>
 										</a>
-										<a href="#" onclick="deleteSchedule(<?= $value->thn_ajaran.','.$value->smt.','.$ruang.','.$tglnya.','.$value->mulai.','.$value->akhir ?>);" class="btn btn-danger">Hapus</a>
+										<a href="#" onclick="deleteSchedule(<?= $value->thn_ajaran.','.$value->smt.','.$ruang.','.$tglnya.','.$value->mulai.','.$value->akhir ?>);" 
+											class="btn btn-danger">
+											<i class="fa fa-trash fa-lg" aria-hidden="true"></i>&nbsp;
+											<strong>Hapus</strong>
+										</a>
 									</td>
 								</tr>
 	                    	<?php

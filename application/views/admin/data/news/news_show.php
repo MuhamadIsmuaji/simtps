@@ -16,7 +16,9 @@
                 </div>
                 <div class="pull-right card-action">
                     <div class="btn-group" role="group" aria-label="...">
-	        			<a href="<?= base_url('admin/data/news/edit/'.$news->id) ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>	        		
+	        			<a href="<?= base_url('admin/data/news/edit/'.$news->id) ?>" class="btn btn-primary">
+                            <i class="fa fa-pencil fa-lg"></i>&nbsp;<strong>Edit</strong>
+                        </a>	        		
                     </div>
                 </div>
             </div>
@@ -29,7 +31,11 @@
                         echo '
                         <div class="sub-title">Lampiran File</div>
                         <div class="text-indent">
-                            Unduh Lampiran File Pengumuman : <a href="'.base_url('public/news/downloadAttachmentFile/'.$news->lampiran).'" class="btn btn-success" style="padding-left:0px;">Unduh<i class="fa fa-download"></i></a>
+                            Unduh Lampiran File Pengumuman : 
+                            <a href="'.base_url('public/news/downloadAttachmentFile/'.$news->lampiran).'" class="btn btn-success" style="padding-left:0px;">
+                                <strong>Unduh</strong>
+                                <i class="fa fa-download fa-lg"></i>
+                            </a>
                         </div>';
                     } else {
                         echo '';

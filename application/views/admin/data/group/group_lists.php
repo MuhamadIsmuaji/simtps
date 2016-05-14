@@ -52,8 +52,14 @@
 	                <div class="title">Data Kelompok Praktikum</div>
 	            </div>
 	            <div class="pull-right card-action">
-	        		<button type="button" id="deleteGroupSelected" onclick="deleteGroupSelected()" visible="false" class="btn btn-warning">Hapus Terpilih</button>
-	        		<button type="button" id="btnImportParticipant" onclick="showCreateGroupModal()" visible="false" class="btn btn-primary">Buat Kelompok</button>
+	        		<button type="button" id="deleteGroupSelected" onclick="deleteGroupSelected()" visible="false" class="btn btn-warning">
+	        			<i class="fa fa-trash fa-lg" aria-hidden="true"></i>&nbsp;
+	        			<strong>Hapus Terpilih</strong>
+	        		</button>
+	        		<button type="button" id="btnImportParticipant" onclick="showCreateGroupModal()" visible="false" class="btn btn-primary">
+	        			<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;
+	        			<strong>Buat Kelompok</strong>
+	        		</button>
 	            </div>
 	        </div>
 	        <div class="card-body">

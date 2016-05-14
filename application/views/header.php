@@ -66,8 +66,6 @@
                         </button>
                         <ol class="breadcrumb navbar-breadcrumb">
                         	<li><?= $navbartitle ?></li>
-                            <!-- <li>Dashboard</li>
-                            <li class="active">Dashboard</li> -->
                         </ol>
                         <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                             <i class="fa fa-th icon"></i>

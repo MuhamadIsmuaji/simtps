@@ -72,8 +72,16 @@
 	                <div class="title">Data Peserta Praktikum</div>
 	            </div>
 	            <div class="pull-right card-action">
-	        		<button type="button" id="deleteParticipantSelected" onclick="deleteParticipantSelected()" visible="false" class="btn btn-warning">Hapus Terpilih</button>
-	        		<button type="button" id="btnImportParticipant" onclick="showImportParticipantModal()" visible="false" class="btn btn-primary">Import Data</button>
+	        		<button type="button" id="deleteParticipantSelected" onclick="deleteParticipantSelected()" 
+	        			visible="false" class="btn btn-warning">
+	        			<i class="fa fa-trash fa-lg" aria-hidden="true"></i>&nbsp;
+	        			<strong>Hapus Terpilih</strong>
+	        		</button>
+	        		<button type="button" id="btnImportParticipant" onclick="showImportParticipantModal()" 
+	        			visible="false" class="btn btn-primary">
+	        			<i class="fa fa-file-excel-o fa-lg" aria-hidden="true"></i>&nbsp;
+	        			<strong>Import Data</strong>
+	        		</button>
 	            </div>
 	        </div>
 	        <div class="card-body">

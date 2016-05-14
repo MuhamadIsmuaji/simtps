@@ -44,12 +44,12 @@ class Group extends CI_Controller {
             $no++;
             $action = '<button id="participant-detail" class="btn btn-primary" style="margin:0px" onclick="show(this)"
                         data-kode_kel="'. $group->kode_kel.'" data-npp= "'. $group->npp .'" data-nmdosen= "'. $group->nama .'">
-                        <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp; Edit
+                        <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp; <strong>Edit</strong>
                     </button>
 
                     <a href="'. base_url('admin/data/group/detailGroup/'.$group->kode_kel) .'" 
                         target="_blank" class="btn btn-success" style="margin:0px">
-                        <i class="fa fa-eye fa-lg" aria-hidden="true"></i>&nbsp; Detail
+                        <i class="fa fa-eye fa-lg" aria-hidden="true"></i>&nbsp; <strong>Detail</strong>
                     </a>';
 
             $isHaveMember = $this->M_anggota->getAnggotaByKodeKel($setting->thn_ajaran, $setting->smt, $group->kode_kel)->num_rows();
@@ -90,6 +90,7 @@ class Group extends CI_Controller {
         $thn_ajaran = $setting->thn_ajaran;
         $smt = $setting->smt;
         $kode_kel = $kode_kelompok;
+        $bimbingan = $this->M_bimbingan->getGuidanceByKodeKel($thn_ajaran,$smt,$kode_kel)->result();
 
         $cekGroup = $this->M_kelompok->getActiveGroup($thn_ajaran,$smt,$kode_kel)->row();
 
@@ -101,7 +102,8 @@ class Group extends CI_Controller {
                 'navbartitle'   => 'Detail Data Kelompok',
                 'settingData'   => $setting,
                 'dataGroup'     => $cekGroup,
-                'dataMember'    => $dataMember
+                'dataMember'    => $dataMember,
+                'bimbingan'     => $bimbingan
             ];
 
             $this->load->view('template',$data);

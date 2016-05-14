@@ -75,8 +75,12 @@ class News extends CI_Controller {
             $validasi = $news->validasi == 1 ? 'Sudah Dipublikasi' : 'Belum Dipublikasi';
             $row[] = $validasi;
             
-            $aksi = '<a href="'. base_url('admin/data/news/show/'.$news->id.'/'.$news->slug).'" class="btn btn-success"><span class="icon fa fa-eye"></span></a>
-					 <a href="'. base_url('admin/data/news/edit/'.$news->id) .'" class="btn btn-primary"><span class="icon fa fa-pencil"></span></a>';
+            $aksi = '<a href="'. base_url('admin/data/news/show/'.$news->id.'/'.$news->slug).'" class="btn btn-success">
+            			<span class="icon fa fa-eye fa-lg"></span> &nbsp; <strong>Lihat</strong>
+            		</a>
+					 <a href="'. base_url('admin/data/news/edit/'.$news->id) .'" class="btn btn-primary">
+					 	<span class="icon fa fa-pencil fa-lg"></span> &nbsp; <strong>Edit</strong>
+					 </a>';
 
             $row[] = $aksi;
             $data[] = $row;
