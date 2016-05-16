@@ -6,8 +6,6 @@
     <div id="dropdown-lecturer" class="panel-collapse collapse">
         <div class="panel-body">
             <ul class="nav navbar-nav">
-                <li><a href="<?= base_url('lecturer/dashboard') ?>">Dashboard</a>
-                </li>
                 <li><a href="<?= base_url('lecturer/data/group') ?>">Daftar Kelompok</a>
                 </li>
                 <li><a href="<?= base_url('lecturer/data/schedule') ?>">Jadwal Sidang</a>

@@ -1,5 +1,5 @@
 RewriteEngine on
-RewriteBase /
+RewriteBase /simtps
 RewriteCond $1 !^(index\.php|images|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

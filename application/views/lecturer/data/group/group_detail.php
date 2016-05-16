@@ -17,8 +17,9 @@
                     </div>
                 </div>
                 <div class="pull-right card-action">
-                    <a href="<?= base_url('lecturer/data/group/groupGuidance/'.$dataGroup->thn_ajaran.'/'.$dataGroup->smt.'/'.$dataGroup->kode_kel) ?>" class="btn btn-primary">
-                    	Bimbingan
+                    <a href="<?= base_url('lecturer/data/group/groupGuidance/'.$dataGroup->thn_ajaran.'/'.$dataGroup->smt.'/'.$dataGroup->kode_kel) ?>" target="_blank" class="btn btn-primary">
+                    	<i class="fa fa-book fa-lg" aria-hidden="true"></i>&nbsp;
+                        <strong>Bimbingan</strong>
                     </a>
                 </div>
             </div>
@@ -65,28 +66,28 @@
                     <table id="tbLecturerListsAdmin" class="table table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th rowspan="2">NBI</th>
-                                <th rowspan="2">NAMA</th>
-                                <th rowspan="2">Nilai Bimbingan</th>
-                                <th colspan="4">Penilaian Moderator</th>
-                                <th colspan="4">Penilaian Penguji 1</th>
-                                <th colspan="4">Penilaian Penguji 2</th>
-                                <th rowspan="2">Nilai Akhir</th>
-                                <th rowspan="2">Nilai Huruf</th>
+                                <th rowspan="2" style="text-align: center;">NBI</th>
+                                <th rowspan="2" style="text-align: center;">NAMA</th>
+                                <th rowspan="2" style="text-align: center;">Nilai Bimbingan</th>
+                                <th colspan="4" style="text-align: center;">Penilaian Moderator</th>
+                                <th colspan="4" style="text-align: center;">Penilaian Penguji 1</th>
+                                <th colspan="4" style="text-align: center;">Penilaian Penguji 2</th>
+                                <th rowspan="2" style="text-align: center;">Nilai Akhir</th>
+                                <th rowspan="2" style="text-align: center;">Nilai Huruf</th>
                             </tr>
                             <tr>
-                                <th>Nilai A</th>
-                                <th>Nilai B</th>
-                                <th>Nilai C</th>
-                                <th>Nilai D</th>
-                                <th>Nilai A</th>
-                                <th>Nilai B</th>
-                                <th>Nilai C</th>
-                                <th>Nilai D</th>
-                                <th>Nilai A</th>
-                                <th>Nilai B</th>
-                                <th>Nilai C</th>
-                                <th>Nilai D</th>
+                                <th style="text-align: center;">Nilai A</th>
+                                <th style="text-align: center;">Nilai B</th>
+                                <th style="text-align: center;">Nilai C</th>
+                                <th style="text-align: center;">Nilai D</th>
+                                <th style="text-align: center;">Nilai A</th>
+                                <th style="text-align: center;">Nilai B</th>
+                                <th style="text-align: center;">Nilai C</th>
+                                <th style="text-align: center;">Nilai D</th>
+                                <th style="text-align: center;">Nilai A</th>
+                                <th style="text-align: center;">Nilai B</th>
+                                <th style="text-align: center;">Nilai C</th>
+                                <th style="text-align: center;">Nilai D</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,25 +97,25 @@
 								<tr>
 									<td><?= $member->nbi ?></td>
 									<td><?= $member->nama ?></td>
-									<td><?= $member->nilai_bimb ?></td>
+									<td style="text-align: center;"><?= $member->nilai_bimb ?></td>
 
-									<td><?= $member->nilai_11 ?></td>
-									<td><?= $member->nilai_12 ?></td>
-									<td><?= $member->nilai_13 ?></td>
-									<td><?= $member->nilai_14 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_11 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_12 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_13 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_14 ?></td>
 									
-									<td><?= $member->nilai_21 ?></td>
-									<td><?= $member->nilai_22 ?></td>
-									<td><?= $member->nilai_23 ?></td>
-									<td><?= $member->nilai_24 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_21 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_22 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_23 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_24 ?></td>
 
-									<td><?= $member->nilai_31 ?></td>
-									<td><?= $member->nilai_32 ?></td>
-									<td><?= $member->nilai_33 ?></td>
-									<td><?= $member->nilai_34 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_31 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_32 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_33 ?></td>
+									<td style="text-align: center;"><?= $member->nilai_34 ?></td>
 
-									<td><?= $member->nilai_akhir ?></td>
-									<td><?= $member->nilai_huruf ?></td>
+									<td style="text-align: center;"><?= $member->nilai_akhir ?></td>
+									<td style="text-align: center;"><?= $member->nilai_huruf ?></td>
 								</tr>
                          	<?php 
                          		}

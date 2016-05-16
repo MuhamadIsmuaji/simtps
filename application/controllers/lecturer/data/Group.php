@@ -49,8 +49,10 @@ class Group extends CI_Controller {
         	$validasi = $group->validasi == 1 ? 'Disetujui' : 'Belum Disetujui'; 
 
         	$action = '<a href="'. 
-        			base_url('lecturer/data/group/detailGroup/'.$group->thn_ajaran .'/'.$group->smt.'/'. $group->kode_kel) .'" 
-        			class="btn btn-primary">Detail</a>';
+        				base_url('lecturer/data/group/detailGroup/'.$group->thn_ajaran .'/'.$group->smt.'/'. $group->kode_kel) .'" target="_blank" class="btn btn-primary">
+        				<i class="fa fa-eye fa-lg"></i>&nbsp;
+        				<strong>Detail</strong>
+        			</a>';
 
             $row = array();
             $no++;

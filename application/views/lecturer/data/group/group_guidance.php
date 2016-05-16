@@ -84,7 +84,9 @@
 	        				<div class="sub-title"></div>
 			                <div class="text-indent">
 			                    <button type="button" id="validasi" onclick="validasi()" class="btn btn-primary" disabled>
-			                    Validasi Bimbingan</button>
+			                    	<i class="fa fa-check-square fa-lg" aria-hidden="true"></i>&nbsp;
+			                    	<strong>Validasi Bimbingan</strong>
+			                    </button>
 			                </div>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="step2" aria-labelledby="profile-tab">
@@ -124,7 +126,8 @@
 	        				<div class="sub-title"></div>
 			                <div class="text-indent">
 			                    <button type="button" id="simpanNilai" onclick="nilai();" class="btn btn-primary" >
-			                    Simpan Nilai</button>
+			                    	<strong>Simpan Nilai</strong>
+			                    </button>
 			                </div>
                         </div>
                     </div>
@@ -155,7 +158,7 @@
 
 		/*Data Penilaian Bimbingan*/
       	$('#simpanNilai').prop('disabled',0);
-      	$('#simpanNilai').html('Simpan Nilai');
+      	$('#simpanNilai').html('<i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i>&nbsp;<strong>Simpan Nilai</strong>');
       	if ( total_data_nilai == 0 ) {
 			$('#simpanNilai').prop('disabled',1);
 		} else {
