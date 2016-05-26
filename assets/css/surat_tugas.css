@@ -14,6 +14,7 @@ header p.univname {
 	font-size: 18px;
 	font-weight: bold;
 	margin-bottom: 2px;
+	padding-left: 115px;
 }
 
 header p.facultyname {
@@ -23,12 +24,15 @@ header p.facultyname {
 	letter-spacing: 4px;
 	margin-bottom: 5px;
 	margin-top: 0px;
+	padding-left: 115px;
 }
 
 header p.address {
 	text-align: center;
 	font-size: 12px;
 	margin-top: 0px;
+	padding-left: 120px;
+
 }
 
 div.prodi {
@@ -37,11 +41,14 @@ div.prodi {
 	margin-left: 64px;
 	margin-bottom: -10px;
 	font-size: 14px;
+	padding-left: 90px;
+
 }
 
 div.prodiLeft {
 	width: 287.5px;
 	padding-top: -10px;
+	margin-left: -28px;
 }
 
 div.prodiLeft p {
@@ -75,6 +82,21 @@ hr.bottom {
 	background-color: black;
 }
 /*Header*/
+
+/* Logo */
+div.logo-container {
+	background-color: red;
+	width: 100px;
+	height: 100px;
+	top: 45px;
+	position: absolute;
+}
+
+div.logo-container img {
+	width: 100px;
+	height: 100px;
+}
+/* Logo */
 
 /*content*/
 

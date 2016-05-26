@@ -10,6 +10,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 	<!-- header -->
 	<header>
+		<div class="logo-container">
+			<img src="<?= base_url('assets/img/logo/Logo-Untag.jpg') ?>">
+		</div>
 		<p class="univname">UNIVERSITAS 17 AGUSTUS 1945 (UNTAG) SURABAYA</p>
 		<p class="facultyname">FAKULTAS TEKNIK</p>
 		<p class="address">
