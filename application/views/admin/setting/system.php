@@ -151,6 +151,69 @@
 					<li class="list-group-item active">
 						<h5>
 							<strong>
+								Bobot Penilaian
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Bimbingan : <?= $settingData->bobot_bimbingan ?>%
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Moderator : <?= $settingData->bobot_moderator ?>%
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Penguji 1 : <?= $settingData->bobot_penguji1 ?>%
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Penguji 2 : <?= $settingData->bobot_penguji2 ?>%
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Presentasi : <?= $settingData->kom_a ?>%
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Kejelasan Rancangan : <?= $settingData->kom_b ?>%
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Kejelasan Uji Coba : <?= $settingData->kom_c ?>%
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item">
+						<h5>
+							<strong>
+								Kelengkapan Dokumen : <?= $settingData->kom_d ?>%
+							</strong>
+						</h5>
+					</li>
+					<li class="list-group-item active">
+						<h5>
+							<strong>
 								Surat Tugas
 							</strong>
 						</h5>
@@ -293,6 +356,80 @@
 	                        				<div class="form-group">
 			                                    <label for="exampleInputEmail1">Pengumpulan Revisi Proposal</label>
 			                                    <input type="text" class="form-control" id="bts_revisi" name="bts_revisi" placeholder="Pengumpulan Revisi Proposal">
+			                                </div>
+	                        			</div>
+	                        		</div>
+	                            </div>
+	                        </div>
+	                    </div>
+		        	</div>
+		        	<div class="row">
+		        		<div class="col-sm-12">
+	                        <div class="panel fresh-color panel-primary">
+	                            <div class="panel-heading"><strong>Bobot Penilaian</strong></div>
+	                            <div class="panel-body">
+	                        		<div class="row">
+	                        			<div class="col-sm-6">
+	                        				<div class="form-group">
+			                                    <label for="exampleInputEmail1">Bimbingan (%)</label>
+			                                    <input type="text" class="form-control" id="bobot_bimbingan" name="bobot_bimbingan" placeholder="Bimbingan" onkeypress="return numbersonly(this,event)">
+			                                </div>
+	                        			</div>
+	                        			<div class="col-sm-6">
+	                        				<div class="form-group">
+			                                    <label for="exampleInputEmail1">Moderator (%)</label>
+			                                    <input type="text" class="form-control" id="bobot_moderator" name="bobot_moderator" placeholder="Moderator" onkeypress="return numbersonly(this,event)">
+			                                </div>
+	                        			</div>
+	                        		</div>
+	                        		<div class="row">
+	                        			<div class="col-sm-6">
+	                        				<div class="form-group">
+			                                    <label for="exampleInputEmail1">Penguji 1 (%)</label>
+			                                    <input type="text" class="form-control" id="bobot_penguji1" name="bobot_penguji1" placeholder="Penguji 1" onkeypress="return numbersonly(this,event)">
+			                                </div>
+	                        			</div>
+	                        			<div class="col-sm-6">
+	                        				<div class="form-group">
+			                                    <label for="exampleInputEmail1">Penguji 2 (%)</label>
+			                                    <input type="text" class="form-control" id="bobot_penguji2" name="bobot_penguji2" placeholder="Penguji 2" onkeypress="return numbersonly(this,event)">
+			                                </div>
+	                        			</div>
+	                        		</div>
+	                            </div>
+	                        </div>
+	                    </div>
+		        	</div>
+		        	<div class="row">
+		        		<div class="col-sm-12">
+	                        <div class="panel fresh-color panel-primary">
+	                            <div class="panel-heading"><strong>Bobot Penilaian (Komponen)</strong></div>
+	                            <div class="panel-body">
+	                        		<div class="row">
+	                        			<div class="col-sm-6">
+	                        				<div class="form-group">
+			                                    <label for="exampleInputEmail1">Presentasi (%)</label>
+			                                    <input type="text" class="form-control" id="kom_a" name="kom_a" placeholder="Presentasi" onkeypress="return numbersonly(this,event)">
+			                                </div>
+	                        			</div>
+	                        			<div class="col-sm-6">
+	                        				<div class="form-group">
+			                                    <label for="exampleInputEmail1">Kejelasan Rancangan (%)</label>
+			                                    <input type="text" class="form-control" id="kom_b" name="kom_b" placeholder="Kejelasan Rancangan" onkeypress="return numbersonly(this,event)">
+			                                </div>
+	                        			</div>
+	                        		</div>
+	                        		<div class="row">
+	                        			<div class="col-sm-6">
+	                        				<div class="form-group">
+			                                    <label for="exampleInputEmail1">Kejelasan Uji Coba (%)</label>
+			                                    <input type="text" class="form-control" id="kom_c" name="kom_c" placeholder="Kejelasan Uji Coba" onkeypress="return numbersonly(this,event)">
+			                                </div>
+	                        			</div>
+	                        			<div class="col-sm-6">
+	                        				<div class="form-group">
+			                                    <label for="exampleInputEmail1">Kelengkapan Dokumen (%)</label>
+			                                    <input type="text" class="form-control" id="kom_d" name="kom_d" placeholder="Kelengkapan Dokumen" onkeypress="return numbersonly(this,event)">
 			                                </div>
 	                        			</div>
 	                        		</div>

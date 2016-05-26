@@ -50,11 +50,11 @@ class Setting extends CI_Controller {
 				$isSetting = $this->M_setting->checkSetting($thn_ajaran, $smt)->num_rows(); // Cek thn_ajaran dan semester
 
 				if ( $isSetting ) { // jika periode sudah ada 
-					$errorMessage = 'Buat Periode Gagal. Periode Masih Aktif';
+					$errorMessage = '<strong>Buat Periode Gagal. Periode Masih Aktif</strong>';
 					$divClass = 'alert fresh-color alert-danger alert-dismissible';
 				} else { // Periode tidak ada
 					if ( $thn_ajaran != $current_thn_ajaran || $smt != $current_smt ) { // Jika buat periode tidak sesuai
-						$errorMessage = 'Buat Periode Gagal. Periode Tidak Sesuai';
+						$errorMessage = '<strong>Buat Periode Gagal. Periode Tidak Sesuai</strong>';
 						$divClass = 'alert fresh-color alert-danger alert-dismissible';		
 					} else { // Periode sesuai
 						$bts_judul = $this->generateBatasWaktuCreate($this->input->post('bts_judul'));
@@ -63,59 +63,100 @@ class Setting extends CI_Controller {
 						$bts_revisi = $this->generateBatasWaktuCreate($this->input->post('bts_revisi'));
 
 						if ( $bts_judul[0] || $bts_kelompok[0] || $bts_proposal[0] || $bts_revisi[0] ) {
-							$errorMessage = 'Batas Waktu Tidak Boleh Kurang Dari Tanggal Sekarang';
+							$errorMessage = '<strong>Batas Waktu Tidak Boleh Kurang Dari Tanggal Sekarang</strong>';
 							$divClass = 'alert fresh-color alert-danger alert-dismissible';	
 						} else {
-							$npp_dekan = $this->input->post('npp_dekan') ? $this->input->post('npp_dekan') : $settingData->npp_dekan;
-							$nama_dekan = $this->input->post('nama_dekan') ? $this->input->post('nama_dekan') : $settingData->nama_dekan;
-							$npp_kalab = $this->input->post('npp_kalab') ? $this->input->post('npp_kalab') : $settingData->npp_kalab;
-							$nama_kalab = $this->input->post('nama_kalab') ? $this->input->post('nama_kalab') : $settingData->nama_kalab;
 
-							$no_surattgs = $this->input->post('no_surattgs') ? $this->input->post('no_surattgs') : '';
-							$tgl_surattgs = $this->input->post('tgl_surattgs') ? $this->input->post('tgl_surattgs') : $now;
-							$tgl_surattgs = $this->generateDateFormat($tgl_surattgs);
-							$status = 1;
-							
-							$updateSetting = [
-								'status'	=> 0
-							];
-							$updateSettingProcess = $this->M_setting->update($settingData->thn_ajaran, $settingData->smt, $updateSetting);
+							// Bobot penilaian
+							$bobot_bimbingan = $this->input->post('bobot_bimbingan') ? $this->input->post('bobot_bimbingan') : 0;
+							$bobot_moderator = $this->input->post('bobot_moderator') ? $this->input->post('bobot_moderator') : 0; 
+							$bobot_penguji1 = $this->input->post('bobot_penguji1') ? $this->input->post('bobot_penguji1') : 0;
+							$bobot_penguji2 = $this->input->post('bobot_penguji2') ? $this->input->post('bobot_penguji2') : 0; 
 
-							$createSetting = [
-								'thn_ajaran'	=> $current_thn_ajaran,
-								'smt'			=> $current_smt,
-								'bts_judul'		=> $bts_judul[1],
-								'bts_kelompok'	=> $bts_kelompok[1],
-								'bts_proposal'	=> $bts_proposal[1],
-								'bts_revisi'	=> $bts_revisi[1],
-								'npp_dekan'		=> $npp_dekan,
-								'nama_dekan'	=> $nama_dekan,
-								'npp_kalab'		=> $npp_kalab,
-								'nama_kalab'	=> $nama_kalab,
-								'no_surattgs'	=> $no_surattgs,
-								'tgl_surattgs'	=> $tgl_surattgs,
-								'status'		=> $status,
-							];
+							// Bobot penilaian - komponenya
+							$kom_a = $this->input->post('kom_a') ? $this->input->post('kom_a') : 0; // presentasi
+							$kom_b = $this->input->post('kom_b') ? $this->input->post('kom_b') : 0; // kejelasan rancangan 
+							$kom_c = $this->input->post('kom_c') ? $this->input->post('kom_c') : 0; // kejelasan uji coba
+							$kom_d = $this->input->post('kom_d') ? $this->input->post('kom_d') : 0; // kelengkapan dokumen
 
-							$createSettingProcess = $this->M_setting->insert($createSetting);
+							// Total bobot penilaian
+							$total_penilaian = $bobot_bimbingan + $bobot_moderator + $bobot_penguji1 + $bobot_penguji2;
+							$total_kom = $kom_a + $kom_b + $kom_c + $kom_d;
 
-							// Proses menonaktifkan semua peserta sebelumnya
-							$mhsActive = $this->M_mhs->getMhsActive()->result_object();
-							if ( $mhsActive ) {
-								$updateMhs = ['akses' => 0];
-								foreach( $mhsActive as $mhs ) {
-									$this->M_mhs->update($mhs->nbi, $updateMhs);
+							// cek jumlah harus tidak lebih dari 100					
+							if ( $total_penilaian > 100 || $total_kom > 100 ) {
+
+								// jika total penilaian > 100
+								if ( $total_penilaian > 100 ) {
+									$errorMessage = '<strong>Total Bobot Penilaian Tidak Boleh Lebih Dari 100 %<strong>';
+									$divClass = 'alert fresh-color alert-danger alert-dismissible';	
+								} else { // Jika total_kom > 100
+									$errorMessage = '<strong>Total Bobot Penilaian (Komponen) Tidak Boleh Lebih Dari 100 %</strong>';
+									$divClass = 'alert fresh-color alert-danger alert-dismissible';	
 								}
-							}
-							// Proses menonaktifkan semua peserta sebelumnya
 
-							if ( $createSettingProcess ) {
-								$errorMessage = 'Buat Periode Berhasil';
-								$divClass = 'alert fresh-color alert-success alert-dismissible';
 							} else {
-								$errorMessage = 'Buat Periode Gagal';
-								$divClass = 'alert fresh-color alert-danger alert-dismissible';
-							}
+								$npp_dekan = $this->input->post('npp_dekan') ? $this->input->post('npp_dekan') : $settingData->npp_dekan;
+								$nama_dekan = $this->input->post('nama_dekan') ? $this->input->post('nama_dekan') : $settingData->nama_dekan;
+								$npp_kalab = $this->input->post('npp_kalab') ? $this->input->post('npp_kalab') : $settingData->npp_kalab;
+								$nama_kalab = $this->input->post('nama_kalab') ? $this->input->post('nama_kalab') : $settingData->nama_kalab;
+
+								$no_surattgs = $this->input->post('no_surattgs') ? $this->input->post('no_surattgs') : '';
+								$tgl_surattgs = $this->input->post('tgl_surattgs') ? $this->input->post('tgl_surattgs') : $now;
+								$tgl_surattgs = $this->generateDateFormat($tgl_surattgs);
+								$status = 1;
+								
+								$updateSetting = [
+									'status'	=> 0
+								];
+
+								$updateSettingProcess = $this->M_setting->update($settingData->thn_ajaran, $settingData->smt, $updateSetting);
+
+								$createSetting = [
+									'thn_ajaran'		=> $current_thn_ajaran,
+									'smt'				=> $current_smt,
+									'bts_judul'			=> $bts_judul[1],
+									'bts_kelompok'		=> $bts_kelompok[1],
+									'bts_proposal'		=> $bts_proposal[1],
+									'bts_revisi'		=> $bts_revisi[1],
+									'npp_dekan'			=> $npp_dekan,
+									'nama_dekan'		=> $nama_dekan,
+									'npp_kalab'			=> $npp_kalab,
+									'nama_kalab'		=> $nama_kalab,
+									'no_surattgs'		=> $no_surattgs,
+									'tgl_surattgs'		=> $tgl_surattgs,
+									'status'			=> $status,
+									'bobot_bimbingan'	=> $bobot_bimbingan,
+									'bobot_moderator'	=> $bobot_moderator,
+									'bobot_penguji1'	=> $bobot_penguji1,
+									'bobot_penguji2'	=> $bobot_penguji2,
+									'kom_a'				=> $kom_a,
+									'kom_b'				=> $kom_b,
+									'kom_c'				=> $kom_c,
+									'kom_d'				=> $kom_d
+								];
+
+								$createSettingProcess = $this->M_setting->insert($createSetting);
+
+								// Proses menonaktifkan semua peserta sebelumnya
+								$mhsActive = $this->M_mhs->getMhsActive()->result_object();
+								if ( $mhsActive ) {
+									$updateMhs = ['akses' => 0];
+									foreach( $mhsActive as $mhs ) {
+										$this->M_mhs->update($mhs->nbi, $updateMhs);
+									}
+								}
+								// Proses menonaktifkan semua peserta sebelumnya
+
+								if ( $createSettingProcess ) {
+									$errorMessage = '<strong>Buat Periode Berhasil</strong>';
+									$divClass = 'alert fresh-color alert-success alert-dismissible';
+								} else {
+									$errorMessage = '<strong>Buat Periode Gagal</strong>';
+									$divClass = 'alert fresh-color alert-danger alert-dismissible';
+								}
+								
+							}		
 						}
 					}
 				}
@@ -127,39 +168,77 @@ class Setting extends CI_Controller {
 				$bts_revisi = $this->generateBatasWaktu($this->input->post('bts_revisi'),4);
 
 				if ( $bts_judul[0] || $bts_kelompok[0] || $bts_proposal[0] || $bts_revisi[0] ) {
-					$errorMessage = 'Batas Waktu Tidak Boleh Kurang Dari Tanggal Sekarang';
+					$errorMessage = '<strong>Batas Waktu Tidak Boleh Kurang Dari Tanggal Sekarang</strong>';
 					$divClass = 'alert fresh-color alert-danger alert-dismissible';	
 				} else {
-					$npp_dekan = $this->input->post('npp_dekan') ? $this->input->post('npp_dekan') : $settingData->npp_dekan;
-					$nama_dekan = $this->input->post('nama_dekan') ? $this->input->post('nama_dekan') : $settingData->nama_dekan;
-					$npp_kalab = $this->input->post('npp_kalab') ? $this->input->post('npp_kalab') : $settingData->npp_kalab;
-					$nama_kalab = $this->input->post('nama_kalab') ? $this->input->post('nama_kalab') : $settingData->nama_kalab;
 
-					$no_surattgs = $this->input->post('no_surattgs') ? $this->input->post('no_surattgs') : $settingData->no_surattgs;
-					$tgl_surattgs = $this->input->post('tgl_surattgs') ? $this->input->post('tgl_surattgs') : $settingData->tgl_surattgs;
-					$tgl_surattgs = $this->generateDateFormat($tgl_surattgs);
+					// Bobot penilaian
+					$bobot_bimbingan = $this->input->post('bobot_bimbingan') ? $this->input->post('bobot_bimbingan') : $settingData->bobot_bimbingan;
+					$bobot_moderator = $this->input->post('bobot_moderator') ? $this->input->post('bobot_moderator') : $settingData->bobot_moderator; 
+					$bobot_penguji1 = $this->input->post('bobot_penguji1') ? $this->input->post('bobot_penguji1') : $settingData->bobot_penguji1;
+					$bobot_penguji2 = $this->input->post('bobot_penguji2') ? $this->input->post('bobot_penguji2') : $settingData->bobot_penguji2; 
 
-					$updateSetting = [
-						'bts_judul'		=> $bts_judul[1],
-						'bts_kelompok'	=> $bts_kelompok[1],
-						'bts_proposal'	=> $bts_proposal[1],
-						'bts_revisi'	=> $bts_revisi[1],
-						'npp_dekan'		=> $npp_dekan,
-						'nama_dekan'	=> $nama_dekan,
-						'npp_kalab'		=> $npp_kalab,
-						'nama_kalab'	=> $nama_kalab,
-						'no_surattgs'	=> $no_surattgs,
-						'tgl_surattgs'	=> $tgl_surattgs
+					// Bobot penilaian - komponenya
+					$kom_a = $this->input->post('kom_a') ? $this->input->post('kom_a') : $settingData->kom_a; // presentasi
+					$kom_b = $this->input->post('kom_b') ? $this->input->post('kom_b') : $settingData->kom_b; // kejelasan rancangan 
+					$kom_c = $this->input->post('kom_c') ? $this->input->post('kom_c') : $settingData->kom_c; // kejelasan uji coba
+					$kom_d = $this->input->post('kom_d') ? $this->input->post('kom_d') : $settingData->kom_d; // kelengkapan dokumen
 
-					];
+					// Total bobot penilaian
+					$total_penilaian = $bobot_bimbingan + $bobot_moderator + $bobot_penguji1 + $bobot_penguji2;
+					$total_kom = $kom_a + $kom_b + $kom_c + $kom_d;
 
-					$updateSettingProcess = $this->M_setting->update($settingData->thn_ajaran, $settingData->smt, $updateSetting);
-					if ( $updateSettingProcess ) {
-						$errorMessage = 'Update Periode Berhasil';
-						$divClass = 'alert fresh-color alert-success alert-dismissible';
-					} else {
-						$errorMessage = 'Update Periode Gagal';
-						$divClass = 'alert fresh-color alert-danger alert-dismissible';
+					// cek jumlah harus tidak lebih dari 100					
+					if ( $total_penilaian > 100 || $total_kom > 100 ) {
+
+						// jika total penilaian > 100
+						if ( $total_penilaian > 100 ) {
+							$errorMessage = '<strong>Total Bobot Penilaian Tidak Boleh Lebih Dari 100 %<strong>';
+							$divClass = 'alert fresh-color alert-danger alert-dismissible';	
+						} else { // Jika total_kom > 100
+							$errorMessage = '<strong>Total Bobot Penilaian (Komponen) Tidak Boleh Lebih Dari 100 %</strong>';
+							$divClass = 'alert fresh-color alert-danger alert-dismissible';	
+						}
+
+					} else { // Proses update sistem
+						$npp_dekan = $this->input->post('npp_dekan') ? $this->input->post('npp_dekan') : $settingData->npp_dekan;
+						$nama_dekan = $this->input->post('nama_dekan') ? $this->input->post('nama_dekan') : $settingData->nama_dekan;
+						$npp_kalab = $this->input->post('npp_kalab') ? $this->input->post('npp_kalab') : $settingData->npp_kalab;
+						$nama_kalab = $this->input->post('nama_kalab') ? $this->input->post('nama_kalab') : $settingData->nama_kalab;
+
+						$no_surattgs = $this->input->post('no_surattgs') ? $this->input->post('no_surattgs') : $settingData->no_surattgs;
+						$tgl_surattgs = $this->input->post('tgl_surattgs') ? $this->input->post('tgl_surattgs') : $settingData->tgl_surattgs;
+						$tgl_surattgs = $this->generateDateFormat($tgl_surattgs);
+
+						$updateSetting = [
+							'bts_judul'			=> $bts_judul[1],
+							'bts_kelompok'		=> $bts_kelompok[1],
+							'bts_proposal'		=> $bts_proposal[1],
+							'bts_revisi'		=> $bts_revisi[1],
+							'npp_dekan'			=> $npp_dekan,
+							'nama_dekan'		=> $nama_dekan,
+							'npp_kalab'			=> $npp_kalab,
+							'nama_kalab'		=> $nama_kalab,
+							'no_surattgs'		=> $no_surattgs,
+							'tgl_surattgs'		=> $tgl_surattgs,
+							'bobot_bimbingan'	=> $bobot_bimbingan,
+							'bobot_moderator'	=> $bobot_moderator,
+							'bobot_penguji1'	=> $bobot_penguji1,
+							'bobot_penguji2'	=> $bobot_penguji2,
+							'kom_a'				=> $kom_a,
+							'kom_b'				=> $kom_b,
+							'kom_c'				=> $kom_c,
+							'kom_d'				=> $kom_d
+						];
+
+						$updateSettingProcess = $this->M_setting->update($settingData->thn_ajaran, $settingData->smt, $updateSetting);
+						if ( $updateSettingProcess ) {
+							$errorMessage = '<strong>Update Periode Berhasil</strong>';
+							$divClass = 'alert fresh-color alert-success alert-dismissible';
+						} else {
+							$errorMessage = '<strong>Update Periode Gagal</strong>';
+							$divClass = 'alert fresh-color alert-danger alert-dismissible';
+						}
 					}
 				}
 			}
