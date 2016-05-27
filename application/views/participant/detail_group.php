@@ -160,8 +160,7 @@
 	                    	<?php 
 	                    		$no = 1;
 	                    		foreach ($dataMember as $member) {
-							    	if ( $member->nbi != $this->session->userdata('nbi') ) {
-							    		$status = $member->konfirmasi == 1 ? 'Menunggu konfirmasi' : 'Anggota';
+							    	$status = $member->konfirmasi == 1 ? 'Menunggu konfirmasi' : 'Anggota';
 	                    	?>
 								<tr>
 									<td><?= $no ?></td>
@@ -171,8 +170,7 @@
 									<td><?= $status ?></td>
 								</tr>
 	                    	<?php
-	                    				$no++;
-	                    			} // end if
+                    				$no++;
 	                    		} // end foreach
 	                    	?>
 	                    </tbody>
