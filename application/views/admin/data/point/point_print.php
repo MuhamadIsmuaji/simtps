@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="identity">
 			<div>
 				<p class="labname">
-					Laboratorium Rekayasa Perangkat Lunak				
+					Laboratorium Rekayasa Perangkat Lunak	
 				</p>
 			</div>
 			<div>
@@ -85,6 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$no++;
 		}
 	?>
+
 	<div class="kalabSign" style="page-break-inside: avoid;">
 		<p class="when">
 			Surabaya, <?= $when ?>

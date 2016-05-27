@@ -99,7 +99,7 @@ class Point extends CI_Controller {
         $filename = 'Daftar Nilai Tugas Perancangan Sistem TA '.$thn_ajaran.'-'.$next.' Semester '.$smt;
         $paper = 'A4';
         $orientation = 'potrait';
-        pdf_create($html, $filename, $paper, $orientation);
+        pdf_create_point($html, $filename, $paper, $orientation);
 
 	}
 
