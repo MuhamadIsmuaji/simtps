@@ -17,7 +17,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <div class="title">Data Jadwal Sidang</div>
+                    <div class="title">Data Jadwal Sidang - <?= $this->session->userdata('nama'); ?></div>
                 </div>
             </div>
             <div class="card-body">

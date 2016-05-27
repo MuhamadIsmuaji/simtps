@@ -165,7 +165,7 @@ class M_kelompok extends CI_Model {
 	}
 
 	public function countFilteredParticipant($thn_ajaran = NULL , $smt = NULL){
-		$this->getDataTablesQueryLecturer($thn_ajaran, $smt);
+		$this->getDataTablesQueryParticipant($thn_ajaran, $smt);
         $query = $this->db->get();
         return $query->num_rows();
 	}
