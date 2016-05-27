@@ -167,26 +167,26 @@
                                                         <tr>
                                                             <th rowspan="2" style="text-align: center;">NBI</th>
                                                             <th rowspan="2" style="text-align: center;">NAMA</th>
-                                                            <th rowspan="2" style="text-align: center;">Nilai Bimbingan</th>
+                                                            <th rowspan="2" style="text-align: center;">Bimbingan</th>
                                                             <th colspan="4" style="text-align: center;">Penilaian Moderator</th>
                                                             <th colspan="4" style="text-align: center;">Penilaian Penguji 1</th>
                                                             <th colspan="4" style="text-align: center;">Penilaian Penguji 2</th>
-                                                            <th rowspan="2" style="text-align: center;">Nilai Akhir</th>
-                                                            <th rowspan="2" style="text-align: center;">Nilai Huruf</th>
+                                                            <th rowspan="2" style="text-align: center; width: 70px;">Akhir</th>
+                                                            <th rowspan="2" style="text-align: center; width: 95px;">Huruf</th>
                                                         </tr>
                                                         <tr>
-                                                            <th style="text-align: center;">Nilai A</th>
-                                                            <th style="text-align: center;">Nilai B</th>
-                                                            <th style="text-align: center;">Nilai C</th>
-                                                            <th style="text-align: center;">Nilai D</th>
-                                                            <th style="text-align: center;">Nilai A</th>
-                                                            <th style="text-align: center;">Nilai B</th>
-                                                            <th style="text-align: center;">Nilai C</th>
-                                                            <th style="text-align: center;">Nilai D</th>
-                                                            <th style="text-align: center;">Nilai A</th>
-                                                            <th style="text-align: center;">Nilai B</th>
-                                                            <th style="text-align: center;">Nilai C</th>
-                                                            <th style="text-align: center;">Nilai D</th>
+                                                            <th style="text-align: center;">Presentasi</th>
+                                                            <th style="text-align: center;">Kejelasan Rancangan</th>
+                                                            <th style="text-align: center;">Kejelasan Uji Coba</th>
+                                                            <th style="text-align: center;">Kelengkapan Dokumen</th>
+                                                            <th style="text-align: center;">Presentasi</th>
+                                                            <th style="text-align: center;">Kejelasan Rancangan</th>
+                                                            <th style="text-align: center;">Kejelasan Uji Coba</th>
+                                                            <th style="text-align: center;">Kelengkapan Dokumen</th>
+                                                            <th style="text-align: center;">Presentasi</th>
+                                                            <th style="text-align: center;">Kejelasan Rancangan</th>
+                                                            <th style="text-align: center;">Kejelasan Uji Coba</th>
+                                                            <th style="text-align: center;">Kelengkapan Dokumen</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -269,15 +269,6 @@
                                                 </button>
                                             </div>
                                             </form>
-                                            <div class="sub-title">Keterangan</div>
-                                            <div class="text-indent">
-                                                <ul class="list-group">
-                                                    <li class="list-group-item">Nilai A : Nilai Presentasi</li>
-                                                    <li class="list-group-item">Nilai B : Nilai Kejelasan Rancangan</li>
-                                                    <li class="list-group-item">Nilai C : Nilai Kejelasan Uji Coba</li>
-                                                    <li class="list-group-item">Nilai C : Nilai Kelengkapan Dokumen</li>
-                                                </ul>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

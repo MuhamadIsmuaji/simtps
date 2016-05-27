@@ -196,6 +196,80 @@ class Group extends CI_Controller {
         }
     }
 
+    // Untuk download dokumen kelompok
+    // Param fileName untuk nama file
+    // Param code untuk jenis file proposal / revisi proposal
+    public function downloadGroupDocument($code = NULL, $fileName = NULL) {
+        if ( !$this->session->userdata('isLecturerTps') && !$this->session->userdata('isAdminTps') ) {
+            redirect('public/home','refresh');
+        }
+
+        if ( $code == NULL || $fileName == NULL ) {
+            redirect('admin/data/group','refresh');        
+        }
+
+        if ( $code == 1 || $code == 2 ) {
+            $file_path = $code == 1 ? 'assets/files/proposal/'.$fileName : 'assets/files/revisi_proposal/'.$fileName;
+
+            if ( file_exists($file_path) ) {
+                $this->load->helper('download');
+                $file = file_get_contents($file_path);
+                force_download($fileName, $file);
+            } else {
+                //not found page
+                redirect('admin/data/group','refresh');
+            }
+        } else {
+            redirect('admin/data/group','refresh');        
+        }
+    }
+
+    public function addUraian($thn_ajaran = NULL, $smt = NULL, $kode_kel = NULL, $nou = NULL) {
+        if ( !$this->session->userdata('isLecturerTps') && !$this->session->userdata('isAdminTps') ) {
+            redirect('public/home','refresh');
+        }
+
+        if ( $thn_ajaran == NULL || $smt == NULL || $kode_kel == NULL || $nou == NULL ) {
+            redirect('public/home','refresh');
+        }
+
+        if ( !empty($_POST) ) { // jika simpan uraian disimpan
+
+            $updateData = [
+                'uraian_dosen'    => $this->input->post('uraian')
+            ];
+
+            $updateProcess = $this->M_bimbingan->update($thn_ajaran,$smt,$kode_kel,$nou,$updateData);
+
+            if ( $updateProcess ) {
+                redirect('lecturer/data/group/groupGuidance/'.$thn_ajaran.'/'.$smt.'/'.$kode_kel,'refresh');
+            } else {
+                echo '<script>alert("Maaf kesalhan proses data")</script>';
+                redirect('lecturer/data/group/groupGuidance/'.$thn_ajaran.'/'.$smt.'/'.$kode_kel,'refresh');
+            }
+
+        } else {
+
+            $filter = [
+                'thn_ajaran'    => $thn_ajaran,
+                'smt'           => $smt,
+                'kode_kel'      => $kode_kel,
+                'nou'           => $nou
+            ];
+
+            $guidanceData = $this->M_bimbingan->getGuidance($filter)->row();
+
+            $data = [
+                'content'       => 'lecturer/data/group/add_uraian',
+                'guidanceData'  => $guidanceData,
+                'pagetitle'     => 'Tambah Uraian Dosen',
+                'navbartitle'   => 'Tambah Uraian Dosen'
+            ];
+
+            $this->load->view('template',$data);
+        }
+    }
+
 }
 
 /* End of file Group.php */

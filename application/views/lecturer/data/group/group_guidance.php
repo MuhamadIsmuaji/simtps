@@ -42,12 +42,14 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade in active" id="step1" aria-labelledby="home-tab">
                             <div class="table-responsive">
-				        		<table id="tbGroupListsLecturer" class="table table-striped" cellspacing="0" width="100%">
+				        		<table id="tbGroupListsLecturer" class="table table-hover" cellspacing="0" width="100%">
 				                    <thead>
 				                        <tr>
-				                            <th>No</th>
-				                            <th>Uraian</th>
+				                            <th>Ke</th>
+				                            <th>Uraian Peserta</th>
+				                            <th>Uraian Dosen</th>
 				                            <th>Tanggal</th>
+				                            <th>#</th>
 				                            <th><input type="checkbox" id="cbAllGuidance" onclick="validasiAll()" /></th>
 				                        </tr>
 				                    </thead>
@@ -64,11 +66,19 @@
 				                    				$banyak++;
 				                    				$cb++;
 				                    			}
+
+				                    			$uraian_dosen = '<a 
+			                    					href="'. base_url('lecturer/data/group/addUraian/'.$settingData->thn_ajaran.'/'.$settingData->smt.'/'.$guidance->kode_kel.'/'.$guidance->nou) .'"
+			                    					class="btn btn-primary" >
+													<strong>Uraian Dosen</strong>
+			                    				</a>';
 				                    	?>
 											<tr>
 												<td><?= $guidance->nou ?></td>
 												<td><?= $guidance->uraian ?></td>
+												<td><?= $guidance->uraian_dosen ?></td>
 												<td><?= $tgl->format('d-m-Y') ?></td>
+												<td><?= $uraian_dosen ?></td>
 												<td><?= $checkGuidance ?></td>
 											</tr>
 				                    	<?php 

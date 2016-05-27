@@ -44,8 +44,9 @@
 	        		<table id="tbBimbList" class="table table-striped" cellspacing="0" width="100%">
 	                    <thead>
 	                        <tr>
-	                            <th>Bimbingan Ke</th>
-	                            <th style="width: 1000px;">Uraian Bimbingan</th>
+	                            <th>Ke</th>
+	                            <th style="width: 900px;">Uraian Peserta</th>
+	                            <th style="width: 900px;">Uraian Dosen</th>
 	                            <th>Tanggal Bimbingan</th>
 	                            <th>Status Validasi</th>
 	                            <th>#</th>
@@ -76,6 +77,7 @@
 	                    			<tr>
 	                    				<td><?= $bimbingan->nou ?></td>
 	                    				<td><?= $bimbingan->uraian ?></td>
+	                    				<td><?= $bimbingan->uraian_dosen ?></td>
 	                    				<td><?= $tgl->format('d-m-Y') ?></td>
 	                    				<td><?= $status ?></td>
 	                    				<td><?= $action ?></td>

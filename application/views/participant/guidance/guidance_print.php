@@ -78,7 +78,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	        </div>
 	        <div class="Cell uraian">
 	            <p>
-	            	Uraian
+	            	Uraian Peserta
+	            </p>
+	        </div>
+	        <div class="Cell uraian">
+	            <p>
+	            	Uraian Dosen
 	            </p>
 	        </div>
 	        <div class="Cell validasi">
@@ -100,6 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			    <td><?= $data->nou ?></td>
 			    <td><?= $tgl->format('d-m-Y') ?></td>
 			    <td><?= $data->uraian ?></td>
+			    <td><?= $data->uraian_dosen ?></td>
 			    <td><?= $validasi ?></td>
 			  </tr>
 			</table>
@@ -109,5 +115,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 	?>
 	<!-- Tablerow -->
+
+	<div class="kalabSign" style="page-break-inside: avoid;">
+		<p class="when">
+			Surabaya, <?= date('d-m-Y') ?>
+		</p>
+		<p class="kalab">Ttd Pembimbing,</p>
+		<p class="who"><?= $group->nama ?></p>
+		<hr>
+		<p class="whonpp">
+			<?php
+				$first = substr($group->npp,0,5);
+				$second = substr($group->npp,6,2);
+				$third = substr($group->npp,8);		
+				echo "NPP. ".$first.'.'.$second.'.'.$third;
+			?>
+		</p>
+	</div>
 </body>
 </html>

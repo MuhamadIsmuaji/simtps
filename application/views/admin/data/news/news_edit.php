@@ -112,9 +112,9 @@
 	            onKeyup: function(e) {
 	                $('#isi').val($('#summernote').summernote('code'));
 	            },
-	            onInit: function() {
-			    	$('#summernote').summernote('code', $('#isi').val());
-			    }
+    	        onInit: function() {
+    			    	$('#summernote').summernote('code', $('#isi').val());
+    			    }
             }
           
         });

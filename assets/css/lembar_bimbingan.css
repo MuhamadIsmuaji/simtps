@@ -1,157 +1,203 @@
 /*Body*/
-	body {
-		color : black;
-		font-family: "Times New Roman";
-		margin: 0px;
-	    padding: 0px;
-	}
-	/*Body*/
+body {
+	color : black;
+	font-family: "Times New Roman";
+	margin: 0px;
+    padding: 0px;
+}
+/*Body*/
 
-	/*header*/
-	
-	/*title*/
-	div.title {
-		font-size: 18px;
-		text-align: center;
-		text-transform: uppercase;
-	}
+/*header*/
 
-	div.title p {
-		margin-top: 0px;
-		margin-bottom: 5px;
-	}
-	/*title*/
+/*title*/
+div.title {
+	font-size: 18px;
+	text-align: center;
+	text-transform: uppercase;
+}
 
-	/*identity*/
-	div.identity {
-		margin-top: 20px;
-		width: 100%;
-		height: auto;
-		font-size: 14px;
-	}
+div.title p {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+/*title*/
 
-	table.identity {
-	  	margin: 0px;
-	  	table-layout: fixed;
-	  	width: 100%; /* must have this set */
-		font-size: 14px;
-	}
+/*identity*/
+div.identity {
+	margin-top: 20px;
+	width: 100%;
+	height: auto;
+	font-size: 14px;
+}
 
-	table.identity td.rowtitle {
-		width: 18%;
-		vertical-align: top;
-	}
+table.identity {
+  	margin: 0px;
+  	table-layout: fixed;
+  	width: 100%; /* must have this set */
+	font-size: 14px;
+}
 
-	table.identity td.rowdotted {
-		width: 1%;
-		vertical-align: top;
-	}
+table.identity td.rowtitle {
+	width: 18%;
+	vertical-align: top;
+}
 
-	table.identity td:nth-child(3) {
-		word-wrap: break-word;
-	}
-	/*identity*/
-	
-	hr.top {
-		margin-top: -8px;
-		margin-bottom: 0px;
-		height: 2.5px;
-		background-color: black;
-	}
+table.identity td.rowdotted {
+	width: 1%;
+	vertical-align: top;
+}
 
-	hr.bottom {
-		margin-top: 3px;
-		height: 0.5px;
-		background-color: black;
-	}
+table.identity td:nth-child(3) {
+	word-wrap: break-word;
+}
+/*identity*/
 
-	/*header*/
+hr.top {
+	margin-top: -8px;
+	margin-bottom: 0px;
+	height: 2.5px;
+	background-color: black;
+}
 
-	/*Table Head*/
-	.Table {
-    	display: table;
-	    width: 100%;
-	    margin-top: 15px;
-	}
+hr.bottom {
+	margin-top: 3px;
+	height: 0.5px;
+	background-color: black;
+}
 
-	.Heading {
-	    display: table-row;
-	    font-weight: bold;
-	    font-size: 16px;
-	    text-align: center;
-	}
+/*header*/
 
-	.Cell {
-	    display: table-cell;
-	    border: 1px solid black;
-	    height: 1px;
-	}
+/*Table Head*/
+.Table {
+	display: table;
+    width: 100%;
+    margin-top: 15px;
+}
 
-	div.Cell p {
-	    margin: 5px 0px 5px 0px;
-	}
+.Heading {
+    display: table-row;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
 
-	div.no {
-		width: 35px;
-		border-right: 0px;
-		padding-top: 6px;
-	}
+.Cell {
+    display: table-cell;
+    border: 1px solid black;
+    height: 1px;
+}
 
-	div.uraian {
-		width: 425px;
-		border-right: 0px;
-		padding-top: 6px;
-	}
+div.Cell p {
+    margin: 5px 0px 5px 0px;
+}
 
-	div.tgl {
-		width: 95px;
-		border-right: 0px;
-		padding-top: 6px;
-	}
+div.no {
+	width: 35px;
+	border-right: 0px;
+	padding-top: 6px;
+}
 
-	div.validasi {
-	    border-width: thin;
-	}
-	/*Table Head*/
+div.uraian {
+	width: 222px;
+	border-right: 0px;
+	padding-top: 6px;
+}
 
-	/*Table Row*/
-	div.tableRow {
-		width: 100%;
-		height: auto;
-		padding: 0px;
-		margin-top: -1px;
-		margin-bottom: -1px;
-	}
+div.tgl {
+	width: 85px;
+	border-right: 0px;
+	padding-top: 6px;
+}
 
-	table.tableRow {
-	  	margin: 0px;
-	  	border: 1px solid black;
-	  	table-layout: fixed;
-	  	width: 100%; /* must have this set */
-		font-size: 14px;
-	}
+div.validasi {
+    border-width: thin;
+}
+/*Table Head*/
 
-	table.tableRow td {
- 		border: 1px solid black;
-	}
+/*Table Row*/
+div.tableRow {
+	width: 100%;
+	height: auto;
+	padding: 0px;
+	margin-top: -1px;
+	margin-bottom: -1px;
+}
 
-	table.tableRow td:nth-child(1) {
-		width: 5%;
-		text-align: center;
-	}
+table.tableRow {
+  	margin: 0px;
+  	border: 1px solid black;
+  	table-layout: fixed;
+  	width: 100%; /* must have this set */
+	font-size: 14px;
+}
 
-	table.tableRow td:nth-child(2) {
-		width: 13.7%;
-		text-align: center;
-	}
+table.tableRow td {
+		border: 1px solid black;
+}
 
-	table.tableRow td:nth-child(3) {
-		width: 60.8%;
-		word-wrap: break-word;
-		padding: 5px;
-	}
+table.tableRow td:nth-child(1) {
+	width: 5%;
+	text-align: center;
+}
 
-	table.tableRow td:nth-child(4) {
-		text-align: center;
-	}
-	/*Table Row*/
+table.tableRow td:nth-child(2) {
+	width: 12.3%;
+	text-align: center;
+}
+
+table.tableRow td:nth-child(3) {
+	width: 31.8%;
+	word-wrap: break-word;
+	padding: 5px;
+}
+
+table.tableRow td:nth-child(4) {
+	width: 31.8%;
+	word-wrap: break-word;
+	padding: 5px;
+}
+
+table.tableRow td:nth-child(5) {
+	text-align: center;
+}
+/*Table Row*/
+
+	/*Kalab Sign*/
+div.kalabSign {
+	width: 325px;
+	height: 200px;
+	margin: 25px 0px 0px 375px;
+}
+
+p.when {
+	text-align: center;
+	font-size: 16px;
+}
+
+p.kalab {
+	text-align: center;
+	font-size: 16px;
+}
+
+
+p.who {
+	text-align: center;
+	font-size: 16px;
+	margin-top: 100px;
+	margin-bottom: 0px;
+}
+
+hr {
+	width: 90%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+p.whonpp {
+	text-align: center;
+	font-size: 16px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+/*Kalab Sign*/
