@@ -89,6 +89,16 @@ class M_jadwal extends CI_Model {
 		return $query;
 	}
 
+	public function getScheduleDosen($thn_ajaran = NULL ,$smt = NULL, $npp = NULL) {
+		$this->db->select('*');
+		$this->db->from($this->table);
+		$this->db->where($this->pk1,$thn_ajaran);
+		$this->db->where($this->pk2,$smt);
+		$this->db->where("( moderator='". $npp ."' OR penguji1='". $npp ."' OR penguji2='". $npp ."'  )");
+		$query = $this->db->get();
+		return $query;
+	}
+
 	public function getJadwalByIdentitas($thn_ajaran = NULL ,$smt = NULL ,$ruang = NULL, $tgl = NULL, $mulai = NULL, $akhir = NULL) {
 		$this->db->select('*');
 		$this->db->from($this->table);

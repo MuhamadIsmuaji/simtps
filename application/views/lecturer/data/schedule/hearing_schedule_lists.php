@@ -1,6 +1,6 @@
 <?php 
     $next = $settingData->thn_ajaran+1;
-    $semester = $settingData->smt == 1 ? 'Ganjil' : 'Genap' ;
+    $semester = $settingData->smt == 1 ? 'Ganjil' : 'Genap' ; 
 ?>
 
 <div class="page-title">
@@ -24,41 +24,44 @@
                 <div class="card-action">
                 </div>
                 <div class="table-responsive">
-                    <table id="tbNewsListsAdmin" class="table table-striped" cellspacing="0" width="100%">
+                    <table id="tbNewsListsAdmin" class="table table-hover" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal Sidang</th>
                                 <th>Waktu</th>
                                 <th>Ruang</th>
-                                <th>#</th>
+                                <th>Moderator</th>
+                                <th>Penguji 1</th>
+                                <th>Penguji 2</th>
+                                <th>Kelompok</th>
+                                <th>Anggota Kelompok</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                $no=1;
-                                foreach ($jadwal as $value) {
-                                    $tgl = new DateTime($value->tgl);
-                                    $mulai = $value->mulai <= 9 ? '0'. $value->mulai .':00' : $value->mulai .':00';
-                                    $akhir = $value->akhir <= 9 ? '0'. $value->akhir .':00' : $value->akhir .':00';
-                                    $waktu = $mulai.' - '.$akhir;
-                                    $ruang = "'".$value->ruang."'";
-                                    $tglnya = "'".$value->tgl."'";
-                            ?>
-                                <tr>
-                                    <td><?= $no ?></td>
-                                    <td><?= $tgl->format('d-m-Y') ?></td>
-                                    <td><?= $waktu ?></td>
-                                    <td><?= $value->ruang ?></td>
-                                    <td>
-                                        <a href="<?= base_url('lecturer/data/schedule/hearingScheduleDetail/'.$value->thn_ajaran.'/'.$value->smt.'/'.$value->ruang.'/'.$value->tgl.'/'.$value->mulai.'/'.$value->akhir)?>" class="btn btn-primary" target="_blank">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                            &nbsp;<strong>Detail</strong>
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php
-                                    $no++; 
+                            <?php 
+                                $no = 1;
+                                foreach ($dataJadwal as $ke) {
+                                    echo '<tr>';
+                                        echo '<td>'. $no .'</td>';
+                                    foreach ($ke as $jadwal) {
+                                        echo '<td>';
+                                        
+                                        if ( is_array($jadwal) ) {
+                                            foreach ($jadwal as $anggota) {
+                                               foreach ($anggota as $key => $dataAnggota) {
+                                                   echo $dataAnggota.'&nbsp;&nbsp;&nbsp;&nbsp;';
+                                               }
+                                               echo '<br/>';
+                                            }
+                                        } else {
+                                            echo $jadwal;
+                                        }
+
+                                        echo '</td>';
+                                    }
+                                    echo '</tr>';
+                                    $no++;
                                 }
                             ?>
                         </tbody>
