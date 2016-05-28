@@ -223,15 +223,55 @@
                                                                                 'selected' : '' ?> >
                                                                             A
                                                                         </option>
+                                                                        <option value="A-"
+                                                                            <?= $membernya->nilai_huruf == 'A-' ? 
+                                                                                'selected' : '' ?> >
+                                                                            A-
+                                                                        </option>
+                                                                        <option value="AB"
+                                                                            <?= $membernya->nilai_huruf == 'AB' ? 
+                                                                                'selected' : '' ?> >
+                                                                            AB
+                                                                        </option>
+                                                                        <option value="B+"
+                                                                            <?= $membernya->nilai_huruf == 'B+' ? 
+                                                                                'selected' : '' ?> >
+                                                                            B+
+                                                                        </option>
                                                                         <option value="B"
                                                                             <?= $membernya->nilai_huruf == 'B' ? 
                                                                                 'selected' : '' ?> >
                                                                             B
                                                                         </option>
+                                                                        <option value="B-"
+                                                                            <?= $membernya->nilai_huruf == 'B-' ? 
+                                                                                'selected' : '' ?> >
+                                                                            B-
+                                                                        </option>
+                                                                        <option value="BC"
+                                                                            <?= $membernya->nilai_huruf == 'BC' ? 
+                                                                                'selected' : '' ?> >
+                                                                            BC
+                                                                        </option>
+                                                                        <option value="C+"
+                                                                            <?= $membernya->nilai_huruf == 'C+' ? 
+                                                                                'selected' : '' ?> >
+                                                                            C+
+                                                                        </option>
                                                                         <option value="C"
                                                                             <?= $membernya->nilai_huruf == 'C' ? 
                                                                                 'selected' : '' ?> >
                                                                             C
+                                                                        </option>
+                                                                        <option value="C-"
+                                                                            <?= $membernya->nilai_huruf == 'C-' ? 
+                                                                                'selected' : '' ?> >
+                                                                            C-
+                                                                        </option>
+                                                                        <option value="CD"
+                                                                            <?= $membernya->nilai_huruf == 'CD' ? 
+                                                                                'selected' : '' ?> >
+                                                                            CD
                                                                         </option>
                                                                         <option value="D"
                                                                             <?= $membernya->nilai_huruf == 'D' ? 
@@ -242,6 +282,11 @@
                                                                             <?= $membernya->nilai_huruf == 'E' ? 
                                                                                 'selected' : '' ?> >
                                                                             E
+                                                                        </option>
+                                                                        <option value="F"
+                                                                            <?= $membernya->nilai_huruf == 'F' ? 
+                                                                                'selected' : '' ?> >
+                                                                            F
                                                                         </option>
                                                                     </select>
                                                                     <input type="hidden" name="thn_ajaran[]" 
