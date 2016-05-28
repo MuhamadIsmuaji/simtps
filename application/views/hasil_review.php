@@ -8,5 +8,5 @@
 	
 	foreach ($datanya as $value) {
 		echo $value['nbi']."<br/>";
-		echo $value['nilai_11']."<br/>";
+		echo $value['kode_kel']."<br/>";
 	}

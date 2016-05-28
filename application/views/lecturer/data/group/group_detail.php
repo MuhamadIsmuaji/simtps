@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="pull-right card-action">
-                    <a href="<?= base_url('lecturer/data/group/groupGuidance/'.$dataGroup->thn_ajaran.'/'.$dataGroup->smt.'/'.$dataGroup->kode_kel) ?>" target="_blank" class="btn btn-primary">
+                    <a href="<?= base_url('lecturer/data/group/groupGuidance/'.$dataGroup->thn_ajaran.'/'.$dataGroup->smt.'/'.$dataGroup->kode_kel) ?>" class="btn btn-primary">
                         <i class="fa fa-book fa-lg" aria-hidden="true"></i>&nbsp;
                         <strong>Bimbingan</strong>
                     </a>

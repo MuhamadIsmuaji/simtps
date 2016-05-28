@@ -46,17 +46,19 @@ class Penilaian extends CI_Controller {
 		            $datanya = explode(',',$this->input->get('data'.$i));
 		            $nbi = $datanya[0];
 		            $nilaiBimbingan = $datanya[1];
-		            $jenis_nilai = 'nilai_bimb';
-		            $getNilaiAKhir = $this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$nilaiBimbingan,$jenis_nilai);
+		            
+		            $dataUpdate = [ 'nilai_bimb' => $nilaiBimbingan];
+		            $updateNilai = $this->M_anggota->update($thn_ajaran,$smt,$kode_kel,$nbi,$dataUpdate);
+
+		            $getNilaiAKhir = $this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi);
 		            $getNilaiHuruf = $this->generateNilaiHuruf($thn_ajaran,$smt,$kode_kel,$nbi);
 		        }
 
 		        if ($getNilaiAKhir && $getNilaiHuruf){
-		        	echo "<script>alert('Berhasil')</script>";
+		        	echo "<script>alert('Penilaian Bimbingan Berhasil Disimpan')</script>";
 					redirect('lecturer/data/group/detailGroup/'.$thn_ajaran.'/'.$smt.'/'.$kode_kel,'refresh');
-		        }
-		       	else {
-		        	echo "<script>alert('Gagal')</script>";
+		        } else {
+		        	echo "<script>alert('Penilaian Bimbingan Gagal Disimpan')</script>";
 					redirect('lecturer/data/group/detailGroup/'.$thn_ajaran.'/'.$smt.'/'.$kode_kel,'refresh');
 		       	}
 
@@ -73,108 +75,78 @@ class Penilaian extends CI_Controller {
 			redirect('public/home','refresh');
 		}
 
-		if ( ! empty($_POST) ) {
-			if ( $this->input->post('btnSimpanNilaiModerator') ) { // Proses penilaian oleh moderator
+		if ( !empty($_POST) ) {
+			$fields = ['thn_ajaran','smt','kode_kel','nbi','point','kom_a','kom_b','kom_c','kom_d'];
+
+			foreach ($fields as $field) {
+
+				foreach ($_POST[$field] as $key => $value) {
+					
+					$datanya[$key][$field] = $value;
+				}
+
+			} // end foreach
+
+			foreach ($datanya as $mhs) {
+
+				$thn_ajaran = $mhs['thn_ajaran'];
+				$smt = $mhs['smt'];
+				$kode_kel = $mhs['kode_kel'];
+				$nbi = $mhs['nbi'];
+
+				if ( $mhs['point'] == 1 ) { // penilaian moderator
 				
-				$fields = ['nbi','kode_kel','thn_ajaran','smt','nilai_11','nilai_12','nilai_13','nilai_14'];
+					$kom_a = 'nilai_11';
+					$kom_b = 'nilai_12';
+					$kom_c = 'nilai_13';
+					$kom_d = 'nilai_14';
 
-				foreach ($fields as $field) {
+				} else if ( $mhs['point'] == 2 ) { // penilaian penguji 1
 
-					foreach ($_POST[$field] as $key => $value) {
-						
-						$datanya[$key][$field] = $value;
-					}
+					$kom_a = 'nilai_21';
+					$kom_b = 'nilai_22';
+					$kom_c = 'nilai_23';
+					$kom_d = 'nilai_24';
+				
+				} else { // penilaian penguji 2
 
-				}
-
-				// Proses update nilai moderator dan nilai huruf
-				foreach ($datanya as $value) {
-					$thn_ajaran = $value['thn_ajaran'];
-					$smt = $value['smt'];
-					$kode_kel = $value['kode_kel'];
-					$nbi = $value['nbi'];
-
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_11'],'nilai_11');
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_12'],'nilai_12');
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_13'],'nilai_13');
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_14'],'nilai_14');
-
-					$this->generateNilaiHuruf($thn_ajaran,$smt,$kode_kel,$nbi);
-				}
-
-
-			} else if ( $this->input->post('btnSimpanNilaiPenguji1') ) { // Proses penilaian oleh penguji 1
-
-				$fields = ['nbi','kode_kel','thn_ajaran','smt','nilai_21','nilai_22','nilai_23','nilai_24'];
-
-				foreach ($fields as $field) {
-
-					foreach ($_POST[$field] as $key => $value) {
-						
-						$datanya[$key][$field] = $value;
-					}
+					$kom_a = 'nilai_31';
+					$kom_b = 'nilai_32';
+					$kom_c = 'nilai_33';
+					$kom_d = 'nilai_34';
 
 				}
 
-				// Proses update nilai moderator dan nilai huruf
-				foreach ($datanya as $value) {
-					$thn_ajaran = $value['thn_ajaran'];
-					$smt = $value['smt'];
-					$kode_kel = $value['kode_kel'];
-					$nbi = $value['nbi'];
+				$dataUpdate = [ 
+					$kom_a => $mhs['kom_a'],
+					$kom_b => $mhs['kom_b'],
+					$kom_c => $mhs['kom_c'],
+					$kom_d => $mhs['kom_d'],
+				];
 
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_21'],'nilai_21');
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_22'],'nilai_22');
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_23'],'nilai_23');
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_24'],'nilai_24');
+		        $updateNilai = $this->M_anggota->update($thn_ajaran,$smt,$kode_kel,$nbi,$dataUpdate);
 
-					$this->generateNilaiHuruf($thn_ajaran,$smt,$kode_kel,$nbi);
-				}
+		        $getNilaiAKhir = $this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi);
+		        $getNilaiHuruf = $this->generateNilaiHuruf($thn_ajaran,$smt,$kode_kel,$nbi);
 
+			} // end foreach
 
-			} else if ( $this->input->post('btnSimpanNilaiPenguji2') ) { // Proses penilaian oleh penguji 2
-
-				$fields = ['nbi','kode_kel','thn_ajaran','smt','nilai_31','nilai_32','nilai_33','nilai_34'];
-
-				foreach ($fields as $field) {
-
-					foreach ($_POST[$field] as $key => $value) {
-						
-						$datanya[$key][$field] = $value;
-					}
-
-				}
-
-				// Proses update nilai moderator dan nilai huruf
-				foreach ($datanya as $value) {
-					$thn_ajaran = $value['thn_ajaran'];
-					$smt = $value['smt'];
-					$kode_kel = $value['kode_kel'];
-					$nbi = $value['nbi'];
-
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_31'],'nilai_31');
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_32'],'nilai_32');
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_33'],'nilai_33');
-					$this->generateNilaiAkhir($thn_ajaran,$smt,$kode_kel,$nbi,$value['nilai_34'],'nilai_34');
-
-					$this->generateNilaiHuruf($thn_ajaran,$smt,$kode_kel,$nbi);
-				}
-
-			} else {
-				redirect('lecturer/data/review','refresh');			
-			}
-
-			redirect('lecturer/data/review','refresh');			
+			if ($getNilaiAKhir && $getNilaiHuruf){
+	        	echo "<script>alert('Nilai Review Sidang Berhasil Disimpan')</script>";
+				redirect('lecturer/data/review','refresh');
+	        } else {
+	        	echo "<script>alert('Nilai Review Sidang Berhasil Disimpan')</script>";
+				redirect('lecturer/data/review','refresh');
+	       	}
 
 		} else {
-			redirect('lecturer/data/review','refresh');
+			redirect('lecturer/data/review','refresh');			
 		}
-
 	}
 
 
 	// Proses generate nilai akhir
-	private function generateNilaiAkhir($thn_ajaran = NULL, $smt = NULL, $kode_kel = NULL, $nbi = NULL, $nilaiBimb = NULL, $jenis_nilai = NULL) {
+	private function generateNilaiAkhir($thn_ajaran = NULL, $smt = NULL, $kode_kel = NULL, $nbi = NULL) {
 		if ( !$this->session->userdata('isLecturerTps') && !$this->session->userdata('isAdminTps') ) {
 			redirect('public/home','refresh');
 		}
@@ -189,23 +161,60 @@ class Penilaian extends CI_Controller {
 		$dataAnggota = $this->M_anggota->getAnggota($dataFilter)->row();
 
 		if ( $dataAnggota ) {
-			$dataUpdate = [ $jenis_nilai => $nilaiBimb];
-			$updateNilai = $this->M_anggota->update($thn_ajaran,$smt,$kode_kel,$nbi,$dataUpdate);
+			
+			$setting = $this->M_setting->getSetting()->row();
 
-			if ( $updateNilai ) {
-				// Perhitungan nilai kahir
-				//$totalNilai = $dataAnggota->nilai_11 + $nilaiBimb;
-				$totalNilai = 0;
-				
-				$dataUpdate = ['nilai_akhir' => $totalNilai];
-				$updateNilaiAkhir = $this->M_anggota->update($thn_ajaran,$smt,$kode_kel,$nbi,$dataUpdate);
+    		// Bobot masing masing nilai
+    		$bobot_bimbingan = $setting->bobot_bimbingan;
+    		$bobot_moderator = $setting->bobot_moderator;
+    		$bobot_penguji1 = $setting->bobot_penguji1;
+    		$bobot_penguji2 = $setting->bobot_penguji2;
+    		$kom_a = $setting->kom_a;
+    		$kom_b = $setting->kom_b;
+    		$kom_c = $setting->kom_c;
+    		$kom_d = $setting->kom_d;
+    		// Bobot masing masing nilai
 
-				if ( $updateNilaiAkhir ) {
-					return true;
-				} else {
-					return false;
-				}
+    		// nilai bimbingan
+    		$bimb = ( $bobot_bimbingan/100 ) * $dataAnggota->nilai_bimb;
+    		// nilai bimbingan
 
+    		// nilai moderator
+    		$kom_a_mod = ( $kom_a/100 ) * $dataAnggota->nilai_11;
+    		$kom_b_mod = ( $kom_b/100 ) * $dataAnggota->nilai_12;
+    		$kom_c_mod = ( $kom_c/100 ) * $dataAnggota->nilai_13;
+    		$kom_d_mod = ( $kom_d/100 ) * $dataAnggota->nilai_14;
+
+    		$tot_mod = ( $kom_a_mod + $kom_b_mod + $kom_c_mod + $kom_d_mod ) * ( $bobot_moderator/100 );
+    		// nilai moderator
+    		
+    		// nilai penguji 1
+    		$kom_a_p1 = ( $kom_a/100 ) * $dataAnggota->nilai_21;
+    		$kom_b_p1 = ( $kom_b/100 ) * $dataAnggota->nilai_22;
+    		$kom_c_p1 = ( $kom_c/100 ) * $dataAnggota->nilai_23;
+    		$kom_d_p1 = ( $kom_d/100 ) * $dataAnggota->nilai_24;
+
+    		$tot_p1 = ( $kom_a_p1 + $kom_b_p1 + $kom_c_p1 + $kom_d_p1 ) * ( $bobot_penguji1/100 );
+    		// nilai penguji 1
+    		 
+    		// nilai penguji 2
+    		$kom_a_p2 = ( $kom_a/100 ) * $dataAnggota->nilai_31;
+    		$kom_b_p2 = ( $kom_b/100 ) * $dataAnggota->nilai_32;
+    		$kom_c_p2 = ( $kom_c/100 ) * $dataAnggota->nilai_33;
+    		$kom_d_p2 = ( $kom_d/100 ) * $dataAnggota->nilai_34;
+
+    		$tot_p2 = ( $kom_a_p2 + $kom_b_p2 + $kom_c_p2 + $kom_d_p2 ) * ( $bobot_penguji2/100 );
+    		// nilai penguji 2
+
+			// Perhitungan nilai kahir
+			$totalNilai = $bimb + $tot_mod + $tot_p1 + $tot_p2;
+			// Perhitungan nilai kahir
+			
+			$dataUpdate = ['nilai_akhir' => $totalNilai];
+			$updateNilaiAkhir = $this->M_anggota->update($thn_ajaran,$smt,$kode_kel,$nbi,$dataUpdate);
+
+			if ( $updateNilaiAkhir ) {
+				return true;
 			} else {
 				return false;
 			}
@@ -232,8 +241,37 @@ class Penilaian extends CI_Controller {
 		$dataAnggota = $this->M_anggota->getAnggota($dataFilter)->row();
 
 		if ( $dataAnggota ) {
+
 			// Perhitungan Nilai Huruf
-			$nilaiHuruf = $dataAnggota->nilai_akhir <= 50 ? 'C' : 'A';
+			if ( $dataAnggota->nilai_akhir > 85 )
+				$nilaiHuruf = 'A';
+			else if ( $dataAnggota->nilai_akhir > 80 && $dataAnggota->nilai_akhir <= 85 )
+				$nilaiHuruf = 'A-';
+			else if ( $dataAnggota->nilai_akhir > 75 && $dataAnggota->nilai_akhir <= 80 )
+				$nilaiHuruf = 'AB';
+			else if ( $dataAnggota->nilai_akhir > 70 && $dataAnggota->nilai_akhir <= 75 )
+				$nilaiHuruf = 'B+';
+			else if ( $dataAnggota->nilai_akhir > 65 && $dataAnggota->nilai_akhir <= 70 )
+				$nilaiHuruf = 'B';
+			else if ( $dataAnggota->nilai_akhir > 60 && $dataAnggota->nilai_akhir <= 65 )
+				$nilaiHuruf = 'B-';
+			else if ( $dataAnggota->nilai_akhir > 55 && $dataAnggota->nilai_akhir <= 60 )
+				$nilaiHuruf = 'BC';
+			else if ( $dataAnggota->nilai_akhir > 50 && $dataAnggota->nilai_akhir <= 55 )
+				$nilaiHuruf = 'C+';
+			else if ( $dataAnggota->nilai_akhir > 45 && $dataAnggota->nilai_akhir <= 50 )
+				$nilaiHuruf = 'C';
+			else if ( $dataAnggota->nilai_akhir > 40 && $dataAnggota->nilai_akhir <= 45 )
+				$nilaiHuruf = 'C-';
+			else if ( $dataAnggota->nilai_akhir > 35 && $dataAnggota->nilai_akhir <= 40 )
+				$nilaiHuruf = 'CD';
+			else if ( $dataAnggota->nilai_akhir > 30 && $dataAnggota->nilai_akhir <= 35 )
+				$nilaiHuruf = 'D';
+			else if ( $dataAnggota->nilai_akhir >= 0 && $dataAnggota->nilai_akhir <=30 )
+				$nilaiHuruf = 'E';
+			else
+				$nilaiHuruf = 'F';
+			// Perhitungan Nilai Huruf
 
 			$dataUpdate = ['nilai_huruf' => $nilaiHuruf];
 			$updateHuruf = $this->M_anggota->update($thn_ajaran,$smt,$kode_kel,$nbi,$dataUpdate);

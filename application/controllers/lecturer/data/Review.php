@@ -8,33 +8,65 @@ class Review extends CI_Controller {
 		$thn_ajaran = $setting->thn_ajaran;
 		$smt = $setting->smt;
 		$dosen = $this->session->userdata('npp');
-		$groupModerator = array();
-		$groupPenguji1 = array();
-		$groupPenguji2 = array();
 
-		$reviewModerator = $this->M_jadwal->reviewSchedule($setting->thn_ajaran, $setting->smt, $dosen, 'moderator')->result();
+		$jadwal = $this->M_jadwal->getScheduleDosen($thn_ajaran,$smt,$dosen)->result();
+		$reviewData = $this->M_jadwal->getScheduleDosen($thn_ajaran,$smt,$dosen)->result();
 
-		foreach ($reviewModerator as $value) {
-			$groupModerator[] = $this->M_anggota->getAnggotaByKodeKelJoinMhsSort($thn_ajaran, $smt, $value->kode_kel)->result_object(); 
-		}
+		$dataMhs = [];
+		foreach ($jadwal as $value) {
+			$mhs = $this->M_anggota->getAnggotaByKodeKelJoinMhs($thn_ajaran,$smt,$value->kode_kel)->result();
 
-		$reviewPenguji1 = $this->M_jadwal->reviewSchedule($setting->thn_ajaran, $setting->smt, $dosen, 'penguji1')->result();
+			foreach ($mhs as $datMhs) {
+				$mhs_n = [];
+				$review_as = '';
+				$point = 0;
 
-		foreach ($reviewPenguji1 as $value) {
-			$groupPenguji1[] = $this->M_anggota->getAnggotaByKodeKelJoinMhsSort($thn_ajaran, $smt, $value->kode_kel)->result_object(); 
-		}
+				if ( $value->moderator == $this->session->userdata('npp') ) {
+		    		$review_as = 'Moderator';
+		    		$point = 1;
+		    		$kom_a = $datMhs->nilai_11;
+		    		$kom_b = $datMhs->nilai_12;
+		    		$kom_c = $datMhs->nilai_13;
+		    		$kom_d = $datMhs->nilai_14;
 
-		$reviewPenguji2 = $this->M_jadwal->reviewSchedule($setting->thn_ajaran, $setting->smt, $dosen, 'penguji2')->result();
+				} else if ( $value->penguji1 == $this->session->userdata('npp') ) {
+		    		$review_as = 'Penguji 1';
+		    		$point = 2;
+		    		$kom_a = $datMhs->nilai_21;
+		    		$kom_b = $datMhs->nilai_22;
+		    		$kom_c = $datMhs->nilai_23;
+		    		$kom_d = $datMhs->nilai_24;
+		    	} else {
+		    		$review_as = 'Penguji 2';
+		    		$point = 3;
+		    		$kom_a = $datMhs->nilai_31;
+		    		$kom_b = $datMhs->nilai_32;
+		    		$kom_c = $datMhs->nilai_33;
+		    		$kom_d = $datMhs->nilai_34;
+		    	}
+				
+				$mhs_n = [
+					'thn_ajaran'	=> $datMhs->thn_ajaran,
+					'smt'			=> $datMhs->smt, 
+					'nbi'			=> $datMhs->nbi,
+					'nama'			=> $datMhs->nama,
+					'kode_kel'		=> $datMhs->kode_kel,
+					'review_as'		=> $review_as,
+					'point'			=> $point,
+					'kom_a'			=> $kom_a,
+					'kom_b'			=> $kom_b, 
+					'kom_c'			=> $kom_c, 
+					'kom_d'			=> $kom_d 
+				];
 
-		foreach ($reviewPenguji2 as $value) {
-			$groupPenguji2[] = $this->M_anggota->getAnggotaByKodeKelJoinMhsSort($thn_ajaran, $smt, $value->kode_kel)->result_object(); 
+				$dataMhs [] = $mhs_n;
+			}
 		}
 
 		$data = [
-			'groupModerator'	=> $groupModerator,
-			'groupPenguji1'		=> $groupPenguji1,
-			'groupPenguji2'		=> $groupPenguji2,
 			'settingData'		=> $setting,
+			'reviewData'		=> $reviewData,
+			'dataMhs'			=> $dataMhs,
 			'content' 			=> 'lecturer/data/review/review_index',
 			'pagetitle' 		=> 'Review Sidang',
 			'navbartitle' 		=> 'Review Sidang'
