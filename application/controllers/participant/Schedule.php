@@ -20,12 +20,27 @@ class Schedule extends CI_Controller {
 			redirect('public/home','refresh');
 		}
 
+
 		$setting = $this->M_setting->getSetting()->row();
 		$thn_ajaran = $setting->thn_ajaran;
 		$smt = $setting->smt;
+
 		$kode_kel = $this->M_anggota->getAnggotaByPeriode($thn_ajaran,$smt,$this->session->userdata('nbi'))->row()->kode_kel;
 
+		if ( $kode_kel == '0' ) {
+			$message = 'Anda belum memiliki kelompok.. Silahkan memilih kelompok terlebih dahulu...';
+			echo "<script>alert('". $message ."')</script>";
+            redirect('participant/dashboard','refresh');
+		}
+
 		$jad_kelompok = $this->M_jadwal->getGroupScheduleByCode($thn_ajaran,$smt,$kode_kel)->row();
+
+		if ( !$jad_kelompok ) {
+			$message = 'Jadwal Sidang Belum Dibuat';
+			echo "<script>alert('". $message ."')</script>";
+            redirect('participant/dashboard','refresh');
+		}
+
 		$jadwal = $this->M_jadwal->getJadwalByIdentitas($thn_ajaran,$smt,$jad_kelompok->ruang,$jad_kelompok->tgl,$jad_kelompok->mulai,$jad_kelompok->akhir)->result();
 
 

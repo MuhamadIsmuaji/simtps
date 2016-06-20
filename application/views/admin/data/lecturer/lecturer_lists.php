@@ -152,6 +152,10 @@
             },
 
         }); 
+
+        table.on( 'xhr', function () {
+		    var json = table.ajax.json();
+		});	
 		/*Datatable*/
 
 		table.on( 'xhr', function () {
