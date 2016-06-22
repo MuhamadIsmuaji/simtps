@@ -1,3 +1,24 @@
+<style type="text/css">
+
+    .ui-autocomplete {
+        max-height: 250px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+    }
+
+
+    /* IE 6 doesn't support max-height
+     * we use height instead, but this forces the menu to always be this tall
+     */
+    html .ui-autocomplete {
+        height: 200px;
+    }
+
+</style>
+
 <?php 
     $next = $settingData->thn_ajaran+1;
     $semester = $settingData->smt == 1 ? 'Ganjil' : 'Genap' ;
