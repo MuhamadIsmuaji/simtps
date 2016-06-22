@@ -86,8 +86,9 @@ class Lecturer extends CI_Controller {
             $no++;
             $row = array();
             $isPembimbing = $this->M_kelompok->isPembimbing($lecturer->npp)->num_rows();
+            $isSchedule = $this->M_jadwal->isSchedule($lecturer->npp)->num_rows();
 
-            if ( $isPembimbing > 0 || $lecturer->akses == 2 ) { // Jika dia pembimbing atau dia admin maka dia tidak bisa dihapus
+            if ( $isPembimbing > 0 || $lecturer->akses == 2 || $isSchedule > 0 ) { // Jika dia pembimbing atau dia admin maka dia tidak bisa dihapus
 				$row[] = '';				
             } else { // Jika dia bukan pembimbing maka dia bisa dihapus
 				$row[] = '<input type="checkbox" id="cbLecturer'. $no_cb .'" value="'. $lecturer->npp .'" onchange="checkLecturerSelected()">';

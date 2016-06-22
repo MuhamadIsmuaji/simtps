@@ -112,6 +112,16 @@ class M_jadwal extends CI_Model {
 		return $query;
 	}
 
+	public function isSchedule($npp = NULL) {
+		$this->db->select('*');
+		$this->db->from($this->table);
+		$this->db->where('moderator',$npp);
+		$this->db->or_where('penguji1',$npp);
+		$this->db->or_where('penguji2',$npp);
+		$query = $this->db->get();
+		return $query;
+	}
+
 }
 
 /* End of file M_jadwal.php */
