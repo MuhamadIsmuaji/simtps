@@ -60,7 +60,9 @@ class Group extends CI_Controller {
                 $no_cb++;
             }
             $row[] = $group->kode_kel;
-            $row[] = $group->thn_ajaran;
+            $next = $group->thn_ajaran+1;
+            $thn_ajaran = $group->thn_ajaran.' / '.$next;
+            $row[] = $thn_ajaran;
             $row[] = $action;
             //$row[] = $group->smt;
             $data[] = $row;
