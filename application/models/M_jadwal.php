@@ -122,6 +122,16 @@ class M_jadwal extends CI_Model {
 		return $query;
 	}
 
+	public function isScheduleGroup($thn_ajaran = NULL, $smt = NULL, $kode_kel = NULL) {
+		$this->db->select('*');
+		$this->db->from($this->table);
+		$this->db->where('thn_ajaran',$thn_ajaran);
+		$this->db->where('smt',$smt);
+		$this->db->where('kode_kel',$kode_kel);
+		$query = $this->db->get();
+		return $query;
+	}
+
 }
 
 /* End of file M_jadwal.php */

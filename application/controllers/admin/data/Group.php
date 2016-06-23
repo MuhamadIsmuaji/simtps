@@ -53,7 +53,8 @@ class Group extends CI_Controller {
                     </a>';
 
             $isHaveMember = $this->M_anggota->getAnggotaByKodeKel($setting->thn_ajaran, $setting->smt, $group->kode_kel)->num_rows();
-            if ( $isHaveMember > 0 ) {
+            $isScheduledGroup = $this->M_jadwal->isScheduleGroup($setting->thn_ajaran, $setting->smt, $group->kode_kel)->num_rows();
+            if ( $isHaveMember > 0 || $isScheduledGroup > 0 ) {
                 $row[] = '';
             } else {
                 $row[] = '<input type="checkbox" id="cbGroup'. $no_cb .'" value="'. $group->kode_kel .'" onchange="checkGroupSelected()">';
