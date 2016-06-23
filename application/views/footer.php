@@ -9,7 +9,7 @@
 		<!-- app-footer -->
 		<footer class="app-footer">
 			<div class="wrapper">
-				<span class="pull-right">Halaman Di Render Dalam <strong>{elapsed_time}</strong> detik | <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> Powered By CTCOM © 2016 Copyright.
+				<span class="pull-right">Page Loaded : <strong>{elapsed_time}</strong> seconds | <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> Powered By Code For Tech © 2016 Copyright.
 			</div>
 		</footer>
 		<!-- app-footer -->
