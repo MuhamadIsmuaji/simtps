@@ -81,7 +81,7 @@
 							<strong>
 								<?php 
 									$first_kalab = substr($settingData->npp_kalab,0,5);
-									$second_kalab = substr($settingData->npp_kalab,6,2);
+									$second_kalab = substr($settingData->npp_kalab,5,2);
 									$third_kalab = substr($settingData->npp_kalab,7);
 								?>
 								<?= $settingData->nama_kalab ?> | NPP : <?= $first_kalab.'.'.$second_kalab.'.'.$third_kalab ?>
