@@ -65,8 +65,8 @@
 							<strong>
 								<?php 
 									$first_dekan = substr($settingData->npp_dekan,0,5);
-									$second_dekan = substr($settingData->npp_dekan,6,2);
-									$third_dekan = substr($settingData->npp_dekan,8);
+									$second_dekan = substr($settingData->npp_dekan,5,2);
+									$third_dekan = substr($settingData->npp_dekan,7);
 								?>
 								<?= $settingData->nama_dekan ?> | NPP : <?= $first_dekan.'.'.$second_dekan.'.'.$third_dekan ?>
 							</strong>
@@ -82,7 +82,7 @@
 								<?php 
 									$first_kalab = substr($settingData->npp_kalab,0,5);
 									$second_kalab = substr($settingData->npp_kalab,6,2);
-									$third_kalab = substr($settingData->npp_kalab,8);
+									$third_kalab = substr($settingData->npp_kalab,7);
 								?>
 								<?= $settingData->nama_kalab ?> | NPP : <?= $first_kalab.'.'.$second_kalab.'.'.$third_kalab ?>
 							</strong>
