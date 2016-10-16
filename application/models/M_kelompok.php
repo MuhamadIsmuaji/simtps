@@ -203,11 +203,14 @@ class M_kelompok extends CI_Model {
 	}
 
 	public function getMaxCode($thn_ajaran = NULL, $smt = NULL) {
-        $this->db->select_max('kode_kel');
-        $this->db->where($this->pktable1, $thn_ajaran);
-        $this->db->where($this->pktable2, $smt);
-        $query = $this->db->get($this->table)->row();
-        return $query->kode_kel;
+		$query = $this->db->query('SELECT MAX(CAST( MID(kode_kel,4) AS INT)) AS maxColumns FROM '. $this->table .' where thn_ajaran = '.$thn_ajaran. ' AND smt = '.$smt);
+		
+		return $query->result_object();
+        // $this->db->select_max('kode_kel');
+        // $this->db->where($this->pktable1, $thn_ajaran);
+        // $this->db->where($this->pktable2, $smt);
+        // $query = $this->db->get($this->table)->row();
+        // return $query->kode_kel;
 
 	}
 

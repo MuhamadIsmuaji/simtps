@@ -401,17 +401,33 @@ class Group extends CI_Controller {
         }
 
         $setting = $this->M_setting->getSetting()->row();
-        $max = ltrim($this->M_kelompok->getMaxCode($setting->thn_ajaran, $setting->smt), 'TPS');
-        if ( $max ) {
-            $max = $max + 1 ;
+        $max = $this->generateGroupCode($setting->thn_ajaran, $setting->smt);
+        // $max = ltrim($this->M_kelompok->getMaxCode($setting->thn_ajaran, $setting->smt), 'TPS');
+        // if ( $max ) {
+        //     $max = $max + 1 ;
 
-            $max = $max <= 9 ? '0'.$max : $max;     
+        //     $max = $max <= 9 ? '0'.$max : $max;     
         
-        } else {
-            $max = '01';
-        }
+        // } else {
+        //     $max = '01';
+        // }
 
         echo json_encode($max);
+    }
+
+    public function generateGroupCode($thn_ajaran, $smt) {
+    
+        $maxId = $this->M_kelompok->getMaxCode($thn_ajaran, $smt)[0]->maxColumns;
+
+        if ($maxId != NULL) {
+            $nextId = $maxId + 1;
+            $newId = $nextId <= 9 ? 'TPS0'. $nextId : 'TPS'. $nextId;
+        } else {
+            $newId = 'TPS01';
+        }
+        
+        return $newId;
+    
     }
 
     public function createManyGroup() {
@@ -435,16 +451,17 @@ class Group extends CI_Controller {
 
             $i = 1;
             while ( $i<= $batas && $groupnya <= $this->input->post('many')) {
-                $max = ltrim($this->M_kelompok->getMaxCode($setting->thn_ajaran, $setting->smt), 'TPS');
-                $kode_kel = 'TPS';
+                // $max = ltrim($this->M_kelompok->getMaxCode($setting->thn_ajaran, $setting->smt), 'TPS');
+                // $kode_kel = 'TPS';
+                $kode_kel = $this->generateGroupCode($setting->thn_ajaran, $setting->smt);
 
-                if ( $max ) {
-                    $max = $max + 1;
-                    $kode_kel = $max <= 9 ? $kode_kel.'0'.$max : $kode_kel.$max;             
-                } else {
-                    $max = '01';
-                    $kode_kel = $kode_kel.$max;
-                }
+                // if ( $max ) {
+                //     $max = $max + 1;
+                //     $kode_kel = $max <= 9 ? $kode_kel.'0'.$max : $kode_kel.$max;             
+                // } else {
+                //     $max = '01';
+                //     $kode_kel = $kode_kel.$max;
+                // }
 
                 $dataGroup = [
                     'thn_ajaran'    => $setting->thn_ajaran,

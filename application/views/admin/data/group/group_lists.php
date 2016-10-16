@@ -309,7 +309,7 @@
 			url : "<?= base_url('admin/data/group/getMaxCode') ?>",
 			dataType : "JSON",
 			success : function(maxCode) {
-				$('#kode_kel').val('TPS'+maxCode);
+				$('#kode_kel').val(maxCode);
 			},	
 		});
 	}
