@@ -141,7 +141,7 @@
                 }
             },
 
-            "aLengthMenu": [[10, 15, 20, -1], [10, 15, 20, "Semua"]],
+            "aLengthMenu": [[10, 15, 20], [10, 15, 20]],
             
             "processing": true,
             "serverSide": true,
