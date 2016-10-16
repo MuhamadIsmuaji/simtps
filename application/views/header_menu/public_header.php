@@ -57,9 +57,9 @@
                         <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
                     </div>
                     <div class="form-group">
-                        <p class="help-block">Gunakan NPM / NPP sebagai Username</p>
-                        <p class="help-block">
-                            Untuk peserta gunakan NPM sebagai password untuk pertama kali login
+                        <p class="help-block text-center">Gunakan NPM (NBI) / NPP sebagai Username</p>
+                        <p class="help-block text-center">
+                            Untuk peserta gunakan NPM (NBI) sebagai password untuk pertama kali login
                         </p>
                     </div>
                     <div class="form-group">

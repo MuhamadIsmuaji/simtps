@@ -76,12 +76,17 @@ class Penilaian extends CI_Controller {
 		}
 
 		if ( !empty($_POST) ) {
+
+			if (count($_POST) == 1) :
+				redirect('lecturer/data/review','refresh');			
+			endif;
+
 			$fields = ['thn_ajaran','smt','kode_kel','nbi','point','kom_a','kom_b','kom_c','kom_d'];
 
 			foreach ($fields as $field) {
 
 				foreach ($_POST[$field] as $key => $value) {
-					
+
 					$datanya[$key][$field] = $value;
 				}
 

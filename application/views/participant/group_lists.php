@@ -169,7 +169,7 @@
 	                $('#btnCancelJoin').prop('disabled',0);
 				} else { // sukses
 					$('#statusRegister').html('<p style="color:green;">Sukses.. Anda tergabung dalam kelompok '+ kode_kel +'</p>');
-					$('#btnJoin').html('Ridirecting...');
+					$('#btnJoin').html('Redirecting...');
 	                $('#btnJoin').prop('disabled',1);
 	                $('#btnCancelJoin').prop('disabled',1);
 
