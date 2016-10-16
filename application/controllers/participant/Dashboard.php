@@ -92,7 +92,15 @@ class Dashboard extends CI_Controller {
                             <span class="icon fa fa-eye"></span>
                         </button>';;
             } else {
-                $join = '-';                
+
+                $isHaveMember = $this->M_anggota->getAnggotaByKodeKel($setting->thn_ajaran, $setting->smt, $group->kode_kel)->num_rows();
+                
+                if ($isHaveMember == 3) {
+                    $join = 'Kelompok Penuh';                
+                } else {
+                    $join = '-';                
+                }
+
             }
 
 
