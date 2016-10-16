@@ -27,7 +27,7 @@
 	                <div class="form-group">
 	                    <label for="NPP" class="col-sm-2 control-label">NPP</label>
 	                    <div class="col-sm-10">
-	                        <input type="text" class="form-control" id="npp" name="npp" placeholder="NPP" value="<?= $lecturerData->npp ?>" required >  
+	                        <input type="text" class="form-control" id="npp" name="npp" placeholder="NPP" value="<?= $lecturerData->npp ?>" onkeypress="return numbersonly(this,event)" maxlength="15" required >  
 	                    	<p class="help-block"></p>
 	                    </div>
 	                </div>

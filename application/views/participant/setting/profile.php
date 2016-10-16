@@ -27,7 +27,7 @@
 	                <div class="form-group">
 	                    <label for="#" class="col-sm-2 control-label">NBI</label>
 	                    <div class="col-sm-10">
-	                        <input type="text" class="form-control" id="nbi" name="nbi" placeholder="NBI" value="<?= $participant->nbi ?>" required />
+	                        <input type="text" class="form-control" id="nbi" name="nbi" placeholder="NBI" value="<?= $participant->nbi ?>" onkeypress="return numbersonly(this,event)" maxlength="10" required />
 	                        <input type="hidden" id="old_nbi" name="old_nbi" value="<?= $participant->nbi ?>" />
 	                    	<p class="help-block"></p>
 	                    </div>

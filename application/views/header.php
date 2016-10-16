@@ -3,6 +3,7 @@
 <head>
 	<title>SIM TPS | <?= $pagetitle ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="<?php echo base_url('assets/img/logo/favicon-untag.png'); ?>">
 
     <!-- Fonts -->
     <!-- <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'> -->

@@ -4,9 +4,16 @@
 	    <div class="side-menu-container">
 	        <div class="navbar-header">
 	            <a class="navbar-brand" href="<?= base_url('public/home') ?>">
-	                <div class="icon fa fa-university fa-lg"></div>
-	                <div class="title"><strong>SIM TPS</strong></div>
-	            </a>
+	                <!-- <div class="icon fa fa-university fa-lg"></div> -->
+
+	                <!-- <div class="title"><strong>SIM TPS</strong></div> -->
+                 	<div class="icon">
+                        <img src="<?= base_url('assets/img/logo/favicon-untag.png') ?>" class="icon-navbar-brand logo-header" style="max-height: 37px;" alt="logo-header">
+                    </div>
+                    <div class="title navtitle" style="margin-left: -7px; margin-top: 1px; font-size: 14px;">
+                        <strong>Tugas Perancangan Sistem</strong>
+                    </div>
+                </a>
 	            <button type="button" class="navbar-expand-toggle pull-right visible-xs">
 	                <i class="fa fa-times icon"></i>
 	            </button>
