@@ -42,21 +42,21 @@
 	                <div class="form-group">
 	                    <label for="inputPassword3" class="col-sm-2 control-label">Password Lama</label>
 	                    <div class="col-sm-10">
-	                        <input type="password" class="form-control" id="pwd_lama" name="pwd_lama" placeholder="Password Lama Max 9 Karakter" maxlength="9" required>
+	                        <input type="password" class="form-control" id="pwd_lama" name="pwd_lama" placeholder="Password Lama Max 20 Karakter" maxlength="20" required>
 	                    	 <p class="help-block" id="alert_pwd_lama"></p>
 	                    </div>
 	                </div>
 	                <div class="form-group">
 	                    <label for="inputPassword3" class="col-sm-2 control-label">Password Baru</label>
 	                    <div class="col-sm-10">
-	                        <input type="password" class="form-control" id="pwd_baru" name="pwd_baru" placeholder="Password Baru Max 9 Karakter" maxlength="9" required>
+	                        <input type="password" class="form-control" id="pwd_baru" name="pwd_baru" placeholder="Password Baru Max 20 Karakter" maxlength="20" required>
 	                    	 <p class="help-block" id="alert_pwd_baru"></p>
 	                    </div>
 	                </div>
 	                <div class="form-group">
 	                    <label for="inputPassword3" class="col-sm-2 control-label">Ulangi Password Baru</label>
 	                    <div class="col-sm-10">
-	                        <input type="password" class="form-control" id="repwd_baru" name="repwd_baru" placeholder="Ulangi Password Baru" maxlength="9" disabled required>
+	                        <input type="password" class="form-control" id="repwd_baru" name="repwd_baru" placeholder="Ulangi Password Baru" maxlength="20" disabled required>
 	                    	 <p class="help-block" id="alert_repwd_baru"></p>
 	                    </div>
 	                </div>

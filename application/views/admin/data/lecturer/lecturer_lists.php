@@ -52,7 +52,7 @@
 	                <div class="form-group">
 	                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
 	                    <div class="col-sm-10">
-	                        <input type="text" class="form-control" id="pwd" name="pwd" placeholder="Password Max 9 Karakter" maxlength="9" required>
+	                        <input type="text" class="form-control" id="pwd" name="pwd" placeholder="Password Max 20 Karakter" maxlength="20" required>
 	                    	 <p class="help-block" id="alert_pwd"></p>
 	                    </div>
 	                </div>
