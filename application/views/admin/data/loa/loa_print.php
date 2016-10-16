@@ -65,8 +65,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<td>
 							<?php 
 								$first = substr($settingData->npp_dekan,0,5);
-								$second = substr($settingData->npp_dekan,6,2);
-								$third = substr($settingData->npp_dekan,8);
+								$second = substr($settingData->npp_dekan,5,2);
+								$third = substr($settingData->npp_dekan,7);
 								echo $first.'.'.$second.'.'.$third;	
 							?>
 						</td>
@@ -181,8 +181,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<p class="whonpp">
 				<?php
 					$first = substr($settingData->npp_dekan,0,5);
-					$second = substr($settingData->npp_dekan,6,2);
-					$third = substr($settingData->npp_dekan,8);		
+					$second = substr($settingData->npp_dekan,5,2);
+					$third = substr($settingData->npp_dekan,7);		
 					echo "NPP. ".$first.'.'.$second.'.'.$third;
 				?>
 			</p>
@@ -232,8 +232,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<td width="100px;">
 						<?php
 							$first_dosen = substr($dataDosen[1],0,5);
-							$second_dosen = substr($dataDosen[1],6,2);
-							$third_dosen = substr($dataDosen[1],8);		
+							$second_dosen = substr($dataDosen[1],5,2);
+							$third_dosen = substr($dataDosen[1],7);		
 							echo $first_dosen.'.'.$second_dosen.'.'.$third_dosen;
 						?>
 					</td>
@@ -256,8 +256,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<p class="whonpp">
 			<?php
 				$first = substr($settingData->npp_dekan,0,5);
-				$second = substr($settingData->npp_dekan,6,2);
-				$third = substr($settingData->npp_dekan,8);		
+				$second = substr($settingData->npp_dekan,5,2);
+				$third = substr($settingData->npp_dekan,7);		
 				echo "NPP. ".$first.'.'.$second.'.'.$third;
 			?>
 		</p>

@@ -96,8 +96,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<p class="whonpp">
 			<?php
 				$first = substr($settingData->npp_kalab,0,5);
-				$second = substr($settingData->npp_kalab,6,2);
-				$third = substr($settingData->npp_kalab,8);		
+				$second = substr($settingData->npp_kalab,5,2);
+				$third = substr($settingData->npp_kalab,7);		
 				echo "NPP. ".$first.'.'.$second.'.'.$third;
 			?>
 		</p>
