@@ -212,6 +212,12 @@ class Group extends CI_Controller {
         if ( empty($_POST) ) {
             redirect('admin/data/group','refresh');
         } else {
+
+            if ($_POST['n_point'] == '0') :
+                redirect('admin/data/group');         
+            endif;
+            
+
             $fields = ['thn_ajaran','smt','kode_kel','nbi','nilai_huruf'];
 
             foreach ($fields as $field) {
@@ -415,7 +421,7 @@ class Group extends CI_Controller {
         echo json_encode($max);
     }
 
-    public function generateGroupCode($thn_ajaran, $smt) {
+    private function generateGroupCode($thn_ajaran, $smt) {
     
         $maxId = $this->M_kelompok->getMaxCode($thn_ajaran, $smt)[0]->maxColumns;
 
