@@ -85,15 +85,21 @@ class Dashboard extends CI_Controller {
             $no++;
             $row = array();
 
-            if ( $setting->bts_kelompok >= $now ) {
-                $join = '<button class="btn btn-primary" onclick="showModalDetailGroup(this)" 
-                            data-kode_kel="'. $group->kode_kel .'" data-thn_ajaran="'. $group->thn_ajaran .'"
-                            data-smt="'. $group->smt .'" >
-                            <span class="icon fa fa-eye"></span>
-                        </button>';;
-            } else {
+            $isHaveMember = $this->M_anggota->getAnggotaByKodeKel($setting->thn_ajaran, $setting->smt, $group->kode_kel)->num_rows();
 
-                $isHaveMember = $this->M_anggota->getAnggotaByKodeKel($setting->thn_ajaran, $setting->smt, $group->kode_kel)->num_rows();
+            if ( $setting->bts_kelompok >= $now ) {
+
+                if ($isHaveMember == 3) {
+                    $join = 'Kelompok Penuh';
+                } else {
+                    $join = '<button class="btn btn-primary" onclick="showModalDetailGroup(this)" 
+                                data-kode_kel="'. $group->kode_kel .'" data-thn_ajaran="'. $group->thn_ajaran .'"
+                                data-smt="'. $group->smt .'" >
+                                <span class="icon fa fa-eye"></span>
+                            </button>';
+                }
+
+            } else {
                 
                 if ($isHaveMember == 3) {
                     $join = 'Kelompok Penuh';                
