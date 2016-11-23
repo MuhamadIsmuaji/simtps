@@ -26,8 +26,8 @@ date_default_timezone_set('Asia/Jakarta');
 |
 */
 
-//$config['base_url'] = 'http://localhost/simtps/';
-$config['base_url'] = 'http://simtps.dev';
+$config['base_url'] = 'http://localhost/simtps/';
+// $config['base_url'] = 'http://simtps.dev';
 
 /*
 |--------------------------------------------------------------------------
