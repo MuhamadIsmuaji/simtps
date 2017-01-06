@@ -5,6 +5,24 @@
     $proposal = $dataGroup->proposal == NULL ? '-' : $dataGroup->proposal;
     $revisi = $dataGroup->revisi == NULL ? '-' : $dataGroup->revisi;
     $validasi = $dataGroup->validasi == 1 ? 'Disetujui' : 'Belum Disetujui'; 
+
+    if ( $dataGroup->judul == NULL ) {
+        $btnJudul = '-';
+    } else {
+        if ( $dataGroup->validasi == 1 ) {
+            $btnJudul = '<button class="btn btn-danger btn-block" onclick="validateTitle(this,0)" data-thn_ajaran="'.$dataGroup->thn_ajaran.'"
+                         data-smt="'.$dataGroup->smt.'" data-kode_kel="'.$dataGroup->kode_kel.'" >
+                            <i class="fa fa-times fa-lg" aria-hidden="true"></i>&nbsp;
+                            Batalkan Validasi Judul
+                        </button>';
+        } else {
+            $btnJudul = '<button class="btn btn-primary btn-block" onclick="validateTitle(this,1)" data-thn_ajaran="'.$dataGroup->thn_ajaran.'"
+                         data-smt="'.$dataGroup->smt.'" data-kode_kel="'.$dataGroup->kode_kel.'" >
+                            <i class="fa fa-check fa-lg" aria-hidden="true"></i>&nbsp;
+                            Validasi Judul
+                        </button>';
+        }
+    }
 ?>
 
 <div class="row">
@@ -30,6 +48,7 @@
                             <td>Judul</td>
                             <td>:</td>
                             <td><?= $judul ?></td>
+                            <td><?= $btnJudul ?></td>
                         </tr>
                         <tr>
                             <td>Proposal</td>
@@ -39,6 +58,7 @@
                                     <?= $proposal ?>
                                 </a>   
                             </td>
+                            <td> </td>
 
                         </tr>
                         <tr>
@@ -49,6 +69,8 @@
                                     <?= $revisi ?>
                                 </a>  
                             </td>
+                            <td> </td>
+
                         </tr>
                         <tr>
                             <td>Status Judul</td>
@@ -136,3 +158,36 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    // for validate title group 
+    // param group and status
+    // group to get group data, status ( 1 = validate , 0 = cancel validate)
+    function validateTitle(group,status) {
+        thn_ajaran_validate = group.getAttribute('data-thn_ajaran');
+        smt_validate = group.getAttribute('data-smt');
+        kode_kel_validate = group.getAttribute('data-kode_kel');
+
+        message_validate = status == 1 ? 'Yakin Ingin Validasi Judul ?' : 'Yakin Ingin Batalkan Validasi Judul ?';
+
+        if ( confirm(message_validate) ) {
+            $.ajax({
+                url : "<?= base_url('lecturer/data/group/validateTitle') ?>",
+                data : 'thn_ajaran='+thn_ajaran_validate+'&smt='+smt_validate+'&kode_kel='+kode_kel_validate+'&status='+status,
+                method : 'POST',
+                dataType : 'JSON',
+                success : function(msg) {
+                    if ( msg == 0 ) {
+                        alert('Proses Gagal');
+                    }
+
+                    window.location.href = "<?= base_url('lecturer/data/group/detailGroup/') ?>/"+thn_ajaran_validate+'/'+smt_validate+'/'
+                    +kode_kel_validate;
+                },
+                error : function(jqXHR, textStatus, errorThrown) {
+                    alert('Error ! Reload Browser Anda');
+                }
+            });
+        }
+    }
+</script>

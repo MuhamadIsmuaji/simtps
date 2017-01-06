@@ -205,7 +205,7 @@ class Group extends CI_Controller {
         }
 
         if ( $code == NULL || $fileName == NULL ) {
-            redirect('admin/data/group','refresh');        
+            redirect('lecturer/data/group','refresh');        
         }
 
         if ( $code == 1 || $code == 2 ) {
@@ -217,10 +217,10 @@ class Group extends CI_Controller {
                 force_download($fileName, $file);
             } else {
                 //not found page
-                redirect('admin/data/group','refresh');
+                redirect('lecturer/data/group','refresh');
             }
         } else {
-            redirect('admin/data/group','refresh');        
+            redirect('lecturer/data/group','refresh');        
         }
     }
 
@@ -267,6 +267,31 @@ class Group extends CI_Controller {
             ];
 
             $this->load->view('template',$data);
+        }
+    }
+
+    // Untuk validasi dan unvalidasi judul kelompok di dosen
+    public function validateTitle() {
+        if ( !$this->session->userdata('isLecturerTps') && !$this->session->userdata('isAdminTps') ) {
+            redirect('public/home','refresh');
+        }
+
+        if ( empty($_POST) ) {
+            redirect('lecturer/data/group','refresh');
+        } else {
+            $thn_ajaran_validate = $this->input->post('thn_ajaran');
+            $smt_validate = $this->input->post('smt');
+            $kode_kel_validate = $this->input->post('kode_kel');
+            $status = $this->input->post('status');
+
+            $validateData = ['validasi' => $status];
+
+            $validate = $this->M_kelompok->update($thn_ajaran_validate,$smt_validate,$kode_kel_validate,$validateData);
+            
+            if ( $validate )
+                echo json_encode(1);
+            else 
+                echo json_encode(0);
         }
     }
 
