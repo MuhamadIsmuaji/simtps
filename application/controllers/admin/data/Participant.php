@@ -68,7 +68,8 @@ class Participant extends CI_Controller {
             $row = array();
 
             $row[] = $cb;
-            $row[] = $participant->kode_kel;
+            $kode_kel = $participant->kode_kel == '0' ? 'Belum Memiliki Kelompok' : $participant->kode_kel; 
+            $row[] = $kode_kel;
             $row[] = $participant->nbi;
             $row[] = $participant->nama;
             $row[] = $akses;

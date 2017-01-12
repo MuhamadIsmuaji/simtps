@@ -37,15 +37,17 @@ class M_anggota extends CI_Model {
 
         
  
-        if(isset($_POST['order']))
-        {
-            $this->db->order_by($column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        }
-        else if(isset($this->order))
-        {
-            $order = $this->order;
-            $this->db->order_by(key($order), $order[key($order)]);
-        }
+        // if(isset($_POST['order']))
+        // {
+        //     // $this->db->order_by($column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        //     $this->db->order_by($this->table.'.kode_kel');
+        // }
+        // else if(isset($this->order))
+        // {
+        //     $order = $this->order;
+        //     $this->db->order_by(key($order), $order[key($order)]);
+        // }
+        $this->db->order_by($this->table.'.kode_kel');
     }
 
 	public function participantListsAdmin($thn_ajaran = NULL , $smt = NULL) {
