@@ -295,6 +295,29 @@ class Group extends CI_Controller {
         }
     }
 
+    // Untuk download dokumen petunjuk
+    public function downloadPetunjukDocument($fileName = NULL) {
+        if ( !$this->session->userdata('isLecturerTps') && !$this->session->userdata('isAdminTps') ) {
+            redirect('public/home','refresh');
+        }
+
+        if ( $fileName == NULL ) {
+            redirect('lecturer','refresh');        
+        }
+
+        // $file_path = $code == 1 ? 'assets/files/petunjuk/'.$fileName : 'assets/files/revisi_proposal/'.$fileName;
+        $file_path = 'assets/files/petunjuk/'.$fileName;
+
+        if ( file_exists($file_path) ) {
+            $this->load->helper('download');
+            $file = file_get_contents($file_path);
+            force_download($fileName, $file);
+        } else {
+            //not found page
+            redirect('lecturer','refresh');
+        }
+    }
+
 }
 
 /* End of file Group.php */
