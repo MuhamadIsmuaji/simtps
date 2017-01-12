@@ -29,7 +29,7 @@
             <div class="card-body">
             <div class="table-responsive">
 	        <form action="<?= base_url('penilaian/penilaianSidang') ?>" method="POST">
-	    		<table id="tbReview" class="table table-striped" cellspacing="0" width="100%">
+	    		<table id="tbReview" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	                <thead>
 	                    <tr >
 	                        <th style="text-align: center;" >NBI</th>
@@ -49,7 +49,7 @@
 	                	?>
 							<tr id="kom">
 								<td style="text-align: center;" ><?= $value['nbi'] ?></td>
-								<td style="text-align: center;" ><?= $value['nama'] ?></td>
+								<td style="text-align: left;" ><?= $value['nama'] ?></td>
 								<td style="text-align: center;" ><?= $value['kode_kel'] ?></td>
 								<td style="text-align: center;" ><?= $value['review_as'] ?></td>
 								<td style="text-align: center;" >

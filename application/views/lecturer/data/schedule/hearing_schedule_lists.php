@@ -24,18 +24,18 @@
                 <div class="card-action">
                 </div>
                 <div class="table-responsive">
-                    <table id="tbNewsListsAdmin" class="table table-hover" cellspacing="0" width="100%">
+                    <table id="tbNewsListsAdmin" class="table table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Tanggal Sidang</th>
-                                <th>Waktu</th>
-                                <th>Ruang</th>
-                                <th>Moderator</th>
-                                <th>Penguji 1</th>
-                                <th>Penguji 2</th>
-                                <th>Kelompok</th>
-                                <th>Anggota Kelompok</th>
+                                <th style="text-align: center;">No</th>
+                                <th style="text-align: center;">Tanggal Sidang</th>
+                                <th style="text-align: center;">Waktu</th>
+                                <th style="text-align: center;">Ruang</th>
+                                <th style="text-align: center;">Moderator</th>
+                                <th style="text-align: center;">Penguji 1</th>
+                                <th style="text-align: center;">Penguji 2</th>
+                                <th style="text-align: center;">Kelompok</th>
+                                <th style="text-align: center;">Anggota Kelompok</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,14 +43,16 @@
                                 $no = 1;
                                 foreach ($dataJadwal as $ke) {
                                     echo '<tr>';
-                                        echo '<td>'. $no .'</td>';
+                                        echo '<td style="text-align: center;">'. $no .'</td>';
                                     foreach ($ke as $jadwal) {
-                                        echo '<td>';
+                                        echo '<td style="text-align: center;">';
                                         
                                         if ( is_array($jadwal) ) {
                                             foreach ($jadwal as $anggota) {
                                                foreach ($anggota as $key => $dataAnggota) {
-                                                   echo $dataAnggota.'&nbsp;&nbsp;&nbsp;&nbsp;';
+                                                   // echo $dataAnggota.'&nbsp;&nbsp;&nbsp;&nbsp;';
+                                                   echo '<p class="text-left">'.$dataAnggota.'</p>';
+
                                                }
                                                echo '<br/>';
                                             }
