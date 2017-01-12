@@ -92,7 +92,7 @@
 	                    <thead>
 	                        <tr>
 	                            <th><input type="checkbox" id="checkAllParticipant" onclick="selectAllParticipant()"></th>
-	                            <th></th>
+	                            <th>KELOMPOK</th>
 	                            <th>NBI</th>
 	                            <th>NAMA</th>
 	                            <th>AKSES</th>

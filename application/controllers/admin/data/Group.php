@@ -42,13 +42,13 @@ class Group extends CI_Controller {
         foreach ($list as $group) {
             $row = array();
             $no++;
-            $action = '<button id="participant-detail" class="btn btn-primary" style="margin:0px" onclick="show(this)"
+            $action = '<button id="participant-detail" class="btn btn-primary btn-sm" style="margin:0px" onclick="show(this)"
                         data-kode_kel="'. $group->kode_kel.'" data-npp= "'. $group->npp .'" data-nmdosen= "'. $group->nama .'">
                         <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp; <strong>Edit</strong>
                     </button>
 
                     <a href="'. base_url('admin/data/group/detailGroup/'.$group->kode_kel) .'" 
-                        target="_blank" class="btn btn-success" style="margin:0px">
+                        target="_blank" class="btn btn-success btn-sm" style="margin:0px">
                         <i class="fa fa-eye fa-lg" aria-hidden="true"></i>&nbsp; <strong>Detail</strong>
                     </a>';
 
@@ -61,9 +61,9 @@ class Group extends CI_Controller {
                 $no_cb++;
             }
             $row[] = $group->kode_kel;
-            $next = $group->thn_ajaran+1;
-            $thn_ajaran = $group->thn_ajaran.' / '.$next;
-            $row[] = $thn_ajaran;
+            // $next = $group->thn_ajaran+1;
+            // $thn_ajaran = $group->thn_ajaran.' / '.$next;
+            $row[] = $group->nama;
             $row[] = $action;
             //$row[] = $group->smt;
             $data[] = $row;

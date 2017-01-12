@@ -92,7 +92,7 @@
 	                        <tr>
 	                            <th><input type="checkbox" id="checkAllGroup" onclick="selectAllGroup()"></th>
 	                            <th>Kode Kelompok</th>
-	                            <th>Tahun Ajaran</th>
+	                            <th>Dosen Pembimbing</th>
 	                            <th>#</th>
 	                        </tr>
 	                    </thead>

@@ -56,7 +56,7 @@ class Participant extends CI_Controller {
 
             $akses = $participant->akses == 1 || $participant->akses == 9 ? 'Aktif' : 'Non Aktif';
             $kelompok = $participant->kode_kel == '0' ? 'Belum Memiliki Kelompok' : $participant->kode_kel;
-            $participantDetail = '<button id="participant-detail" class="btn btn-success btn-sm btn-detail" style="margin:0px"><i class="fa fa-certificate fa-lg"></i></button>';
+            // $participantDetail = '<button id="participant-detail" class="btn btn-success btn-sm btn-detail" style="margin:0px"><i class="fa fa-certificate fa-lg"></i></button>';
             $action = '<button id="participant-detail" class="btn btn-primary btn-sm " style="margin:0px" onclick="show(this)"
                         data-nbi="'. $participant->nbi.'" data-old_nbi="'. $participant->nbi.'" data-email="'. $participant->email.'"
                         data-nama="'. $participant->nama.'" data-pwd="'. $participant->pwd.'" data-akses="'. $participant->akses.'" 
@@ -68,7 +68,7 @@ class Participant extends CI_Controller {
             $row = array();
 
             $row[] = $cb;
-            $row[] = $participantDetail;
+            $row[] = $participant->kode_kel;
             $row[] = $participant->nbi;
             $row[] = $participant->nama;
             $row[] = $akses;
