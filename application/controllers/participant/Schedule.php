@@ -41,7 +41,7 @@ class Schedule extends CI_Controller {
             redirect('participant/dashboard','refresh');
 		}
 
-		$jadwal = $this->M_jadwal->getJadwalByIdentitas($thn_ajaran,$smt,$jad_kelompok->ruang,$jad_kelompok->tgl,$jad_kelompok->mulai,$jad_kelompok->akhir)->result();
+		$jadwal = $this->M_jadwal->getJadwalByIdentitasPar($thn_ajaran,$smt,$jad_kelompok->ruang,$jad_kelompok->tgl,$jad_kelompok->mulai,$jad_kelompok->akhir)->result();
 
 
 		$dataJadwal = [];

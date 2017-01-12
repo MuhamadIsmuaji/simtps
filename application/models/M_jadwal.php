@@ -22,10 +22,11 @@ class M_jadwal extends CI_Model {
 		return $query;
 	}
 
-	public function deleteBySchedule($thn_ajaran = NULL, $smt = NULL, $ruang = NULL, $tgl = NULL, $mulai = NULL, $akhir = NULL) {
+	public function deleteBySchedule($thn_ajaran = NULL, $smt = NULL, $ruang = NULL, $moderator = NULL, $tgl = NULL, $mulai = NULL, $akhir = NULL) {
 		$this->db->where($this->pk1,$thn_ajaran);
 		$this->db->where($this->pk2,$smt);
 		$this->db->where('ruang',$ruang);
+		$this->db->where('moderator',$moderator);
 		$this->db->where('tgl',$tgl);
 		$this->db->where('mulai',$mulai);
 		$this->db->where('akhir',$akhir);
@@ -70,7 +71,7 @@ class M_jadwal extends CI_Model {
 
 	public function getScheduleList($thn_ajaran = NULL, $smt = NULL) {
 		$query = $this->db->query("
-			Select distinct tb_jadwal.thn_ajaran, tb_jadwal.smt, tb_jadwal.ruang, tb_jadwal.mulai, tb_jadwal.akhir, tb_jadwal.tgl
+			Select distinct tb_jadwal.thn_ajaran, tb_jadwal.smt, tb_jadwal.ruang, tb_jadwal.mulai, tb_jadwal.akhir, tb_jadwal.tgl, tb_jadwal.moderator
 				from tb_jadwal inner join tb_dosen
 					ON tb_dosen.npp = tb_jadwal.moderator
 						OR tb_dosen.npp = tb_jadwal.penguji1
@@ -99,7 +100,21 @@ class M_jadwal extends CI_Model {
 		return $query;
 	}
 
-	public function getJadwalByIdentitas($thn_ajaran = NULL ,$smt = NULL ,$ruang = NULL, $tgl = NULL, $mulai = NULL, $akhir = NULL) {
+	public function getJadwalByIdentitas($thn_ajaran = NULL ,$smt = NULL ,$ruang = NULL, $moderator = NULL, $tgl = NULL, $mulai = NULL, $akhir = NULL) {
+		$this->db->select('*');
+		$this->db->from($this->table);
+		$this->db->where($this->pk1,$thn_ajaran);
+		$this->db->where($this->pk2,$smt);
+		$this->db->where('ruang', $ruang);
+		$this->db->where('moderator', $moderator);
+		$this->db->where('tgl', $tgl);
+		$this->db->where('mulai',$mulai);
+		$this->db->where('akhir',$akhir);
+		$query = $this->db->get();
+		return $query;
+	}
+
+	public function getJadwalByIdentitasPar($thn_ajaran = NULL ,$smt = NULL ,$ruang = NULL, $tgl = NULL, $mulai = NULL, $akhir = NULL) {
 		$this->db->select('*');
 		$this->db->from($this->table);
 		$this->db->where($this->pk1,$thn_ajaran);

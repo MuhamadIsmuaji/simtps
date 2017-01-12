@@ -35,12 +35,12 @@ class Schedule extends CI_Controller {
 		$this->load->view('template',$data);
 	}
 
-	public function hearingScheduleEdit($thn_ajaran = NULL, $smt = NULL, $ruang = NULL, $tgl = NULL, $mulai = NULL, $akhir = NULL) {
+	public function hearingScheduleEdit($thn_ajaran = NULL, $smt = NULL, $ruang = NULL, $moderator = NULL, $tgl = NULL, $mulai = NULL, $akhir = NULL) {
 		if ( !$this->session->userdata('isAdminTps') ) {
 			redirect('public/home','refresh');
 		}
 
-		if ( $thn_ajaran == NULL || $smt == NULL || $ruang == NULL || $tgl == NULL || $mulai == NULL || $akhir == NULL  ) {
+		if ( $thn_ajaran == NULL || $smt == NULL || $ruang == NULL || $tgl == NULL || $mulai == NULL || $akhir == NULL || $moderator == NULL ) {
 			redirect('admin/data/schedule/hearingSchedule','refresh');
 		}
 
@@ -50,8 +50,8 @@ class Schedule extends CI_Controller {
 			redirect('admin/data/schedule/hearingSchedule','refresh');
 		}
 
-		$identitasJadwal = $this->M_jadwal->getJadwalByIdentitas($thn_ajaran,$smt,$ruang,$tgl,$mulai,$akhir)->row();
-		$detailJadwal = $this->M_jadwal->getJadwalByIdentitas($thn_ajaran,$smt,$ruang,$tgl,$mulai,$akhir)->result();
+		$identitasJadwal = $this->M_jadwal->getJadwalByIdentitas($thn_ajaran, $smt, $ruang, $moderator, $tgl, $mulai, $akhir)->row();
+		$detailJadwal = $this->M_jadwal->getJadwalByIdentitas($thn_ajaran, $smt, $ruang, $moderator, $tgl, $mulai, $akhir)->result();
 		if ( !$identitasJadwal || !$detailJadwal ) {
 			redirect('admin/data/schedule/hearingSchedule','refresh');
 		}
@@ -92,12 +92,12 @@ class Schedule extends CI_Controller {
 		$this->load->view('template',$data);
 	}
 
-	public function hearingScheduleDetail($thn_ajaran = NULL, $smt = NULL, $ruang = NULL, $tgl = NULL, $mulai = NULL, $akhir = NULL) {
+	public function hearingScheduleDetail($thn_ajaran = NULL, $smt = NULL, $ruang = NULL, $moderator = NULL, $tgl = NULL, $mulai = NULL, $akhir = NULL) {
 		if ( !$this->session->userdata('isAdminTps') ) {
 			redirect('public/home','refresh');
 		}
 
-		if ( $thn_ajaran == NULL || $smt == NULL || $ruang == NULL || $tgl == NULL || $mulai == NULL || $akhir == NULL  ) {
+		if ( $thn_ajaran == NULL || $smt == NULL || $ruang == NULL || $tgl == NULL || $mulai == NULL || $akhir == NULL || $moderator == NULL ) {
 			redirect('admin/data/schedule/hearingSchedule','refresh');
 		}
 
@@ -107,8 +107,8 @@ class Schedule extends CI_Controller {
 			redirect('admin/data/schedule/hearingSchedule','refresh');
 		}
 
-		$identitasJadwal = $this->M_jadwal->getJadwalByIdentitas($thn_ajaran,$smt,$ruang,$tgl,$mulai,$akhir)->row();
-		$detailJadwal = $this->M_jadwal->getJadwalByIdentitas($thn_ajaran,$smt,$ruang,$tgl,$mulai,$akhir)->result();
+		$identitasJadwal = $this->M_jadwal->getJadwalByIdentitas($thn_ajaran, $smt, $ruang, $moderator, $tgl, $mulai, $akhir)->row();
+		$detailJadwal = $this->M_jadwal->getJadwalByIdentitas($thn_ajaran, $smt, $ruang, $moderator, $tgl, $mulai, $akhir)->result();
 		if ( !$identitasJadwal || !$detailJadwal ) {
 			redirect('admin/data/schedule/hearingSchedule','refresh');
 		}
@@ -185,7 +185,7 @@ class Schedule extends CI_Controller {
 						//jika tidak ada perubahan
 						if ( $penguji1 == $old_penguji1 && $penguji2 == $old_penguji2 && $ruang == $old_ruang && $tgl == $old_tgl && $mulai == $old_mulai && $akhir == $old_akhir ) {
 							//Data jadwal yang ada akan dihapus sesuai jadwal dan akan dibuat ulang
-							$delete = $this->M_jadwal->deleteBySchedule($setting->thn_ajaran,$setting->smt,$ruang,$tgl,$mulai,$akhir);
+							$delete = $this->M_jadwal->deleteBySchedule($setting->thn_ajaran, $setting->smt, $ruang, $moderator, $tgl, $mulai, $akhir);
 
 							for( $i=1; $i<=$this->input->get('jml'); $i++) { //ulangi sebanyak jml yg akan dihapus
 					            $kode_kel = $this->input->get('kode_kel'.$i);
@@ -221,9 +221,13 @@ class Schedule extends CI_Controller {
 								$jadwalPenguji1 = 0;
 								$jadwalPenguji2 = 0;
 							} else {
-								$cekJadwalRuang = $this->cekJadwalRuang($setting->thn_ajaran, $setting->smt, $ruang, $tgl, $mulai, $akhir);
-								$jadwalPenguji1 = $this->cekJadwalDosen($setting->thn_ajaran, $setting->smt, $penguji1, $tgl, $mulai, $akhir);
-								$jadwalPenguji2 = $this->cekJadwalDosen($setting->thn_ajaran, $setting->smt, $penguji2, $tgl, $mulai, $akhir);
+								// $cekJadwalRuang = $this->cekJadwalRuang($setting->thn_ajaran, $setting->smt, $ruang, $tgl, $mulai, $akhir);
+								// $jadwalPenguji1 = $this->cekJadwalDosen($setting->thn_ajaran, $setting->smt, $penguji1, $tgl, $mulai, $akhir);
+								// $jadwalPenguji2 = $this->cekJadwalDosen($setting->thn_ajaran, $setting->smt, $penguji2, $tgl, $mulai, $akhir);
+
+								$cekJadwalRuang = 0;
+								$jadwalPenguji1 = 0;
+								$jadwalPenguji2 = 0;
 
 							}
 
@@ -235,7 +239,7 @@ class Schedule extends CI_Controller {
 								redirect('admin/data/schedule/hearingSchedule','refresh');
 							} else {
 								//Data jadwal yang ada akan dihapus sesuai jadwal dan akan dibuat ulang
-								$delete = $this->M_jadwal->deleteBySchedule($setting->thn_ajaran,$setting->smt,$old_ruang,$old_tgl,$old_mulai,$old_akhir);
+								$delete = $this->M_jadwal->deleteBySchedule($setting->thn_ajaran, $setting->smt, $old_ruang, $moderator, $old_tgl, $old_mulai, $old_akhir);
 
 								for( $i=1; $i<=$this->input->get('jml'); $i++) { //ulangi sebanyak jml yg akan dihapus
 						            $kode_kel = $this->input->get('kode_kel'.$i);
@@ -307,15 +311,21 @@ class Schedule extends CI_Controller {
 						redirect('admin/data/schedule/hearingScheduleCreate','refresh');
 					} else { // process tambah jadwal sidang
 						$setting = $this->M_setting->getSetting()->row();
-						$cekJadwalRuang = $this->cekJadwalRuang($setting->thn_ajaran, $setting->smt, $ruang, $tgl, $mulai, $akhir);
+						// $cekJadwalRuang = $this->cekJadwalRuang($setting->thn_ajaran, $setting->smt, $ruang, $tgl, $mulai, $akhir);
+						$cekJadwalRuang = 0;
 
 						if ( $cekJadwalRuang > 0 ) {
 							echo "<script>alert('Jadwal Ruang Crash')</script>";
 							redirect('admin/data/schedule/hearingScheduleCreate','refresh');
 						} else {
-							$jadwalModerator = $this->cekJadwalDosen($setting->thn_ajaran, $setting->smt, $moderator, $tgl, $mulai, $akhir);
-							$jadwalPenguji1 = $this->cekJadwalDosen($setting->thn_ajaran, $setting->smt, $penguji1, $tgl, $mulai, $akhir);
-							$jadwalPenguji2 = $this->cekJadwalDosen($setting->thn_ajaran, $setting->smt, $penguji2, $tgl, $mulai, $akhir);						
+							// $jadwalModerator = $this->cekJadwalDosen($setting->thn_ajaran, $setting->smt, $moderator, $tgl, $mulai, $akhir);
+							// $jadwalPenguji1 = $this->cekJadwalDosen($setting->thn_ajaran, $setting->smt, $penguji1, $tgl, $mulai, $akhir);
+							// $jadwalPenguji2 = $this->cekJadwalDosen($setting->thn_ajaran, $setting->smt, $penguji2, $tgl, $mulai, $akhir);
+
+							$jadwalModerator = 0;
+							$jadwalPenguji1 = 0;
+							$jadwalPenguji2 = 0;	
+
 							if ( $jadwalModerator > 0 || $jadwalPenguji1 > 0 || $jadwalPenguji2 > 0) {
 								echo "<script>alert('Jadwal Dosen Crash')</script>";
 								redirect('admin/data/schedule/hearingScheduleCreate','refresh');
@@ -364,11 +374,12 @@ class Schedule extends CI_Controller {
 			$thn_ajaran = $this->input->post('thn_ajaran');
 			$smt = $this->input->post('smt');
 			$ruang = $this->input->post('ruang');
+			$moderator = $this->input->post('moderator');
 			$tgl = $this->input->post('tgl');
 			$mulai = $this->input->post('mulai');
 			$akhir = $this->input->post('akhir');
 
-			$delete = $this->M_jadwal->deleteBySchedule($thn_ajaran,$smt,$ruang,$tgl,$mulai,$akhir);
+			$delete = $this->M_jadwal->deleteBySchedule($thn_ajaran, $smt, $ruang, $moderator, $tgl, $mulai, $akhir);
 			
 			if ( $delete ) 
 				echo json_encode(1);
@@ -423,7 +434,7 @@ class Schedule extends CI_Controller {
 		$tgl = $this->input->post('old_tgl');
 		
 		// grup yang sudah ada di jadwal
-		$groupWithSchedule = $this->M_jadwal->getJadwalByIdentitas($setting->thn_ajaran, $setting->smt, $ruang, $tgl, $mulai, $akhir)->result_array();
+		$groupWithSchedule = $this->M_jadwal->getJadwalByIdentitas($setting->thn_ajaran, $setting->smt, $ruang, $doping, $tgl, $mulai, $akhir)->result_array();
 
 		$group = $this->M_kelompok->getActiveGroupWithDoping($setting->thn_ajaran,$setting->smt,$doping)->result();
 		

@@ -1,6 +1,7 @@
 <?php 
 	$next = $settingData->thn_ajaran+1;
 	$semester = $settingData->smt == 1 ? 'Ganjil' : 'Genap' ;
+
 ?>
 
 <div class="page-title">
@@ -50,18 +51,19 @@
 	                    			$waktu = $mulai.' - '.$akhir;
 	                    			$ruang = "'".$value->ruang."'";
 	                    			$tglnya = "'".$value->tgl."'";
+	                    			$moderatornya = "'".$value->moderator."'";
 	                    	?>
 								<tr>
 									<td><?= $no ?></td>
 									<td><?= $tgl->format('d-m-Y') ?></td>
 									<td><?= $waktu ?></td>
-									<td><?= $value->ruang ?></td>
+									<td><?= $value->ruang?></td>
 									<td>
-										<a href="<?= base_url('admin/data/schedule/hearingScheduleDetail/'.$value->thn_ajaran.'/'.$value->smt.'/'.$value->ruang.'/'.$value->tgl.'/'.$value->mulai.'/'.$value->akhir)?>" class="btn btn-primary">
+										<a href="<?= base_url('admin/data/schedule/hearingScheduleDetail/'.$value->thn_ajaran.'/'.$value->smt.'/'.$value->ruang.'/'.$value->moderator.'/'.$value->tgl.'/'.$value->mulai.'/'.$value->akhir)?>" class="btn btn-primary">
 											<i class="fa fa-eye fa-lg" aria-hidden="true"></i>&nbsp;
 											<strong>Detail</strong>
 										</a>
-										<a href="#" onclick="deleteSchedule(<?= $value->thn_ajaran.','.$value->smt.','.$ruang.','.$tglnya.','.$value->mulai.','.$value->akhir ?>);" 
+										<a href="#" onclick="deleteSchedule(<?= $value->thn_ajaran.','.$value->smt.','.$ruang.','.$moderatornya.','.$tglnya.','.$value->mulai.','.$value->akhir ?>);" 
 											class="btn btn-danger">
 											<i class="fa fa-trash fa-lg" aria-hidden="true"></i>&nbsp;
 											<strong>Hapus</strong>
@@ -82,12 +84,12 @@
 </div>
 
 <script type="text/javascript">
-	function deleteSchedule(thn_ajaran, smt, ruang, tgl, mulai, akhir) {
+	function deleteSchedule(thn_ajaran, smt, ruang, moderator, tgl, mulai, akhir) {
 		if ( confirm("Yakin Hapus Jadwal ?") ) {
 			$.ajax({
 	          url : "<?= base_url('admin/data/schedule/hearingScheduleDeleteProcess') ?>",
 	          type : "POST",
-	          data : "thn_ajaran="+thn_ajaran+"&smt="+smt+"&ruang="+ruang+"&tgl="+tgl+"&mulai="+mulai+"&akhir="+akhir,
+	          data : "thn_ajaran="+thn_ajaran+"&smt="+smt+"&ruang="+ruang+"&moderator="+moderator+"&tgl="+tgl+"&mulai="+mulai+"&akhir="+akhir,
 	          dataType : "JSON",
 	          success : function(msg) {
 	          	if ( msg ) {

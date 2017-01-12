@@ -12,7 +12,7 @@
                     <div class="title">Jadwal Sidang Tahun Ajaran <?= $settingData->thn_ajaran.' / '.$next.' Semester '. $semester ?></div>
                 </div>
                 <div class="pull-right card-action">
-                    <a href="<?= base_url('admin/data/schedule/hearingScheduleEdit/'.$identitasJadwal->thn_ajaran.'/'.$identitasJadwal->smt.'/'.$identitasJadwal->ruang.'/'.$identitasJadwal->tgl.'/'.$identitasJadwal->mulai.'/'.$identitasJadwal->akhir) ?>" class="btn btn-primary" <?= $disabled ?>>Edit Jadwal</a>
+                    <a href="<?= base_url('admin/data/schedule/hearingScheduleEdit/'.$identitasJadwal->thn_ajaran.'/'.$identitasJadwal->smt.'/'.$identitasJadwal->ruang.'/'.$identitasJadwal->moderator.'/'.$identitasJadwal->tgl.'/'.$identitasJadwal->mulai.'/'.$identitasJadwal->akhir) ?>" class="btn btn-primary" <?= $disabled ?>>Edit Jadwal</a>
                 </div>
             </div>
             <div class="card-body">
