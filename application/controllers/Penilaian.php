@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+set_time_limit(0);
+
+
 class Penilaian extends CI_Controller {
 
 	function construct() {
