@@ -1,6 +1,9 @@
 <?php 
 	$next = $settingData->thn_ajaran+1;
 	$semester = $settingData->smt == 1 ? 'Ganjil' : 'Genap' ;
+	// echo "<pre>";
+	// print_r($jadwal);
+	// echo "</pre>";
 
 ?>
 
@@ -31,46 +34,60 @@
 	        	<div class="card-action">
 				</div>
 	        	<div class="table-responsive">
-	        		<table id="tbNewsListsAdmin" class="table table-striped" cellspacing="0" width="100%">
+	        		<table id="tbNewsListsAdmin" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	                    <thead>
 	                        <tr>
-	                            <th>No</th>
-	                            <th>Tanggal Sidang</th>
-	                            <th>Waktu</th>
-	                            <th>Ruang</th>
-	                            <th>#</th>
+	                            <th style="text-align: center;">No</th>
+	                            <th style="text-align: center;">Tanggal Sidang</th>
+	                            <th style="text-align: center;">Waktu</th>
+	                            <th style="text-align: center;">Ruang</th>
+	                            <th style="text-align: center;">Moderator</th>
+	                            <th style="text-align: center;">Penguji 1</th>
+	                            <th style="text-align: center;">Penguji 2</th>
+	                            <th style="text-align: center;">#</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
 	                    	<?php
                     			$no=1;
+                    			$before = 'not-set';
 	                    		foreach ($jadwal as $value) {
-	                    			$tgl = new DateTime($value->tgl);
-	                    			$mulai = $value->mulai <= 9 ? '0'. $value->mulai .':00' : $value->mulai .':00';
-	                    			$akhir = $value->akhir <= 9 ? '0'. $value->akhir .':00' : $value->akhir .':00';
+	                    			if ($before != 'not-set' && $before != $value['ruang']) :
+	                    				echo '<tr><td colspan="8" style="background-color: rgba(125, 127, 130, 0.18);"></td></tr>';
+	                    			endif;
+
+	                    			$tgl = new DateTime($value['tgl']);
+	                    			$mulai = $value['mulai'] <= 9 ? '0'. $value['mulai'] .':00' : $value['mulai'] .':00';
+	                    			$akhir = $value['akhir'] <= 9 ? '0'. $value['akhir'] .':00' : $value['akhir'] .':00';
 	                    			$waktu = $mulai.' - '.$akhir;
-	                    			$ruang = "'".$value->ruang."'";
-	                    			$tglnya = "'".$value->tgl."'";
-	                    			$moderatornya = "'".$value->moderator."'";
+	                    			$ruang = "'".$value['ruang']."'";
+	                    			$tglnya = "'".$value['tgl']."'";
+	                    			$moderatornya = "'".$value['npp_moderator']."'";
 	                    	?>
 								<tr>
-									<td><?= $no ?></td>
-									<td><?= $tgl->format('d-m-Y') ?></td>
-									<td><?= $waktu ?></td>
-									<td><?= $value->ruang?></td>
-									<td>
-										<a href="<?= base_url('admin/data/schedule/hearingScheduleDetail/'.$value->thn_ajaran.'/'.$value->smt.'/'.$value->ruang.'/'.$value->moderator.'/'.$value->tgl.'/'.$value->mulai.'/'.$value->akhir)?>" class="btn btn-primary">
+									<td style="text-align: center;"><?= $no ?></td>
+									<td style="text-align: center;"><?= $tgl->format('d-m-Y') ?></td>
+									<td style="text-align: center;"><?= $waktu ?></td>
+									<td style="text-align: center;"><?= $value['ruang']?></td>
+									<td style="text-align: left"><?= $value['nm_moderator']?></td>
+									<td style="text-align: left"><?= $value['nm_penguji1']?></td>
+									<td style="text-align: left"><?= $value['nm_penguji2']?></td>
+									<td style="text-align: center;">
+										<a href="<?= base_url('admin/data/schedule/hearingScheduleDetail/'.$value['thn_ajaran'].'/'.$value['smt'].'/'.$value['ruang'].'/'.$value['npp_moderator'].'/'.$value['tgl'].'/'.$value['mulai'].'/'.$value['akhir'])?>" class="btn btn-primary btn-sm">
 											<i class="fa fa-eye fa-lg" aria-hidden="true"></i>&nbsp;
 											<strong>Detail</strong>
 										</a>
-										<a href="#" onclick="deleteSchedule(<?= $value->thn_ajaran.','.$value->smt.','.$ruang.','.$moderatornya.','.$tglnya.','.$value->mulai.','.$value->akhir ?>);" 
-											class="btn btn-danger">
+										<a href="#" onclick="deleteSchedule(<?= $value['thn_ajaran'].','.$value['smt'].','.$ruang.','.$moderatornya.','.$tglnya.','.$value['mulai'].','.$value['akhir'] ?>);" 
+											class="btn btn-danger btn-sm">
 											<i class="fa fa-trash fa-lg" aria-hidden="true"></i>&nbsp;
 											<strong>Hapus</strong>
 										</a>
 									</td>
 								</tr>
 	                    	<?php
+	                    			
+
+	                    			$before = $value['ruang'];
 	                    			$no++; 
 	                    		}
 	                    	?>

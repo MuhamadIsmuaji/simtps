@@ -27,15 +27,15 @@
                     <table id="tbNewsListsAdmin" class="table table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th style="text-align: center;">No</th>
-                                <th style="text-align: center;">Tanggal Sidang</th>
+                                <th style="text-align: center; width: 100px">Tanggal</th>
                                 <th style="text-align: center;">Waktu</th>
                                 <th style="text-align: center;">Ruang</th>
-                                <th style="text-align: center;">Moderator</th>
-                                <th style="text-align: center;">Penguji 1</th>
-                                <th style="text-align: center;">Penguji 2</th>
+                                <th style="text-align: center;width: 120px;"">Moderator</th>
+                                <th style="text-align: center;width: 120px;"">Penguji 1</th>
+                                <th style="text-align: center;width: 120px;"">Penguji 2</th>
                                 <th style="text-align: center;">Kelompok</th>
-                                <th style="text-align: center;">Anggota Kelompok</th>
+                                <th style="text-align: center; width: 250px;">Judul</th>
+                                <th style="text-align: center; width: 300px;"">Anggota Kelompok</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +43,7 @@
                                 $no = 1;
                                 foreach ($dataJadwal as $ke) {
                                     echo '<tr>';
-                                        echo '<td style="text-align: center;">'. $no .'</td>';
+                                        // echo '<td style="text-align: center;">'. $no .'</td>';
                                     foreach ($ke as $jadwal) {
                                         echo '<td style="text-align: center;">';
                                         

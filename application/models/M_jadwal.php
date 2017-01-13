@@ -78,7 +78,19 @@ class M_jadwal extends CI_Model {
 						OR tb_dosen.npp = tb_jadwal.penguji2
 
 				where tb_jadwal.thn_ajaran = '". $thn_ajaran ."' AND tb_jadwal.smt = '". $smt ."'
+				ORDER BY tb_jadwal.ruang
 		");
+
+		// $query = $this->db->query("
+		// 	Select *
+		// 		from tb_jadwal inner join tb_dosen
+		// 			ON tb_dosen.npp = tb_jadwal.moderator
+		// 				OR tb_dosen.npp = tb_jadwal.penguji1
+		// 				OR tb_dosen.npp = tb_jadwal.penguji2
+		// 		where tb_jadwal.thn_ajaran = '". $thn_ajaran ."' AND tb_jadwal.smt = '". $smt ."'
+
+		// 		GROUP BY  tb_jadwal.thn_ajaran, tb_jadwal.smt, tb_jadwal.ruang, tb_jadwal.mulai, tb_jadwal.akhir, tb_jadwal.tgl, tb_jadwal.moderator
+		// ");
 
 		// $query = $this->db->query("
 		// 	Select distinct thn_ajaran, smt, ruang, mulai, akhir

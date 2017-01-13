@@ -24,9 +24,43 @@ class Schedule extends CI_Controller {
 		$setting = $this->M_setting->getSetting()->row();
 		$jadwal = $this->M_jadwal->getScheduleList($setting->thn_ajaran,$setting->smt)->result();
 
+		// echo "<pre>";
+		// print_r($jadwal);
+		// echo "</pre>";
+
+		$jadwals = [];
+
+		foreach($jadwal as $jad) :
+			$jdthnajaran = $jad->thn_ajaran;
+			$jdsmt = $jad->smt;
+			$jdruang = $jad->ruang;
+			$jdmoderator = $jad->moderator;
+			$jdtgl = $jad->tgl;
+			$jdmulai = $jad->mulai;
+			$jdakhir = $jad->akhir;
+
+			// mendapatkan nppnya penguji1 dan penguji2
+			$penguji1 = $this->M_jadwal->getJadwalByIdentitas($jdthnajaran ,$jdsmt, $jdruang, $jdmoderator, $jdtgl, $jdmulai, $jdakhir)->row()->penguji1;
+			$penguji2 = $this->M_jadwal->getJadwalByIdentitas($jdthnajaran ,$jdsmt, $jdruang, $jdmoderator, $jdtgl, $jdmulai, $jdakhir)->row()->penguji2;
+
+			$jadwalnya = [];
+			$jadwalnya['thn_ajaran'] = $jad->thn_ajaran;
+			$jadwalnya['smt'] = $jad->smt;
+			$jadwalnya['tgl'] = $jad->tgl;
+			$jadwalnya['mulai'] = $jad->mulai;
+			$jadwalnya['akhir'] = $jad->akhir;
+			$jadwalnya['ruang'] = $jad->ruang;
+			$jadwalnya['npp_moderator'] = $jad->moderator;
+			$jadwalnya['nm_moderator'] = $this->M_dosen->getDosenByNpp($jad->moderator)->row()->nama;
+			$jadwalnya['nm_penguji1'] = $this->M_dosen->getDosenByNpp($penguji1)->row()->nama;
+			$jadwalnya['nm_penguji2'] = $this->M_dosen->getDosenByNpp($penguji2)->row()->nama;
+			$jadwals[] = $jadwalnya;
+		endforeach;
+
+
 		$data = [
 			'settingData'	=> $setting,
-			'jadwal'		=> $jadwal,
+			'jadwal'		=> $jadwals,
 			'content' 		=> 'admin/data/schedule/hearing/hearing_schedule_lists',
 			'pagetitle' 	=> 'Jadwal Sidang',
 			'navbartitle' 	=> 'Jadwal Sidang'
@@ -113,6 +147,27 @@ class Schedule extends CI_Controller {
 			redirect('admin/data/schedule/hearingSchedule','refresh');
 		}
 
+		$detailJadwals = [];
+
+		foreach($detailJadwal as $det) :
+			$detailnya = [];
+			$detailnya['kode_kel'] = $det->kode_kel;
+			$judul = $this->M_kelompok->getActiveGroup($thn_ajaran, $smt, $det->kode_kel)->row()->judul;
+
+			$detailnya['judul'] = ( $judul == NULL || $judul == '' ) ? 'Belum Input Judul' : $judul;
+			
+			$anggotas = $this->M_anggota->getAnggotaByKodeKelJoinMhs($thn_ajaran, $smt, $det->kode_kel)->result();
+			$anggota_kelompok = [];
+			foreach($anggotas as $anggota) :
+				$anggotanya = [];
+				$anggotanya['identitas'] = $anggota->nbi . ' - ' .$anggota->nama;
+				$anggota_kelompok[] = $anggotanya; 
+			endforeach;
+
+			$detailnya['anggotas'] = $anggota_kelompok;
+			$detailJadwals[] = $detailnya;
+		endforeach;
+
 		$moderator = $this->M_dosen->getDosenByNpp($identitasJadwal->moderator)->row()->nama;
 		$penguji1 = $this->M_dosen->getDosenByNpp($identitasJadwal->penguji1)->row()->nama;
 		$penguji2 = $this->M_dosen->getDosenByNpp($identitasJadwal->penguji2)->row()->nama;
@@ -123,7 +178,7 @@ class Schedule extends CI_Controller {
 			'penguji1'			=> $penguji1,
 			'penguji2'			=> $penguji2,
 			'identitasJadwal'	=> $identitasJadwal,
-			'detailJadwal'		=> $detailJadwal,
+			'detailJadwal'		=> $detailJadwals,
 			'content' 			=> 'admin/data/schedule/hearing/hearing_schedule_detail',
 			'pagetitle' 		=> 'Detail Jadwal Sidang',
 			'navbartitle' 		=> 'Detail Jadwal Sidang'

@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Kami Akan Segera Kembali</title>
+  <link rel="icon" href="<?php echo base_url('assets/img/logo/favicon-untag.png'); ?>">
+  
   <style>
     body { text-align: center; padding: 150px; }
     h1 { font-size: 50px; }

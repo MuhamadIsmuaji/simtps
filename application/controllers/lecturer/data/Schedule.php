@@ -37,6 +37,7 @@ class Schedule extends CI_Controller {
 			$mulai = $value->mulai <= 9 ? '0'. $value->mulai .':00' : $value->mulai .':00';
 			$akhir = $value->akhir <= 9 ? '0'. $value->akhir .':00' : $value->akhir .':00';
 			$waktu = $mulai.' - '.$akhir;
+			$judul = $this->M_kelompok->getActiveGroup($setting->thn_ajaran, $setting->smt, $value->kode_kel)->row()->judul;
 
 			// anggota
 			$anggota = $this->M_anggota->getAnggotaByKodeKelJoinMhs($setting->thn_ajaran, $setting->smt, $value->kode_kel)->result();
@@ -61,6 +62,7 @@ class Schedule extends CI_Controller {
 				'penguji1'		=> $penguji1,
 				'penguji2'		=> $penguji2,
 				'kode_kel'		=> $value->kode_kel,
+				'judul'			=> ( $judul == NULL || $judul == '' ) ? 'Belum Input Judul' : $judul,
 				'anggotanya'	=> $anggotanya
 			];
 

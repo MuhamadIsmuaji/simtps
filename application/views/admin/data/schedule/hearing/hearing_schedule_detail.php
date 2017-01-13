@@ -76,11 +76,13 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="tbLecturerListsAdmin" class="table table-striped" cellspacing="0" width="100%">
+                    <table id="tbLecturerListsAdmin" class="table table-bordered table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>NO</th>
-                                <th>KODE KELOMPOK</th>
+                                <th style="text-align: center; width: 50px;">NO</th>
+                                <th style="text-align: center; width: 150px;">KODE KELOMPOK</th>
+                                <th style="text-align: center; width: 600px;">JUDUL</th>
+                                <th style="text-align: center;">ANGGOTA KELOMPOK</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,8 +91,16 @@
                                 foreach ($detailJadwal as $value2) {
                             ?>
                                 <tr>
-                                    <td><?= $no ?></td>
-                                    <td><?= $value2->kode_kel ?></td>
+                                    <td style="text-align: center;"><?= $no ?></td>
+                                    <td style="text-align: center;"><?= $value2['kode_kel'] ?></td>
+                                    <td style="text-align: center;"><?= $value2['judul'] ?></td>
+
+                                    <td>
+                                        <?php foreach($value2['anggotas'] as $anggota) : ?>
+                                        <?= $anggota['identitas'] .'<br/>' ?>
+                                        <?php endforeach; ?>
+                                    </td>
+
                                 </tr>
                             <?php 
                                     $no++;
