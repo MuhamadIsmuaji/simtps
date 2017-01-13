@@ -104,14 +104,14 @@ class Lecturer extends CI_Controller {
 
             }else if ( $lecturer->akses == 1 ){
             	$akses = 'Dosen Pembimbing';
-            	$aksi = '<button class="btn btn-success" onclick="show(this)"
+            	$aksi = '<button class="btn btn-sm btn-success" onclick="show(this)"
             				data-npp="'.$lecturer->npp.'" data-nama="'.$lecturer->nama.'" data-pwd="'.$lecturer->pwd.'" 
             				data-akses="'.$lecturer->akses.'" data-old="'.$lecturer->npp.'"
             			><span class="icon fa fa-eye fa-lg"></span>
             			</button>';
             }else{
             	$akses = 'Dosen';
-            	$aksi = '<button class="btn btn-block btn-success" onclick="show(this)"
+            	$aksi = '<button class="btn btn-sm btn-success" onclick="show(this)"
             				data-npp="'.$lecturer->npp.'" data-nama="'.$lecturer->nama.'" data-pwd="'.$lecturer->pwd.'" 
             				data-akses="'.$lecturer->akses.'" data-old="'.$lecturer->npp.'"
             			><span class="icon fa fa-eye fa-lg"></span>	
