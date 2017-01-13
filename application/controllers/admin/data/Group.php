@@ -98,12 +98,14 @@ class Group extends CI_Controller {
         $cekGroup = $this->M_kelompok->getActiveGroup($thn_ajaran,$smt,$kode_kel)->row();
 
         if ( $cekGroup ) {
-            $dataMember = $this->M_anggota->getAnggotaByKodeKelJoinMhs($thn_ajaran,$smt,$kode_kel)->result();
+            // $dataMember = $this->M_anggota->getAnggotaByKodeKelJoinMhs($thn_ajaran,$smt,$kode_kel)->result();
 
-            foreach($dataMember as $par) :
-                $this->generateNilaiAkhir($par->thn_ajaran,$par->smt,$par->kode_kel,$par->nbi);
-                $this->generateNilaiHuruf($par->thn_ajaran,$par->smt,$par->kode_kel,$par->nbi);
-            endforeach;
+            // foreach($dataMember as $par) :
+            //     $this->generateNilaiAkhir($par->thn_ajaran,$par->smt,$par->kode_kel,$par->nbi);
+            //     $this->generateNilaiHuruf($par->thn_ajaran,$par->smt,$par->kode_kel,$par->nbi);
+            // endforeach;
+
+            $dataMemberUpdated = $this->M_anggota->getAnggotaByKodeKelJoinMhs($thn_ajaran,$smt,$kode_kel)->result();
 
             $data = [
                 'content'       => 'admin/data/group/group_detail',
@@ -111,7 +113,7 @@ class Group extends CI_Controller {
                 'navbartitle'   => 'Detail Data Kelompok',
                 'settingData'   => $setting,
                 'dataGroup'     => $cekGroup,
-                'dataMember'    => $dataMember,
+                'dataMember'    => $dataMemberUpdated,
                 'bimbingan'     => $bimbingan
             ];
 
