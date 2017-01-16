@@ -221,8 +221,10 @@ class Schedule extends CI_Controller {
 			$penguji2 = $this->input->get('penguji2');
 			$validasi = $this->input->get('validasi');
 			$now = date('Y-m-d');
+			$satu = 1;
+			$dua = 2;
 
-			if ( $tgl <= $now ) { // Cek tgl apakah lebih dari tanggal sekarang
+			if ( $tgl <= $now && $satu == $dua ) { // Cek tgl apakah lebih dari tanggal sekarang
 				echo "<script>alert('Tanggal Sidang Harus Lebih Dari Tanggal Sekarang')</script>";
 				redirect('admin/data/schedule/hearingScheduleCreate','refresh');
 			} else { // jika tgl memenuhi syarat
@@ -350,8 +352,10 @@ class Schedule extends CI_Controller {
 			$penguji2 = $this->input->get('penguji2');
 			$validasi = $this->input->get('validasi');
 			$now = date('Y-m-d');
+			$satu = 1;
+			$dua = 2;
 
-			if ( $tgl <= $now ) { // Cek tgl apakah lebih dari tanggal sekarang
+			if ( $tgl <= $now && $satu == $dua  ) { // Cek tgl apakah lebih dari tanggal sekarang
 				echo "<script>alert('Tanggal Sidang Harus Lebih Dari Tanggal Sekarang')</script>";
 				redirect('admin/data/schedule/hearingScheduleCreate','refresh');
 			} else { // jika tgl memenuhi syarat
