@@ -187,7 +187,8 @@
 									<td><?= $no ?></td>
 									<td><?= $member->nbi ?></td>
 									<td><?= $member->nama ?></td>
-									<td><?= $member->nilai_huruf ?></td>
+									<!--<td><?= $member->nilai_huruf ?></td>-->
+                                  	<td><?= 'Proses Input Nilai' ?></td>
 									<td><?= $status ?></td>
 								</tr>
 	                    	<?php
