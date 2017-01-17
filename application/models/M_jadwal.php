@@ -33,6 +33,13 @@ class M_jadwal extends CI_Model {
 		return $this->db->delete($this->table);
 	}
 
+	public function deleteByKel($thn_ajaran = NULL, $smt = NULL, $kode_kel = NULL) {
+		$this->db->where($this->pk1,$thn_ajaran);
+		$this->db->where($this->pk2,$smt);
+		$this->db->where('kode_kel',$kode_kel);
+		return $this->db->delete($this->table);
+	}
+
 	public function insert($scheduleData = null) {
 		return $this->db->insert($this->table, $scheduleData);
 	}

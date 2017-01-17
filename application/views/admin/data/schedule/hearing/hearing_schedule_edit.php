@@ -213,7 +213,7 @@
 
       },
       error : function(jqXHR, textStatus, errorThrown) {
-        alert('Terjadi Kesalahan : '+ textStatus);
+        alert('Terjadi Kesalahan : '+ errorThrown);
       }
     });
     //get Autoload by Selected moderator

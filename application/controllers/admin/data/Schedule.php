@@ -491,9 +491,16 @@ class Schedule extends CI_Controller {
 		$mulai = $this->input->post('old_mulai');
 		$akhir = $this->input->post('old_akhir');
 		$tgl = $this->input->post('old_tgl');
+
+		// $doping = '20460148501';
+		// $ruang = 'K313';
+		// $mulai = '9';
+		// $akhir = '15';
+		// $tgl = '2017-01-16';
 		
 		// grup yang sudah ada di jadwal
 		$groupWithSchedule = $this->M_jadwal->getJadwalByIdentitas($setting->thn_ajaran, $setting->smt, $ruang, $doping, $tgl, $mulai, $akhir)->result_array();
+		
 
 		$group = $this->M_kelompok->getActiveGroupWithDoping($setting->thn_ajaran,$setting->smt,$doping)->result();
 		
@@ -508,12 +515,20 @@ class Schedule extends CI_Controller {
 				if ( $value->kode_kel == $groupWithSchedule[$index]['kode_kel'] ) { 
 					$data[] = 1;
 					$data[] = $value->kode_kel;
-					$index++;
+					$index++;					
 
 					$many++;
 					$dataGroup[] = $data;
 
+				} else {
+					$data[] = 0;
+					$data[] = $value->kode_kel;
+
+					$many++;
+					$dataGroup[] = $data;
 				}
+
+
 			} else {
 				$punyaJadwal = $this->M_jadwal->getGroupScheduleByCode($setting->thn_ajaran,$setting->smt, $value->kode_kel)->num_rows();
 				// Untuk mencegah tampil di list ketika grup sudah ada jadwal di tempat lain
@@ -523,8 +538,11 @@ class Schedule extends CI_Controller {
 					$many++;
 					$dataGroup[] = $data;
 				}
-			}			
+			}
+
 		}
+
+		
 		echo json_encode(['many' => $many, 'list' => $dataGroup]);
 	}
 

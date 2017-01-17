@@ -345,6 +345,9 @@ class Group extends CI_Controller {
 
                     $updateProcess = $this->M_kelompok->update($setting->thn_ajaran, $setting->smt, $kode_kel, $dataGroup);
 
+                    // ketika pembimbing kelompok diganti, jadwal sidang kelompok harus di hapus
+                    $deleteScheduledGroup = $this->M_jadwal->deleteByKel($setting->thn_ajaran, $setting->smt, $kode_kel);
+
                     if ($updateProcess) // update berhasil
                         echo json_encode(1);
                     else // update gagal
