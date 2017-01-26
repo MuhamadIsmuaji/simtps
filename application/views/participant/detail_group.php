@@ -46,7 +46,8 @@
     	<i class="fa fa-user-times fa-lg" aria-hidden="true"></i>&nbspKeluar Dari Kelompok</button>' : ''; 
 
     $btnInvite = $settingData->bts_kelompok >= $now && $banyak < 3 ?'<button type="button" id="btnInvite" onclick="inviteMember()" class="btn btn-primary">
-    	<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i>&nbspUndang Anggota</button>' : '';    
+    	<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i>&nbspUndang Anggota</button>' : '';
+
 ?>
 
 <div class="page-title">
@@ -167,14 +168,15 @@
 	        	<div class="card-action">
 				</div>
 	        	<div class="table-responsive">
-	        		<table id="tbLecturerListsAdmin" class="table table-striped" cellspacing="0" width="100%">
+	        		<table id="tbLecturerListsAdmin" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	                    <thead>
 	                        <tr>
-	                            <th>NO</th>
-	                            <th>NBI</th>
-	                            <th>Nama</th>
-	                            <th>Nilai</th>
-	                            <th>Status</th>
+	                            <th style="text-align: center;">NO</th>
+	                            <th style="text-align: center;">NBI</th>
+	                            <th style="text-align: center;">Nama</th>
+	                            <th style="text-align: center;">Nilai</th>
+	                            <th style="text-align: center;">Keterangan</th>
+	                            <th style="text-align: center;">Status</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -182,14 +184,72 @@
 	                    		$no = 1;
 	                    		foreach ($dataMember as $member) {
 							    	$status = $member->konfirmasi == 1 ? 'Menunggu konfirmasi' : 'Anggota';
+							    	if ($kelompok->revisi != NULL) :
+						    			$arrKeterangan = [];
+
+							    		$arrNilaiBimb = [
+							    			$member->nilai_bimb, 
+							    		];
+
+							    		$arrNilaiMod = [
+							    			$member->nilai_11, $member->nilai_12, $member->nilai_13, $member->nilai_14,
+							    		];
+
+							    		$arrNilaiP1 = [
+							    			$member->nilai_21, $member->nilai_22, $member->nilai_23, $member->nilai_24,
+							    		];
+
+							    		$arrNilaiP2 = [
+							    			$member->nilai_31, $member->nilai_32, $member->nilai_33, $member->nilai_34,
+							    		];
+
+							    		if (in_array(0, $arrNilaiBimb)) :
+							    			$arrKeterangan[] = 'Bimbingan';
+							    		endif;
+
+							    		if (in_array(0, $arrNilaiMod)) :
+							    			$arrKeterangan[] = 'Moderator';
+							    		endif;
+
+							    		if (in_array(0, $arrNilaiP1)) :
+							    			$arrKeterangan[] = 'Penguji 1';
+							    		endif;
+
+							    		if (in_array(0, $arrNilaiP2)) :
+							    			$arrKeterangan[] = 'Penguji 2';
+							    		endif;
+
+							    		
+							    		if (count($arrKeterangan) > 0) :
+							    			$keterangan = 'Nilai : ';
+							    			
+							    			for($i=0; $i<count($arrKeterangan);$i++) :
+							    				if ($i==count($arrKeterangan)-1) :
+							    					$keterangan = $keterangan.$arrKeterangan[$i];
+							    				else :
+							    					$keterangan = $keterangan.$arrKeterangan[$i].', ';
+							    				endif;
+							    			endfor;
+
+							    			$keterangan = $keterangan.' ada yang belum diisi.';
+							    		else :
+							    			$keterangan = '-';
+							    		endif;
+
+							    		$nilai_huruf = $member->nilai_huruf;
+								    	
+								    else :
+								    	$nilai_huruf = '-';
+								    	$keterangan = 'Belum upload revisi proposal';
+								    endif;    
 	                    	?>
 								<tr>
-									<td><?= $no ?></td>
-									<td><?= $member->nbi ?></td>
-									<td><?= $member->nama ?></td>
-									<!--<td><?= $member->nilai_huruf ?></td>-->
-                                  	<td><?= 'Proses Input Nilai' ?></td>
-									<td><?= $status ?></td>
+									<td style="text-align: center;"><?= $no ?></td>
+									<td style="text-align: left;"><?= $member->nbi ?></td>
+									<td style="text-align: left;"><?= $member->nama ?></td>
+                                  	<td style="text-align: center;"><?= $nilai_huruf ?></td>
+                                  	<td style="text-align: center;"><?= $keterangan ?></td>
+									<td style="text-align: center;"><?= $status ?></td>
 								</tr>
 	                    	<?php
                     				$no++;
