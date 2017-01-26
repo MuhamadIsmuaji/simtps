@@ -51,11 +51,68 @@ class Point extends CI_Controller {
             $no++;
             $row = array();
 
-            $row[] = $participant->nbi;
+            if ($participant->kode_kel != '0') :
+                 $arrKeterangan = [];
+
+                $arrNilaiBimb = [
+                    $participant->nilai_bimb, 
+                ];
+
+                $arrNilaiMod = [
+                    $participant->nilai_11, $participant->nilai_12, $participant->nilai_13, $participant->nilai_14,
+                ];
+
+                $arrNilaiP1 = [
+                    $participant->nilai_21, $participant->nilai_22, $participant->nilai_23, $participant->nilai_24,
+                ];
+
+                $arrNilaiP2 = [
+                    $participant->nilai_31, $participant->nilai_32, $participant->nilai_33, $participant->nilai_34,
+                ];
+
+                if (in_array(0, $arrNilaiBimb)) :
+                    $arrKeterangan[] = 'Bimbingan';
+                endif;
+
+                if (in_array(0, $arrNilaiMod)) :
+                    $arrKeterangan[] = 'Moderator';
+                endif;
+
+                if (in_array(0, $arrNilaiP1)) :
+                    $arrKeterangan[] = 'Penguji 1';
+                endif;
+
+                if (in_array(0, $arrNilaiP2)) :
+                    $arrKeterangan[] = 'Penguji 2';
+                endif;
+
+                
+                if (count($arrKeterangan) > 0) :
+                    $keterangan = 'Nilai : ';
+                    
+                    for($i=0; $i<count($arrKeterangan);$i++) :
+                        if ($i==count($arrKeterangan)-1) :
+                            $keterangan = $keterangan.$arrKeterangan[$i];
+                        else :
+                            $keterangan = $keterangan.$arrKeterangan[$i].', ';
+                        endif;
+                    endfor;
+
+                    $keterangan = $keterangan.' ada yang belum diisi.';
+                else :
+                    $keterangan = '-';
+                endif;
+            else :
+                $keterangan = 'Belum Memilih Kelompok';
+            endif;
+
+            $row[] = '<p class="text-center">'.$participant->nbi.'</p>';
             $row[] = $participant->nama;
-            $row[] = $participant->nilai_huruf;
+            $row[] = '<p class="text-center">'.$participant->nilai_huruf.'</p>';
+            $row[] = $keterangan;
             $data[] = $row;
         }
+
         $output = array(
             "draw"              => $this->input->post('draw'),
             "recordsTotal"      => $this->M_anggota->countAll(),
@@ -75,7 +132,7 @@ class Point extends CI_Controller {
             redirect('admin/data/point','refresh');
         }
 
-        $pointList = $this->M_anggota->getAnggotaPeriode($thn_ajaran, $smt)->result();
+        $pointList = $this->M_anggota->getAnggotaPeriodePointPrint($thn_ajaran, $smt)->result();
         $setting = $this->M_setting->getSetting()->row();
         $when = $this->generateIndoTime(date('Y-m-d'));
         $next = $thn_ajaran+1;

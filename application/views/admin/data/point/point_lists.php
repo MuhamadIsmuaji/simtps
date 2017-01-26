@@ -1,6 +1,6 @@
 <div class="page-title">
    <div class="row">
-   		 <div class="col-md-8 col-md-offset-2">
+   		 <div class="col-md-12">
    		 	<span class="title">Halaman Daftar Nilai</span>
     		<div class="description">Halaman ini digunakan untuk mencetak daftar nilai</div>
     		<input type="hidden" name="current_thn_ajaran" id="current_thn_ajaran" value="<?= $current_thn_ajaran ?>" />
@@ -12,7 +12,7 @@
 </div>
 <div class="row">
 	<!-- Lists -->
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-12">
 	    <div class="card">
 	        <div class="card-header">
 	            <div class="card-title">
@@ -29,12 +29,13 @@
 	        	<div class="card-action">
 				</div>
 	        	<div class="table-responsive">
-	        		<table id="tbPointListsAdmin" class="table table-striped" cellspacing="0" width="100%">
+	        		<table id="tbPointListsAdmin" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	                    <thead>
 	                        <tr>
-	                            <th>NBI</th>
-	                            <th>NAMA</th>
-	                            <th>NILAI</th>
+	                            <th style="text-align: center;">NBI</th>
+	                            <th style="text-align: center;">NAMA</th>
+	                            <th style="text-align: center;">NILAI</th>
+	                            <th style="text-align: center;">KETERANGAN</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody></tbody>

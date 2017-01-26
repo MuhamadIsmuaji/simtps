@@ -58,12 +58,71 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	        <div class="Cell nilai">
 	            <p>Nilai</p>
 	        </div>
+	        <div class="Cell keterangan">
+	            <p>Keterangan</p>
+	        </div>
 	    </div>
 	</div>
 	
 	<?php 
 		$no = 1;
 		foreach ($pointList as $point) {
+
+			if ($point->kode_kel != '0') :
+                 $arrKeterangan = [];
+
+                $arrNilaiBimb = [
+                    $point->nilai_bimb, 
+                ];
+
+                $arrNilaiMod = [
+                    $point->nilai_11, $point->nilai_12, $point->nilai_13, $point->nilai_14,
+                ];
+
+                $arrNilaiP1 = [
+                    $point->nilai_21, $point->nilai_22, $point->nilai_23, $point->nilai_24,
+                ];
+
+                $arrNilaiP2 = [
+                    $point->nilai_31, $point->nilai_32, $point->nilai_33, $point->nilai_34,
+                ];
+
+                if (in_array(0, $arrNilaiBimb)) :
+                    $arrKeterangan[] = 'Bimbingan';
+                endif;
+
+                if (in_array(0, $arrNilaiMod)) :
+                    $arrKeterangan[] = 'Moderator';
+                endif;
+
+                if (in_array(0, $arrNilaiP1)) :
+                    $arrKeterangan[] = 'Penguji 1';
+                endif;
+
+                if (in_array(0, $arrNilaiP2)) :
+                    $arrKeterangan[] = 'Penguji 2';
+                endif;
+
+                
+                if (count($arrKeterangan) > 0) :
+                    $keterangan = 'Nilai : ';
+                    
+                    for($i=0; $i<count($arrKeterangan);$i++) :
+                        if ($i==count($arrKeterangan)-1) :
+                            $keterangan = $keterangan.$arrKeterangan[$i];
+                        else :
+                            $keterangan = $keterangan.$arrKeterangan[$i].', ';
+                        endif;
+                    endfor;
+
+                    $keterangan = $keterangan.' ada yang belum diisi.';
+                else :
+                    $keterangan = '-';
+                endif;
+            else :
+                $keterangan = 'Belum Memilih Kelompok';
+
+            endif;
 	?>
 			<div class="tableRow" style="page-break-inside:auto;">
 				<div class="container">
@@ -78,6 +137,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="cellRow nilai-row">
 						<p><?= $point->nilai_huruf ?></p>
+					</div>
+					<div class="cellRow keterangan-row">
+						<p><?= $keterangan ?></p>
 					</div>
 				</div>
 			</div>

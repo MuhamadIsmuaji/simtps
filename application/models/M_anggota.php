@@ -109,6 +109,17 @@ class M_anggota extends CI_Model {
 		return $query;
 	}
 
+	public function getAnggotaPeriodePointPrint($thn_ajaran = NULL , $smt = NULL) {
+		$this->db->select('*');
+		$this->db->from($this->table);
+		$this->db->join('tb_mhs',$this->table.'.nbi = tb_mhs.nbi','inner');
+		$this->db->where('tb_anggota.thn_ajaran', $thn_ajaran);
+		$this->db->where('tb_anggota.smt', $smt);
+		$this->db->order_by($this->table.'.nbi','ASC');
+		$query = $this->db->get();
+		return $query;
+	}
+
 	public function insert($anggotaData = null) {
 		return $this->db->insert($this->table, $anggotaData);
 	}
